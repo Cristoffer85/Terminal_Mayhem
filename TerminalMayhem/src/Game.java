@@ -4,14 +4,14 @@ import java.util.function.ToDoubleBiFunction;
 
 public class Game {
 
-    Player player =new Player;
+    Player player =new Player();
 
     //ska vara olika monster här
-    Monstertyp monstertyp = new Monstertyp;
+    Monstertyp monstertyp = new Monstertyp();
 
-    Shop shop = new Shop;
+    Shop shop = new Shop();
 
-    Text text = new text;
+    Text text = new text();
 
     boolean game = true;
 
@@ -62,11 +62,11 @@ public class Game {
         while (isAnyOneDeadYet){
             attack(player.getStrength(), monstertyp.getDefence());
             if (monstertyp.checkIfdead() == true){
-                isAnyOneDeadYet == false;
+                isAnyOneDeadYet = false;
             }
             attack(monstertyp.getStrength(), player.getdefence());
             if (player.checkIfdead() == true){
-                isAnyOneDeadYet == false;
+                isAnyOneDeadYet = false;
             }
         }
     }
