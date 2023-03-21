@@ -61,10 +61,10 @@ public class TextClass {
 
     void getMainMenutext(){        //Huvudmenytext
         System.out.println(
-                "1.Starta spel\n" +
-                "2.Se Heros egenskaper\n" +
+                "1.Start game.\n" +
+                "2.See your current stats.\n" +
                 "3.Shop\n" +
-                "4.Avsluta spel"
+                "4.End game."
         );
     }
 
