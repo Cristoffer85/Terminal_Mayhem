@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class Shop {
 
-    ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList<>();
 
     public Shop() {
         // Fills the shop with items
@@ -27,10 +27,12 @@ public class Shop {
             index++;
         }
     }
+
     public int getPrice(int itemNumber) {
-        return items.get(itemNumber).getPrice();  // returnera priset på det aktuella object
+        return items.get(itemNumber).getPrice();  // returns the price the class Game checks if the user can afford the item
     }
-    public Item buyItem(int itemNumber) {   //
+
+    public Item buyItem(int itemNumber) {   // if the user affords the item
         Item copyObject = items.get(itemNumber);
         items.remove(itemNumber); // tar bara bort objektet ur listan men objektet finns kvar
         return copyObject;
