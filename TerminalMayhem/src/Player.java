@@ -48,6 +48,7 @@ public class Player {
 
             //check if player does critical hit
             public void criticalHit (){
+                chance();
                 checkIfSuccess = randomNum<=critical;
             }
 
@@ -95,12 +96,15 @@ public class Player {
                 }
             }
 
-
             public boolean checkIfDead() {
                 return hp <= 0;
             }
 
-        }
+            public void getGold(int gold){
+                this.gold+=gold;
+            }
 
-
+            public void payGold(int gold){
+                this.gold-=gold;
+            }
 }
