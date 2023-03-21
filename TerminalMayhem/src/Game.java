@@ -61,7 +61,10 @@ public class Game {
             //TODO Behöver sortera ut monster av motsvarande level och skicka in.
             // Förslag?
 
-            fightBetween(player, //skicka med monster motsvarande level
+            //TODO skicka med monster name
+            text.aMonsterAppears(monster.getName());
+
+            fightBetween(player,monster //skicka med monster motsvarande level
                      );
 
 
