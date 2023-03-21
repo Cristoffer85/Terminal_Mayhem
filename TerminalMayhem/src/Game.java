@@ -1,13 +1,18 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 
 public class Game {
 
+    //TODO Hur ska spelaren initieras?
     Player player =new Player();
 
     //TODO ska vara olika monster här
     Monstertyp monstertyp = new Monstertyp();
+
+    //TODO lägg in alla monster här
+    ArrayList <Monster> monsters = new ArrayList<Monster>();
 
     Shop shop = new Shop();
 
@@ -58,11 +63,18 @@ public class Game {
     private void goAdventuring() {
         int isItAFight = random.nextInt(100);
         if (isItAFight >=10){
+
+
             //TODO Behöver sortera ut monster av motsvarande level och skicka in.
             // Förslag?
 
-            fightBetween(player, //skicka med monster motsvarande level
+            //TODO skicka med monster name
+            text.aMonsterAppears(monster.getName());
+
+            fightBetween(player,monster //skicka med monster motsvarande level
                      );
+            //TODO after fight
+            // +guld, xp , HP
 
 
         } else {
