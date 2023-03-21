@@ -1,3 +1,5 @@
+# Custom ignore to keep unwanted folders out of branches
+New folder/
 # Compiled class file
 *.class
 
