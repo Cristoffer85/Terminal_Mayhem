@@ -6,17 +6,14 @@ public class Player {
             String name;
             int level;
             int nextLevelExp;
-            int exp=0;
+            int exp = 0;
             int maxHp;
             int hp;
             int strength;
             int toughness;
             int gold;
-            int critical;
+            int criticalChance;
             boolean readyForFinalBoss;
-            int randomNum;
-            boolean checkIfSuccess;
-
             Random random;
             //save instans which is sent from Game, to make a link between item and player
             Item item;
@@ -38,31 +35,24 @@ public class Player {
             public void makePlayer(){
                 level=1;
                 maxHp=30;
-                this.hp=this.maxHp;
+                hp=maxHp;
                 strength=10;
                 toughness=5;
-                critical=20;
+                criticalChance=20;
                 gold=0;
                 readyForFinalBoss=false;
             }
 
             //make random number
             public int chance(){
-                randomNum=random.nextInt(100);
-                return randomNum;
-            }
-
-            //check if player does critical hit
-            public void criticalHit (){
-                chance();
-                checkIfSuccess = randomNum<=critical;
+                return random.nextInt(100);
             }
 
             //attack monster with normal attack or critical attack
             public int attack() {
                 int damage;
-                criticalHit();
-                if (checkIfSuccess) {
+
+                if (chance()<=criticalChance) {
                     damage = (strength + (strength * 2)) / 2 + 10;
                 } else {
                     damage = (strength + (strength * 2)) / 2;
@@ -78,7 +68,7 @@ public class Player {
                 }
             }
 
-            public int getToughness(){
+            public int defence(){
                 return toughness;
             }
 
@@ -92,7 +82,7 @@ public class Player {
                 nextLevelExp=(int)Math.pow(level, 2);
             }
 
-            //everytime check if player has leveled up if leveled up then plus 1
+            //everytime check if player has leveled up, if leveled up Lv+ 1
             public void checkIfLeveledUp() {
                 if (nextLevelExp <= exp) {
                     level += 1;
@@ -124,12 +114,12 @@ public class Player {
             }
 
             public void showHero(){
-                System.out.println("Name:     "+ name);
-                System.out.println("Level:    "+ level );
-                System.out.println("HP:       "+ hp+"/"+maxHp);
+                System.out.println("Name: "+ name);
+                System.out.println("Level: "+ level );
+                System.out.println("HP: "+ hp+"/"+maxHp);
                 System.out.println("Strength: "+ strength);
-                System.out.println("toughness:"+ strength);
-                System.out.println("Critical: "+ critical);
-                System.out.println("Gold:     "+ gold );
+                System.out.println("toughness: "+ toughness);
+                System.out.println("Critical Chance: "+ criticalChance);
+                System.out.println("Gold: "+ gold );
             }
 }
