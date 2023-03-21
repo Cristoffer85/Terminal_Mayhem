@@ -28,8 +28,9 @@ public class Game {
 
         //loop för själva spelet, hämta spelarens val och matcha mot switch.
         while(game){
-            int mainMenuChoice = scanner.nextInt();
+
             text.getMainMenu();
+            int mainMenuChoice = scanner.nextInt();
 
             switch (mainMenuChoice){
                 case 1:
@@ -59,48 +60,58 @@ public class Game {
         if (isItAFight >=10){
             //TODO Behöver sortera ut monster av motsvarande level och skicka in.
             // Förslag?
+
             fightBetween(player, //skicka med monster motsvarande level
                      );
+
 
         } else {
             text.nothingHappend();
         }
     }
 
-    //här spelas fighten tills någon är död. Attack eller use potion
+    //här spelas fighten tills någon är död.
     private void fightBetween(Player player, Monstertyp monster) {
         boolean isAnyOneDeadYet = true;
         while (isAnyOneDeadYet){
 
+            //Attack eller use potion
             text.getFightMenu();
-            int fightChoice;
+            int fightChoice = scanner.nextInt();
 
             switch(fightChoice){
-                case 1:
+                case 1: //spelarens attack, som ändrar monstrets HP
                     monster.setHp(attack(player.getStrength(), monster.getDefence()));
                     break;
-                case 2:
+                case 2:  // Använd potion
                     player.usePotion();
                     break;
                 default:
                     text.getInvalidChoice();
             }
 
+            //avsluta loopen och gå tillbaka till menyn om monstret dör
             if (monster.checkIfdead() == true){
                 isAnyOneDeadYet = false;
             }
+
+            //Monstrets attack som ändrar spelarens HP.
             player.setHp(attack(monster.getStrength(), player.getdefence()));
+            // om spelaren dör, hoppa tillbaka till att skapa en ny spelare
             if (player.checkIfdead() == true){
-                isAnyOneDeadYet = false;
+                text.playerDead();
+                startGame();
             }
         }
     }
 
-    private int attack(int attackerStrengt, int defenderToughness) {
-        int damage = random.nextInt(attackerStrengt) -(attackerStrengt*2) -defenderToughness;
+    //här löses attackvärdena
+    private int attack(int attackerStrength, int defenderToughness) {
+        int damage = random.nextInt(attackerStrength) -(attackerStrength*2) -defenderToughness;
         return  damage;
     }
 
+    //här löses transaktioner mellan shop och playerklassen.
     private void goShopping() {
         text.getShopMenu();
         shop.showItems();
@@ -110,16 +121,10 @@ public class Game {
             Player.addToInventory(shop.buyItem(shopChoice));
             text.youHaveBought(shop.getName(shopChoice));
         } else{
-            text.insuffiontFunds();
+            text.inSufficient();
         }
 
-
-
-        //add buyitem return to player arraylist.
-        //TODO behöver bestämma om varan ska föras över, så fall behövs en metod för att skriva över från shop till player.
-        // annars behöver metoden kolla om varan är en medaljon eller potion och sen agera uteifrån det på playerns stats.
-
-        //vill du köpa mer?
+        //TODO add later vill du köpa mer?
 
     }
 
