@@ -65,6 +65,4 @@ public abstract class Monster {
 
 
 
-
-
 }
