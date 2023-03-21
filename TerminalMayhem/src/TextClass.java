@@ -31,11 +31,11 @@ Metod getBossFightText()
 */
 public class TextClass {
 
-    void getWelcomeText(){     //Välkomsttext + be användaren att skriva in sitt namn (Skapa Hero)
+    void getWelcomeText(){     //Välkomsttext + användaren skapar sin hero
         System.out.println("#############################################################");
         System.out.println("   Welcome to the fantastic adventures of Terminal Mayhem    ");
         System.out.println("#############################################################");
-        System.out.println("\n"                                                           );
+        System.out.println(""                                                             );
         System.out.println("                 ---^---      ---^---                        ");
         System.out.println("                |       |    |       |                       ");
         System.out.println("                |       |    |       |                       ");
@@ -51,15 +51,15 @@ public class TextClass {
         System.out.println("                 ---v---      ---v---                        ");
         System.out.println(""                                                             );
         System.out.println("#############################################################");
-        System.out.println("\n"                                                           );
-        System.out.println("This is the story of KLink, a tyre-changing pro, and as well our main antagonist and his struggles in the Tyrule kingdom.");
-        System.out.println("The Tyrule Kingdom is a mysterious and wonderous land in the shape of a Tyre-formed airport terminal, where he scours the kingdom fighting various evil entities and daily mystic evil encounters such as dishes.");;
-        System.out.println("His ultimate goal is to surpass all the obstacles in his way, and defeat the evil tyrant Backgammon, which holds his dear Welding-expert Girlfriend Welda, captured in terminal 5B.");;
-        System.out.println("\n"                                                           );
-        System.out.println("\n"                                                           )
+        System.out.println("  "                                                           );
+        System.out.println("This is the story of ______, a tyre-changing pro, and as well our main antagonist and your struggles in the Tyrule kingdom.");
+        System.out.println("The Tyrule Kingdom is a mysterious and wonderous land in the shape of a Tyre-formed airport terminal, where you scour the kingdom fighting various evil entities and daily mystic evil encounters.");;
+        System.out.println("Your ultimate goal is to surpass all the obstacles in your way, encounter both funnier and unfunnier encounters and lastly but not least defeat the evil tyrant Backgammon, which holds your dear Welding-expert partner Welda, captured in terminal 5B.");;
+        System.out.println(""                                                             );
+        System.out.print("Please enter your hero:s name: "                                );
     }
 
-    void getMainMenutext(){ //1.Starta spel, 2.Se Heros egenskaper, 3.Shop, 4.Avsluta spel
+    void getMainMenutext(){        //Huvudmenytext
         System.out.println(
                 "1.Starta spel\n" +
                 "2.Se Heros egenskaper\n" +
@@ -68,39 +68,47 @@ public class TextClass {
         );
     }
 
-    void getGameRoundMenu(){
+    void getGameRoundMenu(){        //? Oklart vad detta är, än så länge.
         System.out.println("");
     }
 
-    void getPlayerDead(){
-        System.out.println("Sorry, you´re dead now! You were overwhelmed by the dishes..");
+    void getPlayerDead(){     //Game over
+        System.out.println("Sorry, you´re dead! You were overwhelmed by the dishes..");
     }
 
-    void getShopMenu(){ //Välkommen till ShopMenu! : Behöver stå "Vad väljer du?" i slutet
+    void getShopMenu(){ //Shopmenyn! Div. olika saker.
         System.out.println(
-                "1.Starta spel\n" +
-                "2.Se Heros egenskaper\n" +
-                "\n" +
-                "                \"4.Avsluta spel\"");
+                "Welcome to the shop!\n" +
+                "1.Healing Potion\n" +
+                "2.Medallion\n" +
+                "" +
+                "What is your number of choice?: "
+        );
     }
 
-    void getPlayerStatText(){  //Här är statsen för din hjälte
-        System.out.println("");
+    void getPlayerStatText(){  //Statsen för din hjälte
+        System.out.println("Here are the current statistics of your Hero: ");
     }
 
-    void ThanksForPlaying(){   //Sluttext Thank you for playing! Awesome game and performance by you good sire!
-        System.out.println("");
+    void ThanksForPlaying(){   //Sluttext          //Tillägg för play again fråga?
+        System.out.println("Thank you for playing! You solved all the evil airportproblems that could ever exist in this kingdom...!");
     }
 
     void getBossFightText(){   //beskriver slutbossen för att ge mer inlevelse i spelet
-        System.out.println("");
+        System.out.println(".... You hear a lurge thud, the kind that only the largest form of set of multiple encyclopedias mounted together could ever perform, and there he was, standing right in front of you, Backgammon...");
     }
 
-    void getFightMenu(){  //1.Fight, 2.Drink healing potion
-
+    void getFightMenu(){  //Fightmenyn, val
+        System.out.println(
+                "Oh no! You´re up for a fight! What do you wanna do?\n" +
+                "1.Fight!\n" +
+                "2.Drink healing potion.\n" +
+                "" +
+                "What is your number of choice?: "
+        );
     }
 
-    void invalidChoice(){    //för olika switch casear...."det här valet finns inte"
-        System.out.println();
+    void invalidChoice(){    //Ej giltigt val.
+        System.out.println("Im sorry, but you´ve made an incorrect choice.");
     }
 }
