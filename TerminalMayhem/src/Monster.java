@@ -45,14 +45,20 @@ public abstract class Monster {
             return exp;
         }
 
-
     public boolean checkIfDead(){
         return HP<=0;
 
     }
 
-    public int attack(){
+    public abstract int attack();
+    public abstract int defence();
 
+    public int dropGold(){
+        return gold;
+
+    }
+    public int dropExp(){
+        return exp;
     }
 
 
