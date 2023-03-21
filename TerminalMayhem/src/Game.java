@@ -63,27 +63,30 @@ public class Game {
     private void goAdventuring() {
         int isItAFight = random.nextInt(100);
         if (isItAFight >=10){
-
-
-            //TODO Behöver sortera ut monster av motsvarande level och skicka in.
-            // Förslag?
-
-            //TODO skicka med monster name
-            text.aMonsterAppears(monster.getName());
-
-            fightBetween(player,monster //skicka med monster motsvarande level
-                     );
-            //TODO after fight
-            // +guld, xp , HP
-
-
+            for (Monster monster: monsters) {
+                if (monster.getLevel() == player.getLevel()){
+                    text.aMonsterAppears(monster.getName());
+                    calculateBattle(player,monster);
+                }
+            }
+            givePlayerReward();
         } else {
             text.nothingHappend();
         }
     }
 
+    private void givePlayerReward() {
+        //TODO
+
+        player.getGold(monster.dropGold());
+        player.getExp(monster.dropExp());
+
+        //Ligger hos spelarklassen
+        player.addHp();
+    }
+
     //här spelas fighten tills någon är död.
-    private void fightBetween(Player player, Monstertyp monster) {
+    private void calculateBattle(Player player, Monster monster) {
         boolean isAnyOneDeadYet = true;
         while (isAnyOneDeadYet){
 
@@ -125,18 +128,34 @@ public class Game {
 
     //här löses transaktioner mellan shop och playerklassen.
     private void goShopping() {
-        text.getShopMenu();
-        shop.showItems();
-        int shopChoice = scanner.nextInt();
-        shop.getPrice(shopChoice);
-        if (shop.getPrice(shopChoice) <= player.getGold){
-            Player.addToInventory(shop.buyItem(shopChoice));
-            text.youHaveBought(shop.getName(shopChoice));
-        } else{
-            text.inSufficient();
+        boolean shopmore = true;
+        while (shopmore){
+            text.getShopMenu();
+            shop.showItems();
+            int shopChoice = scanner.nextInt();
+            shop.getPrice(shopChoice);
+            if (shop.getPrice(shopChoice) <= player.getGold){
+                Player.addToInventory(shop.buyItem(shopChoice));
+                text.youHaveBought(shop.getName(shopChoice));
+                text.doYouWantToBuyMore();
+                int buyMore = scanner.nextInt();
+                if (buyMore == 1){
+                    goShopping();
+                }
+                if (buyMore == 2){
+                    text.thanksForShopping();
+                    shopmore = false;
+                } else {
+                    text.invalidChoice();
+                }
+            } else{
+                text.inSufficient();
+            }
+
         }
 
-        //TODO add later vill du köpa mer?
+
+
 
     }
 
