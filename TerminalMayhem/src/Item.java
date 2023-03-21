@@ -1,13 +1,13 @@
 /**
  * @author Kristian Karlson
  */
-public abstract class Items {
+public abstract class Item {
 
     private String name;
     private int value; //
     private int price;
 
-    public Items(String name, int value, int price){
+    public Item(String name, int value, int price){
         this.name = name;
         this.value = value;
         this.price = price;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class Shop {
 
-    ArrayList<Items> items = new ArrayList<>();
+    ArrayList<Item> items = new ArrayList<>();
 
     public Shop() {
         // Fills the shop with items
@@ -17,19 +17,21 @@ public class Shop {
 
     public void showItems() {
         // display all available items in the shop
-        int i = 0;
-        for (Items item : items) {
+        int index = 0;  // number to select items from when buying
+        for (Item item : items) {
             if (item instanceof Medallion) {
-                System.out.println(i + " " + item.getName() + ", adds " + item.getValue() + " Strength, costs: " + item.getPrice());
+                System.out.println(index + " " + item.getName() + ", adds " + item.getValue() + " Strength, costs: " + item.getPrice());
             } else if (item instanceof HealingPotion) {
-                System.out.println(i + " " + item.getName() + ", gives " + item.getValue() + " Health points, costs: " + item.getPrice());
+                System.out.println(index + " " + item.getName() + ", gives " + item.getValue() + " Health points, costs: " + item.getPrice());
             }
-            i++;
+            index++;
         }
     }
-
-    public Items buyItem(int itemNumber) {
-        Items copyObject = items.get(itemNumber);
+    public int getPrice(int itemNumber) {
+        return items.get(itemNumber).getPrice();  // returnera priset på det aktuella object
+    }
+    public Item buyItem(int itemNumber) {   //
+        Item copyObject = items.get(itemNumber);
         items.remove(itemNumber); // tar bara bort objektet ur listan men objektet finns kvar
         return copyObject;
     }
