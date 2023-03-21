@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Game {
 
+    //TODO Hur ska spelaren initieras?
     Player player =new Player();
 
     //TODO ska vara olika monster här
@@ -72,6 +73,8 @@ public class Game {
 
             fightBetween(player,monster //skicka med monster motsvarande level
                      );
+            //TODO after fight
+            // +guld, xp , HP
 
 
         } else {
