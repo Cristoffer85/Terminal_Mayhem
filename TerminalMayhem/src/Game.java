@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.function.ToDoubleBiFunction;
 
 public class Game {
 
@@ -24,6 +25,7 @@ public class Game {
 
             switch (mainMenuChoice){
                 case 1:
+
                     break;
                 case 2:
                     text.getPlayerStatText();
@@ -41,6 +43,16 @@ public class Game {
 
     }
 
+    private void goShopping() {
+        text.getShopMenu();
+        shop.showItems();
+        int shopChoice = scanner.nextInt();
+        //TODO behöver bestämma om varan ska föras över, så fall behövs en metod för att skriva över från shop till player.
+        // annars behöver metoden kolla om varan är en medaljon eller potion och sen agera uteifrån det på playerns stats.
+
+        //vill du köpa mer?
+
+    }
 
 
 }
