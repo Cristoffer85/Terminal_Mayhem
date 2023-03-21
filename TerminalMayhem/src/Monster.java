@@ -16,13 +16,9 @@ public abstract class Monster {
             this.exp = exp;
         }
 
-        // Getters and setters for the properties
+        // Getters for the properties
         public String getName() {
             return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
         }
 
         public int getHP() {
@@ -37,32 +33,16 @@ public abstract class Monster {
             return strength;
         }
 
-        public void setStrength(int strength) {
-            this.strength = strength;
-        }
-
         public int getToughness() {
             return toughness;
-        }
-
-        public void setToughness(int toughness) {
-            this.toughness = toughness;
         }
 
         public int getGold() {
             return gold;
         }
 
-        public void setGold(int gold) {
-            this.gold = gold;
-        }
-
         public int getExp() {
             return exp;
-        }
-
-        public void setExp(int exp) {
-            this.exp = exp;
         }
 
 
@@ -74,6 +54,7 @@ public abstract class Monster {
     public int attack(){
 
     }
+
 
 
 
