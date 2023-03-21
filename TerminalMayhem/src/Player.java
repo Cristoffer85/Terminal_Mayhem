@@ -16,6 +16,7 @@ public class Player {
             boolean readyForFinalBoss;
             int randomNum;
             boolean checkIfSuccess;
+
             Random random;
             //save instans which is sent from Game, to make a link between item and player
             Item item;
@@ -77,6 +78,10 @@ public class Player {
                 }
             }
 
+            public int getToughness(){
+                return toughness;
+            }
+
             //add exp
             public void setExp(int exp) {
                 this.exp += exp;
@@ -84,7 +89,7 @@ public class Player {
 
             //calc for leveling up *not done yet*
             public void levelUp() {
-                Math.pow(level, 2);
+                nextLevelExp=(int)Math.pow(level, 2);
             }
 
             //everytime check if player has leveled up if leveled up then plus 1
@@ -116,5 +121,15 @@ public class Player {
             public void resetPlayer(){
              makePlayer();
              itemList.clear();
+            }
+
+            public void showHero(){
+                System.out.println("Name:     "+ name);
+                System.out.println("Level:    "+ level );
+                System.out.println("HP:       "+ hp+"/"+maxHp);
+                System.out.println("Strength: "+ strength);
+                System.out.println("toughness:"+ strength);
+                System.out.println("Critical: "+ critical);
+                System.out.println("Gold:     "+ gold );
             }
 }
