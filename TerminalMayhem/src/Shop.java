@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class Shop {
 
-    ArrayList<Items> items;
+    ArrayList<Items> items = new ArrayList<>();
 
     public Shop(){
         // Fills the shop with items
@@ -15,16 +15,16 @@ public class Shop {
 
     }
 
-    private void showItems(){
+    public void showItems(){
         // display all available items in the shop
         for (Items item: items) {
-            System.out.println(item);
+            System.out.println(item.getName() + " " + item.getValue() + " " + item.getPrice());
         }
     }
 
-    private void removeItem(Object object) {
+    public void removeItem(Items item) {
         // when item is bought remove from shop
-        items.remove(object);
+        items.remove(item);
 
     }
 
