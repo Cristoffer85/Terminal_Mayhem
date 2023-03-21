@@ -16,7 +16,7 @@ public abstract class Monster {
             this.exp = exp;
         }
 
-        // Getters for the properties
+
         public String getName() {
             return name;
         }
