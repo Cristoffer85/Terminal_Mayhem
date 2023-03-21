@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -8,6 +9,9 @@ public class Game {
 
     //TODO ska vara olika monster här
     Monstertyp monstertyp = new Monstertyp();
+
+    //TODO lägg in alla monster här
+    ArrayList <Monster> monsters = new ArrayList<Monster>();
 
     Shop shop = new Shop();
 
@@ -58,6 +62,8 @@ public class Game {
     private void goAdventuring() {
         int isItAFight = random.nextInt(100);
         if (isItAFight >=10){
+
+
             //TODO Behöver sortera ut monster av motsvarande level och skicka in.
             // Förslag?
 
