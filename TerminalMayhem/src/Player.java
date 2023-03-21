@@ -17,27 +17,32 @@ public class Player {
             int randomNum;
             boolean checkIfSuccess;
             Random random;
+            //save instans which is sent from Game, to make a link between item and player
             Item item;
 
             //ArrayList for saving bought Item
             ArrayList<Item> itemList;
 
-            //construct for setting up all the value, and call random function,make arrayList,
-            public Player(Item item, int level, int maxHp, int strength, int toughness, int gold, int criticalChance) {
+            //construct for setting up all the value, and call random and arrayList,
+            public Player(Item item,String name ) {
                 this.item=item;
-                this.level = level;
-                this.maxHp = maxHp;
-                this.hp=this.maxHp;
-                this.strength = strength;
-                this.toughness = toughness;
-                this.critical = criticalChance;
-                this.gold = gold;
-                this.readyForFinalBoss = readyForFinalBoss;
+                this.name=name;
                 random=new Random();
                 itemList=new ArrayList<Item>();
 
-                //testCode
-                itemList.add(item);
+                makePlayer();
+            }
+
+            //First status of player
+            public void makePlayer(){
+                level=1;
+                maxHp=30;
+                this.hp=this.maxHp;
+                strength=10;
+                toughness=5;
+                critical=20;
+                gold=0;
+                readyForFinalBoss=false;
             }
 
             //make random number
@@ -106,5 +111,10 @@ public class Player {
 
             public void payGold(int gold){
                 this.gold-=gold;
+            }
+
+            public void resetPlayer(){
+             makePlayer();
+             itemList.clear();
             }
 }
