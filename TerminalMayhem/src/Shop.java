@@ -7,7 +7,7 @@ public class Shop {
 
     ArrayList<Items> items = new ArrayList<>();
 
-    public Shop(){
+    public Shop() {
         // Fills the shop with items
         this.items.add(new Medallion());
         this.items.add(new HealingPotion());
@@ -15,18 +15,25 @@ public class Shop {
 
     }
 
-    public void showItems(){
+    public void showItems() {
         // display all available items in the shop
-        for (Items item: items) {
-            System.out.println(item.getName() + " " + item.getValue() + " " + item.getPrice());
+        int i = 0;
+        for (Items item : items) {
+            if (item instanceof Medallion) {
+                System.out.println(i + " " + item.getName() + ", adds " + item.getValue() + " Strength, costs: " + item.getPrice());
+            } else if (item instanceof HealingPotion) {
+                System.out.println(i + " " + item.getName() + ", gives " + item.getValue() + " Health points, costs: " + item.getPrice());
+            }
+            i++;
         }
     }
 
-    public void removeItem(Items item) {
-        // when item is bought remove from shop
-        items.remove(item);
-
+    public Items buyItem(int itemNumber) {
+        Items copyObject = items.get(itemNumber);
+        items.remove(itemNumber); // tar bara bort objektet ur listan men objektet finns kvar
+        return copyObject;
     }
 
-
 }
+
+

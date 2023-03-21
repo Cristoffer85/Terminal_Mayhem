@@ -4,7 +4,7 @@
 public abstract class Items {
 
     private String name;
-    private int value;
+    private int value; //
     private int price;
 
     public Items(String name, int value, int price){
