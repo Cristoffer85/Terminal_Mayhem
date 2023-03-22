@@ -14,7 +14,6 @@ public class Player {
     private int gold;
     private int criticalChance;
     private boolean readyForFinalBoss;
-    private boolean checkIfLeveledUp;
 
     Random random;
     //save instans which is sent from Game, to make a link between HealingPotion and player
