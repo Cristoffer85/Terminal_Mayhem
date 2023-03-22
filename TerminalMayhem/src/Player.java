@@ -33,13 +33,14 @@ public class Player {
     //First status of player
     public void makePlayer(){
         level=1;
-        maxHp=10000;
+        maxHp=100;
         hp=maxHp;
         exp=0;
         strength=10;
-        toughness=5;
-        criticalChance=20;
+        toughness=4;
+        criticalChance=5;
         gold=0;
+        defence();
     }
 
     //make random number
@@ -72,8 +73,7 @@ public class Player {
     }
 
 
-
-    //calc for leveling up *not done yet*
+    //calc for leveling up
     public void nextLevelExp() {
         nextLevelExp = level * 2;
     }
@@ -127,7 +127,7 @@ public class Player {
         return hp;
     }
     public void setHP(int damage){
-           hp -= damage;
+        hp -= damage;
     }
 
     public int getStrength(){
@@ -138,8 +138,8 @@ public class Player {
     }
 
     //add exp
-    public void setExp(int exp) {
-        this.exp += exp;
+    public void setExp(int earnedExp) {
+        exp += earnedExp;
     }
 
     public int getGold(){
@@ -174,8 +174,11 @@ public class Player {
         System.out.println("Critical Chance: " + criticalChance);
         System.out.println("Gold: " + gold );
         System.out.println("Inventory");
-        for(Item item : itemList){
+
+        if(itemList != null) {
+            for(Item item : itemList){
             System.out.print(item + " ");
+            }
         }
     }
 
