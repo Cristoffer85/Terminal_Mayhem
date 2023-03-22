@@ -68,10 +68,6 @@ public class TextClass {
         );
     }
 
-    void getGameRoundMenu(){        //? Oklart vad detta är, än så länge.
-        System.out.println("");
-    }
-
     void getPlayerDead(){     //Game over
         System.out.println("Sorry, you´re dead! You were overwhelmed by the dishes..");
     }
@@ -98,6 +94,14 @@ public class TextClass {
         System.out.println(".... You hear a lurge thud, the kind that only the largest form of set of multiple encyclopedias mounted together could ever perform, and there he was, standing right in front of you, Backgammon...");
     }
 
+    void thanksForShopping(){  //
+        System.out.println("Thank you for shopping!");
+    }
+
+    void inSufficient(){  //
+        System.out.println("Insufficient Gold!");
+    }
+
     void getFightMenu(){  //Fightmenyn, val
         System.out.println(
                 "Oh no! You´re up for a fight! What do you wanna do?\n" +
@@ -108,7 +112,27 @@ public class TextClass {
         );
     }
 
-    void invalidChoice(){    //Ej giltigt val.
+    void youHaveBought(String item){  //Du har köpt
+        System.out.println("You have bought: " + item);
+    }
+
+    void youHaveLevelup(){  //
+        System.out.println("Congrats! You have leveled up!");
+    }
+
+    void aMonsterAppears(String monsterName){  //
+        System.out.println("a wild " + monsterName + " appares");
+    }
+
+    void nothingHappened(){  //
+        System.out.println("An extremely weird day in the kingdom, where you just encountered random empty baggage carts and lost tourists from Malta, with one persons luggage lost in Austrias terminal..: ");
+    }
+
+    void getInvalidChoice(){    //Ej giltigt val.
         System.out.println("Im sorry, but you´ve made an incorrect choice.");
+    }
+
+    void doYouWantToBuyMore(){    //Köpa mer?
+        System.out.println("Do you want to purchase something more?");
     }
 }

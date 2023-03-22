@@ -13,7 +13,7 @@ public class Player {
     private int toughness;
     private int gold;
     private int criticalChance;
-    private boolean readyForFinalBoss;
+
 
     Random random;
     //save instans which is sent from Game, to make a link between HealingPotion and player
@@ -33,14 +33,13 @@ public class Player {
     //First status of player
     public void makePlayer(){
         level=1;
-        maxHp=30;
+        maxHp=10000;
         hp=maxHp;
         exp=0;
         strength=10;
         toughness=5;
         criticalChance=20;
         gold=0;
-        readyForFinalBoss=false;
     }
 
     //make random number
@@ -62,7 +61,7 @@ public class Player {
 
     //use potion and also check if hp is not reached to maxHP.
     public void usePotion(HealingPotion potion) {
-        hp+=potion.value;
+        hp+=potion.getValue();
         if(maxHp<=hp){
             hp=maxHp;
         }
@@ -86,24 +85,36 @@ public class Player {
     }
 
     //check if user has reached level 9 and ready to meet a final boss
-    public void checkIfReadyForFinalBoss() {
-        if (level == 9) {
-            readyForFinalBoss = true;
-        }
+    public boolean checkIfReadyForFinalBoss() {
+        return level == 9;
     }
 
     public boolean checkIfDead() {
         return hp <= 0;
     }
 
+
     public void setGold(int gold){
         this.gold+=gold;
+    }
+
+    public void addToInventory(Item item){
+        itemList.add(item);
+    }
+
+    // Add HP after fighting Monster
+    public void addHP(){
+        this.hp+=hp;
+    }
+
+    public void setHP(int hp){
+        this.hp=hp;
     }
 
     public int getStrength(){
         return strength;
     }
-    public int defence(){
+    public int getToughness(){
         return toughness;
     }
 
@@ -111,6 +122,7 @@ public class Player {
     public void setExp(int exp) {
         this.exp += exp;
     }
+
     public int getGold(){
         return gold;
     }
@@ -134,6 +146,8 @@ public class Player {
     public String getName(){
         return name;
     }
+
+
 
     public void showHero(){
         System.out.println("Name: "+ name);

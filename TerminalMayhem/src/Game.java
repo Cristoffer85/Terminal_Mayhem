@@ -6,14 +6,15 @@ import java.util.Scanner;
 public class Game {
 
     HealingPotion healingPotion = new HealingPotion();
-    //TODO is this right Wakana?
     Player player = new Player(healingPotion);
 
     //TODO construct different monsters
-    Monstertyp monstertyp = new Monstertyp();
+    UnikMonster monstertyp = new UnikMonster("Sopgubbe", 1, 50,10,2,12,100);
+
 
     //TODO add monsters here
     ArrayList<Monster> monsters = new ArrayList<Monster>();
+
 
     Shop shop = new Shop();
 
@@ -23,7 +24,7 @@ public class Game {
     Random random = new Random();
 
     void startGame() {
-
+        monsters.add(new UnikMonster("Sopgubbe", 1, 50,10,2,12,100));
         text.getWelcomeText();
         player.setName(scanner.nextLine()); // sets player name
 
@@ -35,22 +36,17 @@ public class Game {
             int mainMenuChoice = scanner.nextInt();
 
             switch (mainMenuChoice) {
-                case 1:
-                    goAdventuring(player);
-                    break;
-                case 2:
+                case 1 -> goAdventuring(player);
+                case 2 -> {
                     text.getPlayerStatText();
                     player.showHero();
-                    break;
-                case 3:
-                    goShopping();
-                    break;
-                case 4:
+                }
+                case 3 -> goShopping();
+                case 4 -> {
                     text.ThanksForPlaying();
                     System.exit(0);
-                    break;
-                default:
-                    text.invalidChoice();
+                }
+                default -> text.getInvalidChoice();
             }
         }
 
@@ -61,7 +57,7 @@ public class Game {
         int isItAFight = random.nextInt(100);
         if (isItAFight >= 10) {
             for (Monster monster : monsters) {
-                if (monster.getLevel() == player.getLevel()) {
+                if (monster.getLvl() == player.getLevel()) {
                     text.aMonsterAppears(monster.getName());
                     calculateBattle(player, monster);
                     givePlayerReward(player,monster);
@@ -73,17 +69,17 @@ public class Game {
                 player.levelUp();
             }
         } else {
-            text.nothingHappend();
+            text.nothingHappened();
         }
     }
 
     //Give player XP, gold and Hp boost
-    private void givePlayerReward(Player player,Monstertyp monster) {
-        player.getGold(monster.dropGold());
-        player.getExp(monster.dropExp());
+    private void givePlayerReward(Player player,Monster monster) {
+        player.setGold(monster.dropGold());
+        player.setExp(monster.dropExp());
 
         //TODO player gets an HP boost, based on what?
-        player.addHp();
+        player.addHP();
     }
 
     //Initiate battle between player and selected monster.
@@ -96,27 +92,24 @@ public class Game {
             int fightChoice = scanner.nextInt();
 
             switch (fightChoice) {
-                case 1: //Player attack, changes monster HP
-                    monster.setHp(attack(player.getStrength(), monster.getToughness()));
-                    break;
-                case 2:  // Use potion
-                    player.usePotion(healingPotion);
-                    break;
-                default:
-                    text.getInvalidChoice();
+                case 1 -> //Player attack, changes monster HP
+                        monster.setHP(attack(player.getStrength(), monster.getToughness()));
+                case 2 ->  // Use potion
+                        player.usePotion(healingPotion);
+                default -> text.getInvalidChoice();
             }
 
             //game exits the loop if the monster is dead
-            if (monster.checkIfdead() == true) {
+            if (monster.checkIfDead()) {
                 isAnyOneDeadYet = false;
             }
 
             //Monster attack, that changes player HP
-            player.setHp(attack(monster.getStrength(), player.getToughness()));
+            player.setHP(attack(monster.getStrength(), player.getToughness()));
 
             // If the player dies, game goes back to creating a new player
-            if (player.checkIfdead() == true) {
-                text.playerDead();
+            if (player.checkIfDead()) {
+                text.getPlayerDead();
                 startGame();
             }
         }
@@ -129,6 +122,7 @@ public class Game {
         return damage;
     }
 
+    //TODO evigloop
     // in this method the transactions between shop and player are concluded
     private void goShopping() {
         boolean shopmore = true;
@@ -137,10 +131,10 @@ public class Game {
             shop.showItems();
             int shopChoice = scanner.nextInt();
             shop.getPrice(shopChoice);
-            if (shop.getPrice(shopChoice) <= player.getGold) {   //check if player has enough money
-                Player.addToInventory(shop.buyItem(shopChoice));
+            if (shop.getPrice(shopChoice) <= player.getGold()) {   //check if player has enough money
+                player.addToInventory(shop.buyItem(shopChoice));
                 player.payGold(shop.getPrice(shopChoice));      // Get Player money, for the items price
-                text.youHaveBought(shop.getName(shopChoice));
+                text.youHaveBought(shop.getName(shopChoice));   // Takes a string from the shop and sends to text class
                 text.doYouWantToBuyMore();
                 int buyMore = scanner.nextInt();        // if the player wants to buy more stuff
                 if (buyMore == 1) {
@@ -150,7 +144,7 @@ public class Game {
                     text.thanksForShopping();
                     shopmore = false;
                 } else {
-                    text.invalidChoice();
+                    text.getInvalidChoice();
                 }
             } else {
                 text.inSufficient();

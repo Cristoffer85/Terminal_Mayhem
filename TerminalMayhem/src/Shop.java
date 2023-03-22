@@ -38,6 +38,11 @@ public class Shop {
         return copyObject;
     }
 
+    public String getName(int itemNumber) {
+        return items.get(itemNumber).getName();
+    }
+
+
 }
 
 
