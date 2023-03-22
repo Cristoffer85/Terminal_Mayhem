@@ -10,10 +10,12 @@ public class Game {
     Player player = new Player(healingPotion);
 
     //TODO construct different monsters
-    Monstertyp monstertyp = new Monstertyp();
+    UnikMonster monstertyp = new UnikMonster("Sopgubbe", 1, 50,10,2,12,100);
+
 
     //TODO add monsters here
     ArrayList<Monster> monsters = new ArrayList<Monster>();
+
 
     Shop shop = new Shop();
 
@@ -112,7 +114,7 @@ public class Game {
             }
 
             //Monster attack, that changes player HP
-            player.setHp(attack(monster.getStrength(), player.getToughness()));
+            player.setHP(attack(monster.getStrength(), player.getToughness()));
 
             // If the player dies, game goes back to creating a new player
             if (player.checkIfdead() == true) {
@@ -140,7 +142,7 @@ public class Game {
             if (shop.getPrice(shopChoice) <= player.getGold) {   //check if player has enough money
                 Player.addToInventory(shop.buyItem(shopChoice));
                 player.payGold(shop.getPrice(shopChoice));      // Get Player money, for the items price
-                text.youHaveBought(shop.getName(shopChoice));
+                text.youHaveBought(shop.getName(shopChoice));   // Takes a string from the shop and sends to text class
                 text.doYouWantToBuyMore();
                 int buyMore = scanner.nextInt();        // if the player wants to buy more stuff
                 if (buyMore == 1) {

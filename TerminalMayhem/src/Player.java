@@ -33,7 +33,7 @@ public class Player {
     //First status of player
     public void makePlayer(){
         level=1;
-        maxHp=30;
+        maxHp=10000;
         hp=maxHp;
         exp=0;
         strength=10;
@@ -62,7 +62,7 @@ public class Player {
 
     //use potion and also check if hp is not reached to maxHP.
     public void usePotion(HealingPotion potion) {
-        hp+=potion.value;
+        hp+=potion.getValue();
         if(maxHp<=hp){
             hp=maxHp;
         }
