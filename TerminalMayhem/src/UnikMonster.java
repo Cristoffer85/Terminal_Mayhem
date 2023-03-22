@@ -1,8 +1,8 @@
 public class UnikMonster extends Monster {
 
 
-    public UnikMonster(String name, int HP, int strength, int toughness, int gold, int exp) {
-        super(name, HP, strength, toughness, gold, exp);
+    public UnikMonster(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
+        super(name, lvl, HP, strength, toughness, gold, exp);
     }
 
     @Override
@@ -17,8 +17,8 @@ public class UnikMonster extends Monster {
 
 
     public class Zombie extends Monster {
-        public Zombie(String name, int HP, int strength, int toughness, int gold, int exp) {
-            super(name, HP, strength, toughness, gold, exp);
+        public Zombie(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
+            super(name, lvl, HP, strength, toughness, gold, exp);
         }
 
         @Override
@@ -33,8 +33,8 @@ public class UnikMonster extends Monster {
 
     }
     public class Skeleton extends Monster {
-        public Skeleton(String name, int HP, int strength, int toughness, int gold, int exp) {
-            super(name, HP, strength, toughness, gold, exp);
+        public Skeleton(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
+            super(name, lvl, HP, strength, toughness, gold, exp);
         }
 
         @Override
@@ -49,8 +49,8 @@ public class UnikMonster extends Monster {
 
     }
     public class Dragon extends Monster {
-        public Dragon(String name, int HP, int strength, int toughness, int gold, int exp) {
-            super(name, HP, strength, toughness, gold, exp);
+        public Dragon(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
+            super(name, lvl, HP, strength, toughness, gold, exp);
         }
 
         @Override
@@ -66,8 +66,8 @@ public class UnikMonster extends Monster {
     }
 
     public class Demon extends Monster {
-        public Demon(String name, int HP, int strength, int toughness, int gold, int exp) {
-            super(name, HP, strength, toughness, gold, exp);
+        public Demon(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
+            super(name, lvl, HP, strength, toughness, gold, exp);
         }
 
         @Override
@@ -82,8 +82,8 @@ public class UnikMonster extends Monster {
 
     }
     public class Goblin extends Monster {
-        public Goblin(String name, int HP, int strength, int toughness, int gold, int exp) {
-            super(name, HP, strength, toughness, gold, exp);
+        public Goblin(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
+            super(name, lvl, HP, strength, toughness, gold, exp);
         }
 
         @Override
@@ -97,9 +97,9 @@ public class UnikMonster extends Monster {
         }
 
     }
-    public class God extends Monster {
-        public God(String name, int HP, int strength, int toughness, int gold, int exp) {
-            super(name, HP, strength, toughness, gold, exp);
+    public class Orc extends Monster {
+        public Orc(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
+            super(name, lvl, HP, strength, toughness, gold, exp);
         }
 
         @Override
@@ -114,9 +114,9 @@ public class UnikMonster extends Monster {
 
     }
 
-    public class Death extends Monster {
-        public Death(String name, int HP, int strength, int toughness, int gold, int exp) {
-            super(name, HP, strength, toughness, gold, exp);
+    public class Minotauros extends Monster {
+        public Minotauros(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
+            super(name, lvl, HP, strength, toughness, gold, exp);
         }
 
         @Override
@@ -131,8 +131,8 @@ public class UnikMonster extends Monster {
 
     }
     public class Knight extends Monster {
-        public Knight(String name, int HP, int strength, int toughness, int gold, int exp) {
-            super(name, HP, strength, toughness, gold, exp);
+        public Knight(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
+            super(name, lvl, HP, strength, toughness, gold, exp);
         }
 
         @Override
@@ -147,8 +147,8 @@ public class UnikMonster extends Monster {
 
     }
     public class Mercenary extends Monster {
-        public Mercenary(String name, int HP, int strength, int toughness, int gold, int exp) {
-            super(name, HP, strength, toughness, gold, exp);
+        public Mercenary(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
+            super(name, lvl, HP, strength, toughness, gold, exp);
         }
 
         @Override
@@ -164,8 +164,8 @@ public class UnikMonster extends Monster {
     }
 
     public class Slime extends Monster {
-        public Slime(String name, int HP, int strength, int toughness, int gold, int exp) {
-            super(name, HP, strength, toughness, gold, exp);
+        public Slime(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
+            super(name, lvl, HP, strength, toughness, gold, exp);
         }
 
         @Override
@@ -179,10 +179,22 @@ public class UnikMonster extends Monster {
         }
 
     }
-    Zombie zombie = new Zombie("Zombie", 100, 10, 5, 50, 100);
-    Skeleton skeleton = new Skeleton("Skeleton", 80, 8, 3, 30, 80);
-    Dragon dragon = new Dragon("Dragon", 500, 50, 20, 500, 1000);
-    Demon demon = new Demon("Demon", 300, 60, 10, 300, 200);
+    Goblin goblin = new Goblin("Goblin" ,1,40,10,0,10,100);
+    Orc orc = new Orc("Orc", 2,43,12,2,20,100);
+    Skeleton skeleton = new Skeleton("Skeleton", 3, 46,14,4,30,150);
+    Mercenary mercenary = new Mercenary("Mercenary", 4,49,16,6,40,200);
+    Zombie zombie = new Zombie("Zombie",5,52,18,8,50,250);
+    Minotauros minotauros = new Minotauros("Minotauros", 6,55,20,10,60,300);
+    Knight knight = new Knight ("Knight",7,58,22,12,70,350);
+    Dragon dragon = new Dragon("Dragon",8,61,24,14,80,400);
+    Demon demon = new Demon("Demon",9,64,26,16,90,450);
+    Slime slime = new Slime("Slime",10,200,28,20,1000,1000);
+
+
+
+
+
+
 
 
 }

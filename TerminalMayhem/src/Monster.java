@@ -1,14 +1,16 @@
 public abstract class Monster {
 
         private String name;
+        private int lvl;
         private int HP;
         private int strength;
         private int toughness;
         private int gold;
         private int exp;
 
-        public Monster(String name, int HP, int strength, int toughness, int gold, int exp) {
+        public Monster(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
             this.name = name;
+            this.lvl = lvl;
             this.HP = HP;
             this.strength = strength;
             this.toughness = toughness;
@@ -20,6 +22,8 @@ public abstract class Monster {
         public String getName() {
             return name;
         }
+
+        public int getLvl(){ return lvl; }
 
         public int getHP() {
             return HP;
