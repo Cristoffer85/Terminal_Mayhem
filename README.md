@@ -1,2 +1,4 @@
-# terminal-mayhem
-Inlämningsuppgift grupp 1 jin oop 45
+TERMINAL MAYHEM
+ 
+Inlämningsuppgift Grupp 1 - Grupparbete Spel, OOP V12-13 2023.
+         
