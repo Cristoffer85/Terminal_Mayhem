@@ -8,13 +8,7 @@ public class Game {
     HealingPotion healingPotion = new HealingPotion();
     Player player = new Player(healingPotion);
 
-    //TODO construct different monsters
-    UnikMonster monstertyp = new UnikMonster("Sopgubbe", 1, 50,10,2,12,100);
-
-
-    //TODO add monsters here
     ArrayList<Monster> monsters = new ArrayList<Monster>();
-
 
     Shop shop = new Shop();
 
@@ -24,10 +18,16 @@ public class Game {
     Random random = new Random();
 
     void startGame() {
+        //initiate monsters
         monsters.add(new UnikMonster("Sopgubbe", 1, 50,10,2,12,100));
+
         text.getWelcomeText();
         player.setName(scanner.nextLine()); // sets player name
 
+        mainSwitch();
+    }
+
+    private void mainSwitch() {
         //Main-game loop
         boolean game = true;
         while (game) {
@@ -49,13 +49,13 @@ public class Game {
                 default -> text.getInvalidChoice();
             }
         }
-
     }
 
     // 90 % chance of going to battle, match monster with player level
     private void goAdventuring(Player player) {
         int isItAFight = random.nextInt(100);
         if (isItAFight >= 10) {
+
             for (Monster monster : monsters) {
                 if (monster.getLvl() == player.getLevel()) {
                     text.aMonsterAppears(monster.getName());
@@ -90,6 +90,8 @@ public class Game {
             //User choice to attack or use a potion
             text.getFightMenu();
             int fightChoice = scanner.nextInt();
+            System.out.println(player.getHp());
+            System.out.println(monster.getHP());
 
             switch (fightChoice) {
                 case 1 -> //Player attack, changes monster HP
@@ -122,7 +124,6 @@ public class Game {
         return damage;
     }
 
-    //TODO evigloop
     // in this method the transactions between shop and player are concluded
     private void goShopping() {
         boolean shopmore = true;
@@ -148,6 +149,7 @@ public class Game {
                 }
             } else {
                 text.inSufficient();
+                shopmore = false;
             }
         }
     }

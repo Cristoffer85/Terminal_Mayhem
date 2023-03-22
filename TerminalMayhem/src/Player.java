@@ -90,7 +90,10 @@ public class Player {
     }
 
     public boolean checkIfDead() {
-        return hp <= 0;
+        if (hp <= 0){
+            return true;
+        }
+        return false;
     }
 
 
@@ -108,7 +111,7 @@ public class Player {
     }
 
     public void setHP(int hp){
-        this.hp=hp;
+        this.hp = this.hp -hp;
     }
 
     public int getStrength(){
@@ -157,5 +160,9 @@ public class Player {
         System.out.println("toughness: "+ toughness);
         System.out.println("Critical Chance: "+ criticalChance);
         System.out.println("Gold: "+ gold );
+    }
+
+    public int getHp() {
+        return this.hp;
     }
 }
