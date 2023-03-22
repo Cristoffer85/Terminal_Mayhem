@@ -17,11 +17,7 @@ public class Game {
 
     Shop shop = new Shop();
 
-    Text text = new text();
-
-    //
-
-
+    TextClass text = new TextClass();
 
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
@@ -35,22 +31,22 @@ public class Game {
         boolean game = true;
         while (game) {
 
-            text.getMainMenu();
+            text.getMainMenutext();
             int mainMenuChoice = scanner.nextInt();
 
             switch (mainMenuChoice) {
                 case 1:
-                    goAdventuring();
+                    goAdventuring(player);
                     break;
                 case 2:
                     text.getPlayerStatText();
-                    player.getStats();
+                    player.showHero();
                     break;
                 case 3:
                     goShopping();
                     break;
                 case 4:
-                    text.thanksForPlaying();
+                    text.ThanksForPlaying();
                     System.exit(0);
                     break;
                 default:
@@ -61,16 +57,17 @@ public class Game {
     }
 
     // 90 % chance of going to battle, match monster with player level
-    private void goAdventuring() {
+    private void goAdventuring(Player player) {
         int isItAFight = random.nextInt(100);
         if (isItAFight >= 10) {
             for (Monster monster : monsters) {
                 if (monster.getLevel() == player.getLevel()) {
                     text.aMonsterAppears(monster.getName());
                     calculateBattle(player, monster);
+                    givePlayerReward(player,monster);
                 }
             }
-            givePlayerReward();
+
             if (player.checkIfLeveledUp()){  // check if player has reached a new level
                 text.youHaveLevelup();
                 player.levelUp();
@@ -81,7 +78,7 @@ public class Game {
     }
 
     //Give player XP, gold and Hp boost
-    private void givePlayerReward() {
+    private void givePlayerReward(Player player,Monstertyp monster) {
         player.getGold(monster.dropGold());
         player.getExp(monster.dropExp());
 
@@ -103,7 +100,7 @@ public class Game {
                     monster.setHp(attack(player.getStrength(), monster.getToughness()));
                     break;
                 case 2:  // Use potion
-                    player.usePotion();
+                    player.usePotion(healingPotion);
                     break;
                 default:
                     text.getInvalidChoice();
