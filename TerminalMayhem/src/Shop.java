@@ -15,6 +15,10 @@ public class Shop {
 
     }
 
+    public int inventorySize(){
+        return items.size();
+    }
+
     public void showItems() {
         // display all available items in the shop
         int index = 0;  // number to select items from when buying

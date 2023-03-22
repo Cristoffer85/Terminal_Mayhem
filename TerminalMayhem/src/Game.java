@@ -19,7 +19,7 @@ public class Game {
 
     void startGame() {
         //initiate monsters
-        monsters.add(new UnikMonster("Sopgubbe", 1, 50,10,2,12,100));
+        monsters.add(new UnikMonster("Sopgubbe", 1, 50, 10, 2, 12, 100));
 
         text.getWelcomeText();
         player.setName(scanner.nextLine()); // sets player name
@@ -60,11 +60,11 @@ public class Game {
                 if (monster.getLvl() == player.getLevel()) {
                     text.aMonsterAppears(monster.getName());
                     calculateBattle(player, monster);
-                    givePlayerReward(player,monster);
+                    givePlayerReward(player, monster);
                 }
             }
 
-            if (player.checkIfLeveledUp()){  // check if player has reached a new level
+            if (player.checkIfLeveledUp()) {  // check if player has reached a new level
                 text.youHaveLevelup();
                 player.levelUp();
             }
@@ -74,7 +74,7 @@ public class Game {
     }
 
     //Give player XP, gold and Hp boost
-    private void givePlayerReward(Player player,Monster monster) {
+    private void givePlayerReward(Player player, Monster monster) {
         player.setGold(monster.dropGold());
         player.setExp(monster.dropExp());
 
@@ -126,33 +126,29 @@ public class Game {
 
     // in this method the transactions between shop and player are concluded
     private void goShopping() {
-        boolean shopmore = true;
-        while (shopmore) {
+        // loop runs while true use break to exit
+        while (shop.inventorySize() > 0) { // check that the shop contains items
             text.getShopMenu();
             shop.showItems();
-            int shopChoice = scanner.nextInt();
-            shop.getPrice(shopChoice);
-            if (shop.getPrice(shopChoice) <= player.getGold()) {   //check if player has enough money
-                player.addToInventory(shop.buyItem(shopChoice));
-                player.payGold(shop.getPrice(shopChoice));      // Get Player money, for the items price
-                text.youHaveBought(shop.getName(shopChoice));   // Takes a string from the shop and sends to text class
-                text.doYouWantToBuyMore();
-                int buyMore = scanner.nextInt();        // if the player wants to buy more stuff
-                if (buyMore == 1) {
-                    goShopping();
-                }
+            int itemToBuy = scanner.nextInt();
+
+            if (shop.getPrice(itemToBuy) <= player.getGold()) { //check if player has enough money
+
+                text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
+                player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
+                player.addToInventory(shop.buyItem(itemToBuy)); // removes the item from the shop
+
+                text.doYouWantToBuyMore();              // if the player wants to buy more stuff
+                int buyMore = scanner.nextInt();
+
                 if (buyMore == 2) {
                     text.thanksForShopping();
-                    shopmore = false;
-                } else {
-                    text.getInvalidChoice();
+                    break;
                 }
             } else {
                 text.inSufficient();
-                shopmore = false;
             }
         }
+        System.out.println("Thank you come again or the shop is empty");
     }
-
-
 }
