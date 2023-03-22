@@ -3,123 +3,146 @@ import java.util.Random;
 
 public class Player {
 
-            String name;
-            int level;
-            int nextLevelExp;
-            int exp = 0;
-            int maxHp;
-            int hp;
-            int strength;
-            int toughness;
-            int gold;
-            int criticalChance;
-            boolean readyForFinalBoss;
-            Random random;
-            //save instans which is sent from Game, to make a link between item and player
-            Item item;
+    private String name;
+    private int level;
+    private int nextLevelExp;
+    private int exp ;
+    private int maxHp;
+    private int hp;
+    private int strength;
+    private int toughness;
+    private int gold;
+    private int criticalChance;
+    private boolean readyForFinalBoss;
+    private boolean checkIfLeveledUp;
 
-            //ArrayList for saving bought Item
-            ArrayList<Item> itemList;
+    Random random;
+    //save instans which is sent from Game, to make a link between HealingPotion and player
+    HealingPotion potion;
 
-            //construct for setting up all the value, and call random and arrayList,
-            public Player(Item item,String name ) {
-                this.item=item;
-                this.name=name;
-                random=new Random();
-                itemList=new ArrayList<Item>();
+    //ArrayList for saving bought Item
+    ArrayList<Item> itemList;
 
-                makePlayer();
-            }
+    //construct for setting up all the value, and call random and arrayList,
+    public Player(HealingPotion potion) {
+        this.potion=potion;
+        random=new Random();
+        itemList= new ArrayList<>();
+        makePlayer();
+    }
 
-            //First status of player
-            public void makePlayer(){
-                level=1;
-                maxHp=30;
-                hp=maxHp;
-                strength=10;
-                toughness=5;
-                criticalChance=20;
-                gold=0;
-                readyForFinalBoss=false;
-            }
+    //First status of player
+    public void makePlayer(){
+        level=1;
+        maxHp=30;
+        hp=maxHp;
+        exp=0;
+        strength=10;
+        toughness=5;
+        criticalChance=20;
+        gold=0;
+        readyForFinalBoss=false;
+    }
 
-            //make random number
-            public int chance(){
-                return random.nextInt(100);
-            }
+    //make random number
+    public int chance(){
+        return random.nextInt(100);
+    }
 
-            //attack monster with normal attack or critical attack
-            public int attack() {
-                int damage;
+    //attack monster with normal attack or critical attack
+    public int attack() {
+        int damage;
 
-                if (chance()<=criticalChance) {
-                    damage = (strength + (strength * 2)) / 2 + 10;
-                } else {
-                    damage = (strength + (strength * 2)) / 2;
-                }
-                return damage;
-            }
+        if (chance()<=criticalChance) {
+            damage = (strength + (strength * 2)) / 2 + 10;
+        } else {
+            damage = (strength + (strength * 2)) / 2;
+        }
+        return damage;
+    }
 
-            //use potion and also check if hp is not reached to maxHP.
-            public void usePotion(Item potion) {
-                hp+=potion.value;
-                if(maxHp<=hp){
-                    hp=maxHp;
-                }
-            }
+    //use potion and also check if hp is not reached to maxHP.
+    public void usePotion(HealingPotion potion) {
+        hp+=potion.value;
+        if(maxHp<=hp){
+            hp=maxHp;
+        }
+    }
 
-            public int defence(){
-                return toughness;
-            }
 
-            //add exp
-            public void setExp(int exp) {
-                this.exp += exp;
-            }
 
-            //calc for leveling up *not done yet*
-            public void levelUp() {
-                nextLevelExp=(int)Math.pow(level, 2);
-            }
+    //calc for leveling up *not done yet*
+    public void nextLevelExp() {
+        nextLevelExp=(int)Math.pow(level, 2);
+    }
 
-            //everytime check if player has leveled up, if leveled up Lv+ 1
-            public void checkIfLeveledUp() {
-                if (nextLevelExp <= exp) {
-                    level += 1;
-                }
-            }
+    //everytime check if player has leveled up, if leveled up Lv+ 1
+    public boolean checkIfLeveledUp() {
+        return nextLevelExp <= exp;
+    }
 
-            //check if user has reached level 9 and ready to meet a final boss
-            public void checkIfReadyForFinalBoss() {
-                if (level == 9) {
-                    readyForFinalBoss = true;
-                }
-            }
+    public void levelUp(){
+        level+=1;
+        nextLevelExp();
+    }
 
-            public boolean checkIfDead() {
-                return hp <= 0;
-            }
+    //check if user has reached level 9 and ready to meet a final boss
+    public void checkIfReadyForFinalBoss() {
+        if (level == 9) {
+            readyForFinalBoss = true;
+        }
+    }
 
-            public void getGold(int gold){
-                this.gold+=gold;
-            }
+    public boolean checkIfDead() {
+        return hp <= 0;
+    }
 
-            public void payGold(int gold){
-                this.gold-=gold;
-            }
+    public void setGold(int gold){
+        this.gold+=gold;
+    }
 
-            public void resetPlayer(){
-             makePlayer();
-             itemList.clear();
-            }
+    public int getStrength(){
+        return strength;
+    }
+    public int defence(){
+        return toughness;
+    }
 
-            public void showHero(){
-                System.out.println("Name: "+ name);
-                System.out.println("Level: "+ level );
-                System.out.println("HP: "+ hp+"/"+maxHp);
-                System.out.println("Strength: "+ strength);
-                System.out.println("toughness: "+ toughness);
-                System.out.println("Critical Chance: "+ criticalChance);
-                System.out.println("Gold: "+ gold );
-            }
+    //add exp
+    public void setExp(int exp) {
+        this.exp += exp;
+    }
+    public int getGold(){
+        return gold;
+    }
+
+    public void payGold(int gold){
+        this.gold-=gold;
+    }
+
+    public void resetPlayer(){
+        makePlayer();
+        itemList.clear();
+    }
+
+    public int getLevel(){
+        return level;
+    }
+
+    public void setName(String name){
+        this.name=name;
+    }
+    public String getName(){
+        return name;
+    }
+
+    public void showHero(){
+        System.out.println("Name: "+ name);
+        System.out.println("Level: "+ level );
+        System.out.println("HP: "+ hp+"/"+maxHp);
+        System.out.println("Strength: "+ strength);
+        System.out.println("toughness: "+ toughness);
+        System.out.println("Critical Chance: "+ criticalChance);
+        System.out.println("Gold: "+ gold );
+    }
 }
