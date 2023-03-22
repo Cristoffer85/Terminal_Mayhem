@@ -61,7 +61,7 @@ public class Player {
 
     //use potion and also check if hp is not reached to maxHP.
     public void usePotion(HealingPotion potion) {
-        hp+=potion.getValue();
+        hp+=potion.getPotionValue();
         if(maxHp<=hp){
             hp=maxHp;
         }

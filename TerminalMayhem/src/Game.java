@@ -147,6 +147,7 @@ public class Game {
                 }
             } else {
                 text.inSufficient();
+                break;
             }
         }
         System.out.println("Thank you come again or the shop is empty");
