@@ -30,7 +30,7 @@ public abstract class Monster {
         }
 
         public void setHP(int HP) {
-            this.HP = HP;
+            this.HP = this.HP - HP;
         }
 
         public int getStrength() {
@@ -50,7 +50,10 @@ public abstract class Monster {
         }
 
     public boolean checkIfDead(){
-        return HP<=0;
+        if (HP <= 0){
+            return true;
+        }
+        return false;
 
     }
 

@@ -133,6 +133,6 @@ public class TextClass {
     }
 
     void doYouWantToBuyMore(){    //Köpa mer?
-        System.out.println("Do you want to purchase something more?");
+        System.out.println("Do you want to purchase something more? 1 for yes, 2 for no");
     }
 }
