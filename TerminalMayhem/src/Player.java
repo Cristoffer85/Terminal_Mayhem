@@ -106,10 +106,7 @@ public class Player {
     }
 
     public boolean checkIfDead() {
-        if (hp <= 0){
-            return true;
-        }
-        return false;
+        return hp <= 0;
     }
 
 
