@@ -5,39 +5,40 @@ import java.util.Scanner;
 
 public class Game {
 
-    //TODO Hur ska spelaren initieras?
-    Player player =new Player();
+    HealingPotion healingPotion = new HealingPotion();
+    //TODO is this right Wakana?
+    Player player = new Player(healingPotion);
 
-    //TODO ska vara olika monster här
+    //TODO construct different monsters
     Monstertyp monstertyp = new Monstertyp();
 
-    //TODO lägg in alla monster här
-    ArrayList <Monster> monsters = new ArrayList<Monster>();
+    //TODO add monsters here
+    ArrayList<Monster> monsters = new ArrayList<Monster>();
 
     Shop shop = new Shop();
 
     Text text = new text();
 
-    //Så länge spelet körs
-    boolean game = true;
+    //
+
 
 
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
 
-    void startGame(){
+    void startGame() {
 
-        //Hämta välkomsttext och sätter spelarens namn
         text.getWelcomeText();
-        player.setName(scanner.nextLine());
+        player.setName(scanner.nextLine()); // sets player name
 
-        //loop för själva spelet, hämta spelarens val och matcha mot switch.
-        while(game){
+        //Main-game loop
+        boolean game = true;
+        while (game) {
 
             text.getMainMenu();
             int mainMenuChoice = scanner.nextInt();
 
-            switch (mainMenuChoice){
+            switch (mainMenuChoice) {
                 case 1:
                     goAdventuring();
                     break;
@@ -59,104 +60,105 @@ public class Game {
 
     }
 
-    // här börjar vi kolla om det inträffar en strid, 10 procents chans så händer inget.
+    // 90 % chance of going to battle, match monster with player level
     private void goAdventuring() {
         int isItAFight = random.nextInt(100);
-        if (isItAFight >=10){
-            for (Monster monster: monsters) {
-                if (monster.getLevel() == player.getLevel()){
+        if (isItAFight >= 10) {
+            for (Monster monster : monsters) {
+                if (monster.getLevel() == player.getLevel()) {
                     text.aMonsterAppears(monster.getName());
-                    calculateBattle(player,monster);
+                    calculateBattle(player, monster);
                 }
             }
             givePlayerReward();
+            if (player.checkIfLeveledUp()){  // check if player has reached a new level
+                text.youHaveLevelup();
+                player.levelUp();
+            }
         } else {
             text.nothingHappend();
         }
     }
 
+    //Give player XP, gold and Hp boost
     private void givePlayerReward() {
-        //TODO
-
         player.getGold(monster.dropGold());
         player.getExp(monster.dropExp());
 
-        //Ligger hos spelarklassen
+        //TODO player gets an HP boost, based on what?
         player.addHp();
     }
 
-    //här spelas fighten tills någon är död.
+    //Initiate battle between player and selected monster.
     private void calculateBattle(Player player, Monster monster) {
         boolean isAnyOneDeadYet = true;
-        while (isAnyOneDeadYet){
+        while (isAnyOneDeadYet) {
 
-            //Attack eller use potion
+            //User choice to attack or use a potion
             text.getFightMenu();
             int fightChoice = scanner.nextInt();
 
-            switch(fightChoice){
-                case 1: //spelarens attack, som ändrar monstrets HP
-                    monster.setHp(attack(player.getStrength(), monster.getDefence()));
+            switch (fightChoice) {
+                case 1: //Player attack, changes monster HP
+                    monster.setHp(attack(player.getStrength(), monster.getToughness()));
                     break;
-                case 2:  // Använd potion
+                case 2:  // Use potion
                     player.usePotion();
                     break;
                 default:
                     text.getInvalidChoice();
             }
 
-            //avsluta loopen och gå tillbaka till menyn om monstret dör
-            if (monster.checkIfdead() == true){
+            //game exits the loop if the monster is dead
+            if (monster.checkIfdead() == true) {
                 isAnyOneDeadYet = false;
             }
 
-            //Monstrets attack som ändrar spelarens HP.
-            player.setHp(attack(monster.getStrength(), player.getdefence()));
-            // om spelaren dör, hoppa tillbaka till att skapa en ny spelare
-            if (player.checkIfdead() == true){
+            //Monster attack, that changes player HP
+            player.setHp(attack(monster.getStrength(), player.getToughness()));
+
+            // If the player dies, game goes back to creating a new player
+            if (player.checkIfdead() == true) {
                 text.playerDead();
                 startGame();
             }
         }
     }
 
-    //här löses attackvärdena
+    //Resolve the fight between attacker and defender.
     private int attack(int attackerStrength, int defenderToughness) {
-        int damage = random.nextInt(attackerStrength) -(attackerStrength*2) -defenderToughness;
-        return  damage;
+        int damage = random.nextInt(attackerStrength) - (attackerStrength * 2) - defenderToughness;
+        //TODO check for critical damage
+        return damage;
     }
 
-    //här löses transaktioner mellan shop och playerklassen.
+    // in this method the transactions between shop and player are concluded
     private void goShopping() {
         boolean shopmore = true;
-        while (shopmore){
+        while (shopmore) {
             text.getShopMenu();
             shop.showItems();
             int shopChoice = scanner.nextInt();
             shop.getPrice(shopChoice);
-            if (shop.getPrice(shopChoice) <= player.getGold){
+            if (shop.getPrice(shopChoice) <= player.getGold) {   //check if player has enough money
                 Player.addToInventory(shop.buyItem(shopChoice));
+                player.payGold(shop.getPrice(shopChoice));      // Get Player money, for the items price
                 text.youHaveBought(shop.getName(shopChoice));
                 text.doYouWantToBuyMore();
-                int buyMore = scanner.nextInt();
-                if (buyMore == 1){
+                int buyMore = scanner.nextInt();        // if the player wants to buy more stuff
+                if (buyMore == 1) {
                     goShopping();
                 }
-                if (buyMore == 2){
+                if (buyMore == 2) {
                     text.thanksForShopping();
                     shopmore = false;
                 } else {
                     text.invalidChoice();
                 }
-            } else{
+            } else {
                 text.inSufficient();
             }
-
         }
-
-
-
-
     }
 
 
