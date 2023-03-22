@@ -73,13 +73,7 @@ public class TextClass {
     }
 
     void getShopMenu(){ //Shopmenyn! Div. olika saker.
-        System.out.println(
-                "Welcome to the shop!\n" +
-                "1.Healing Potion\n" +
-                "2.Medallion\n" +
-                "" +
-                "What is your number of choice?: "
-        );
+        System.out.println("Welcome to the shop!");
     }
 
     void getPlayerStatText(){  //Statsen för din hjälte
