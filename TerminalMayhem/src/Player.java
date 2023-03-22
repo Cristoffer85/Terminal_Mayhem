@@ -9,11 +9,11 @@ public class Player {
     private int exp ;
     private int maxHp;
     private int hp;
+    private int defence;
     private int strength;
     private int toughness;
     private int gold;
     private int criticalChance;
-
 
     Random random;
     //save instans which is sent from Game, to make a link between HealingPotion and player
@@ -43,27 +43,31 @@ public class Player {
     }
 
     //make random number
-    public int chance(){
-        return random.nextInt(100);
+    public int randomNumber(int max,int min){
+        return random.nextInt(max)+min;
     }
 
     //attack monster with normal attack or critical attack
     public int attack() {
         int damage;
 
-        if (chance()<=criticalChance) {
-            damage = (strength + (strength * 2)) / 2 + 10;
+        if (randomNumber (100,0) <= criticalChance ) {
+            damage = randomNumber(strength*2,strength ) + 10;
         } else {
-            damage = (strength + (strength * 2)) / 2;
+            damage = randomNumber( strength*2,strength );
         }
         return damage;
     }
 
+    public void defence(){
+        defence = toughness + ( strength / 2);
+    }
+
     //use potion and also check if hp is not reached to maxHP.
     public void usePotion(HealingPotion potion) {
-        hp+=potion.getValue();
-        if(maxHp<=hp){
-            hp=maxHp;
+        hp += potion.getValue();
+        if( maxHp <= hp ){
+            hp = maxHp;
         }
     }
 
@@ -71,7 +75,7 @@ public class Player {
 
     //calc for leveling up *not done yet*
     public void nextLevelExp() {
-        nextLevelExp=(int)Math.pow(level, 2);
+        nextLevelExp = level * 2;
     }
 
     //everytime check if player has leveled up, if leveled up Lv+ 1
@@ -80,8 +84,18 @@ public class Player {
     }
 
     public void levelUp(){
-        level+=1;
+        level += 1;
+        maxHp += 10;
+        hp=maxHp;
+        criticalChance += 1;
+        strength += 2;
+        toughness += 1;
         nextLevelExp();
+    }
+
+    public void resetPlayer(){
+        makePlayer();
+        itemList.clear();
     }
 
     //check if user has reached level 9 and ready to meet a final boss
@@ -97,8 +111,8 @@ public class Player {
     }
 
 
-    public void setGold(int gold){
-        this.gold+=gold;
+    public void setGold( int gold ){
+        this.gold += gold;
     }
 
     public void addToInventory(Item item){
@@ -107,11 +121,13 @@ public class Player {
 
     // Add HP after fighting Monster
     public void addHP(){
-        this.hp+=hp;
+        this.hp += hp;
     }
-
-    public void setHP(int hp){
-        this.hp = this.hp -hp;
+    public int getHp() {
+        return hp;
+    }
+    public void setHP(int damage){
+           hp -= damage;
     }
 
     public int getStrength(){
@@ -131,21 +147,18 @@ public class Player {
     }
 
     public void payGold(int gold){
-        this.gold-=gold;
+        this.gold -= gold;
     }
 
-    public void resetPlayer(){
-        makePlayer();
-        itemList.clear();
-    }
 
     public int getLevel(){
         return level;
     }
 
     public void setName(String name){
-        this.name=name;
+        this.name = name;
     }
+
     public String getName(){
         return name;
     }
@@ -153,16 +166,18 @@ public class Player {
 
 
     public void showHero(){
-        System.out.println("Name: "+ name);
-        System.out.println("Level: "+ level );
-        System.out.println("HP: "+ hp+"/"+maxHp);
-        System.out.println("Strength: "+ strength);
-        System.out.println("toughness: "+ toughness);
-        System.out.println("Critical Chance: "+ criticalChance);
-        System.out.println("Gold: "+ gold );
+        System.out.println("Name: " + name);
+        System.out.println("Level: " + level );
+        System.out.println("HP: " + hp+" / "+maxHp);
+        System.out.println("Strength: " + strength);
+        System.out.println("toughness: " + toughness);
+        System.out.println("Critical Chance: " + criticalChance);
+        System.out.println("Gold: " + gold );
+        System.out.println("Inventory");
+        for(Item item : itemList){
+            System.out.print(item + " ");
+        }
     }
 
-    public int getHp() {
-        return this.hp;
-    }
+
 }
