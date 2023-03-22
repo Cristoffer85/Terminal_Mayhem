@@ -16,13 +16,13 @@ public class Player {
     private int criticalChance;
 
     Random random;
-    //save instans which is sent from Game, to make a link between HealingPotion and player
+    //Save the instance that is sent from the game to create a link between the Healing Potion and the player.
     HealingPotion potion;
 
     //ArrayList for saving bought Item
     ArrayList<Item> itemList;
 
-    //construct for setting up all the value, and call random and arrayList,
+    //a constructor for setting up all the values, calling the random function, and initializing the ArrayList
     public Player(HealingPotion potion) {
         this.potion=potion;
         random=new Random();
@@ -30,7 +30,7 @@ public class Player {
         makePlayer();
     }
 
-    //First status of player
+    //The initial status of the player
     public void makePlayer(){
         level=1;
         maxHp=100;
@@ -48,7 +48,7 @@ public class Player {
         return random.nextInt(max)+min;
     }
 
-    //attack monster with normal attack or critical attack
+    //Attack the monster with a normal or critical attack.
     public int attack() {
         int damage;
 
@@ -64,7 +64,7 @@ public class Player {
         defence = toughness + ( strength / 2);
     }
 
-    //use potion and also check if hp is not reached to maxHP.
+    //Use a potion, and also check if the HP has not reached the MaxHP.
     public void usePotion(HealingPotion potion) {
         hp += potion.getValue();
         if( maxHp <= hp ){
@@ -73,16 +73,17 @@ public class Player {
     }
 
 
-    //calc for leveling up
+    //Calculate the leveling up process
     public void nextLevelExp() {
         nextLevelExp = level * 2;
     }
 
-    //everytime check if player has leveled up, if leveled up Lv+ 1
+    //Check if the player has leveled up
     public boolean checkIfLeveledUp() {
         return nextLevelExp <= exp;
     }
 
+    //increase the players status after leveling up
     public void levelUp(){
         level += 1;
         maxHp += 10;
@@ -93,12 +94,13 @@ public class Player {
         nextLevelExp();
     }
 
+    //reset all the values
     public void resetPlayer(){
         makePlayer();
         itemList.clear();
     }
 
-    //check if user has reached level 9 and ready to meet a final boss
+    //Check if the user has reached level 9 and is ready to face the final boss
     public boolean checkIfReadyForFinalBoss() {
         return level == 9;
     }
@@ -121,7 +123,7 @@ public class Player {
 
     // Add HP after fighting Monster
     public void addHP(){
-        this.hp += hp;
+        hp+=(maxHp*0.1);
     }
     public int getHp() {
         return hp;
