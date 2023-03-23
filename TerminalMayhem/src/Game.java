@@ -8,10 +8,10 @@ public class Game {
     HealingPotion healingPotion = new HealingPotion();
     Player player = new Player(healingPotion);
 
+
     ArrayList<Monster> monsters = new ArrayList<Monster>();
 
     Shop shop = new Shop();
-
 
     Text text = new Text(player);
 
@@ -20,10 +20,32 @@ public class Game {
 
     void startGame() {
         //initiate monsters
-        monsters.add(new allSortsOfMonsters("Sopgubbe", 1, 50, 30, 2, 12, 100));
+        Goblin goblin = new Goblin("Goblin", 1, 40, 10, 0, 10, 100);
+        Orc orc = new Orc("Orc", 2, 43, 12, 2, 20, 100);
+        Skeleton skeleton = new Skeleton("Skeleton", 3, 46, 14, 4, 30, 150);
+        Mercenary mercenary = new Mercenary("Mercenary", 4, 49, 16, 6, 40, 200);
+        Zombie zombie = new Zombie("Zombie", 5, 52, 18, 8, 50, 250);
+        Minotauros minotauros = new Minotauros("Minotauros", 6, 55, 20, 10, 60, 300);
+        Knight knight = new Knight("Knight", 7, 58, 22, 12, 70, 350);
+        Dragon dragon = new Dragon("Dragon", 8, 61, 24, 14, 80, 400);
+        Demon demon = new Demon("Demon", 9, 64, 26, 16, 90, 450);
+        Slime slime = new Slime("Slime", 10, 200, 28, 20, 1000, 1000);
+
+        monsters.add(goblin);
+        monsters.add(orc);
+        monsters.add(skeleton);
+        monsters.add(mercenary);
+        monsters.add(zombie);
+        monsters.add(minotauros);
+        monsters.add(knight);
+        monsters.add(dragon);
+        monsters.add(demon);
+        monsters.add(slime);
+
 
         text.getWelcomeText();
         player.setName(scanner.nextLine()); // sets player name
+        text.getMainMenutext(player.getName());
 
         mainSwitch();
     }
@@ -33,7 +55,7 @@ public class Game {
         boolean game = true;
         while (game) {
 
-            text.getMainMenutext(player.getName());
+
             int mainMenuChoice = scanner.nextInt();
 
             switch (mainMenuChoice) {
@@ -74,6 +96,7 @@ public class Game {
             //wait for user to press return
             text.pressToContinue();
             scanner.nextLine();
+
         }
     }
 
@@ -130,22 +153,23 @@ public class Game {
 
     //Resolve the fight between attacker and defender.
     private void playerAttack(Player player, Monster monster) {
-        if (player instanceof Player){ // behöver en try catch för att kontroll att player attackerar monster
-            monster.setDamage(player.attack() - monster.defence());
+        if (player instanceof Player) { // behöver en try catch för att kontroll att player attackerar monster
+            monster.setDamage(player.attack() - monster.defence(player.attack())); //TODO kolla att det är rätt här kristian!!
             text.getHpLeftAfterPlayerRound(player.getName(), player.getHp(), monster.getName(), monster.getHP());
         } else System.out.println("Error: Method is for player attacking"); // tillfällig felkod
 
     }
-    private void monsterAttack(Monster monster, Player player){
-        if (monster instanceof Monster){ // behöver en try catch för att kontroll att monster attackerar player
+
+    private void monsterAttack(Monster monster, Player player) {
+        if (monster instanceof Monster) { // behöver en try catch för att kontroll att monster attackerar player
             player.setDamage(monster.attack() - player.defence());
-            text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
+            text.getHpLeftAfterMonsterRound(monster.getName(), monster.getHP(), player.getName(), player.getHp());
         } else System.out.println("Error: Method is for monster attacking"); // tillfällig felkod
     }
 
     // in this method the transactions between shop and player are concluded
     private void goShopping() {
-        player.setGold(400);
+        player.setGold(400); //TODO remove this when done testing
         // loop runs while true use break to exit
         while (shop.inventorySize() > 0) { // check that the shop contains items
             text.getShopMenu();
@@ -157,7 +181,7 @@ public class Game {
 
                 text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
                 player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
-                player.addToInventory(shop.buyItem(itemToBuy)); // removes the item from the shop
+                player.addToInventory(shop.buyItem(itemToBuy)); // Add item to player inventory
 
                 text.doYouWantToBuyMore();              // if the player wants to buy more stuff
                 int buyMore = scanner.nextInt();

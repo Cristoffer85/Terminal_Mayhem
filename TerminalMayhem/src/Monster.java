@@ -1,5 +1,7 @@
-public abstract class Monster {
+import java.util.Random;
 
+public abstract class Monster {
+    Random random;
     private String name;
     private int lvl;
     private int HP;
@@ -18,6 +20,9 @@ public abstract class Monster {
         this.exp = exp;
     }
 
+    public int randomNumber(int max, int min) {
+        return random.nextInt(max) + min;
+    }
 
     public String getName() {
         return name;
@@ -57,9 +62,13 @@ public abstract class Monster {
         return HP <= 0;
     }
 
-    public abstract int attack();
+    public int attack(){
+        return randomNumber(strength * 2, strength);
+    }
 
-    public abstract int defence();
+    public  int defence(int attack){
+        return toughness + (strength / 2);
+    }
 
     public int dropGold() {
         return gold;
