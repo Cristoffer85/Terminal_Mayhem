@@ -33,7 +33,7 @@ public class Game {
         boolean game = true;
         while (game) {
 
-            text.getMainMenutext();
+            text.getMainMenutext(player.getName());
             int mainMenuChoice = scanner.nextInt();
 
             switch (mainMenuChoice) {
