@@ -12,6 +12,7 @@ public class Game {
 
     Shop shop = new Shop();
 
+
     TextClass text = new TextClass();
 
     Scanner scanner = new Scanner(System.in);
@@ -70,6 +71,11 @@ public class Game {
             }
         } else {
             text.nothingHappened();
+            //wait for user to press return
+            text.pressToContinue();
+            scanner.nextLine();
+
+
         }
     }
 
@@ -90,14 +96,20 @@ public class Game {
             //User choice to attack or use a potion
             text.getFightMenu();
             int fightChoice = scanner.nextInt();
-            System.out.println(player.getHp());
-            System.out.println(monster.getHP());
 
             switch (fightChoice) {
-                case 1 -> //Player attack, changes monster HP
-                        monster.setHP(attack(player.getStrength(), monster.getToughness()));
-                case 2 ->  // Use potion
-                        player.usePotion(healingPotion);
+                case 1 -> {  //Player attack, changes monster HP
+                    monster.getDamage(attack(player.getStrength(), monster.getToughness()));
+                    text.getHpLeftAfterPlayerRound(player.getName(), player.getHp(), monster.getName(), monster.getHP());
+                    text.pressToContinue();
+                    scanner.nextLine();// needs to  be two here, i am not crazy .../E.
+                    scanner.nextLine();
+
+                }
+                case 2 -> {  // Use potion
+                    player.usePotion(healingPotion);
+                    text.playerUsedPotion(player.getName(), healingPotion.getPotionValue());
+                }
                 default -> text.getInvalidChoice();
             }
 
@@ -107,7 +119,10 @@ public class Game {
             }
 
             //Monster attack, that changes player HP
-            player.setHP(attack(monster.getStrength(), player.getToughness()));
+            player.getDamage(attack(monster.getStrength(), player.getToughness()));
+            text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
+            text.pressToContinue();
+            scanner.nextLine();
 
             // If the player dies, game goes back to creating a new player
             if (player.checkIfDead()) {
@@ -126,10 +141,12 @@ public class Game {
 
     // in this method the transactions between shop and player are concluded
     private void goShopping() {
+        player.setGold(400);
         // loop runs while true use break to exit
         while (shop.inventorySize() > 0) { // check that the shop contains items
             text.getShopMenu();
             shop.showItems();
+
             int itemToBuy = scanner.nextInt();
 
             if (shop.getPrice(itemToBuy) <= player.getGold()) { //check if player has enough money
@@ -140,16 +157,22 @@ public class Game {
 
                 text.doYouWantToBuyMore();              // if the player wants to buy more stuff
                 int buyMore = scanner.nextInt();
-
-                if (buyMore == 2) {
-                    text.thanksForShopping();
-                    break;
+                try {
+                    if (buyMore == 1) {
+                        continue;
+                    }
+                    if (buyMore == 2) {
+                        text.thanksForShopping();
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid input");
                 }
+
             } else {
                 text.inSufficient();
                 break;
             }
         }
-        System.out.println("Thank you come again or the shop is empty");
     }
 }
