@@ -20,7 +20,7 @@ public class Game {
 
     void startGame() {
         //initiate monsters
-        monsters.add(new allSortsOfMonsters("Sopgubbe", 1, 50, 10, 2, 12, 100));
+        monsters.add(new allSortsOfMonsters("Sopgubbe", 1, 50, 30, 2, 12, 100));
 
         text.getWelcomeText();
         player.setName(scanner.nextLine()); // sets player name
@@ -90,8 +90,8 @@ public class Game {
 
     //Initiate battle between player and selected monster.
     private void calculateBattle(Player player, Monster monster) {
-        boolean isAnyOneDeadYet = true;
-        while (isAnyOneDeadYet) {
+
+        while (true) {
 
             //User choice to attack or use a potion
             text.getFightMenu();
@@ -99,12 +99,10 @@ public class Game {
 
             switch (fightChoice) {
                 case 1 -> {  //Player attack, changes monster HP
-                    monster.getDamage(attack(player.getStrength(), monster.getToughness()));
-                    text.getHpLeftAfterPlayerRound(player.getName(), player.getHp(), monster.getName(), monster.getHP());
+                    playerAttack(player, monster);
                     text.pressToContinue();
                     scanner.nextLine();// needs to  be two here, i am not crazy .../E.
                     scanner.nextLine();
-
                 }
                 case 2 -> {  // Use potion
                     player.usePotion(healingPotion);
@@ -115,28 +113,36 @@ public class Game {
 
             //game exits the loop if the monster is dead
             if (monster.checkIfDead()) {
-                isAnyOneDeadYet = false;
+                break;
             }
 
             //Monster attack, that changes player HP
-            player.getDamage(attack(monster.getStrength(), player.getToughness()));
-            text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
+            monsterAttack(monster, player);
+
             text.pressToContinue();
             scanner.nextLine();
 
-            // If the player dies, game goes back to creating a new player
+            // If the player dies, breaks loop
             if (player.checkIfDead()) {
                 text.getPlayerDead();
-                startGame();
+                break;
             }
         }
     }
 
     //Resolve the fight between attacker and defender.
-    private int attack(int attackerStrength, int defenderToughness) {
-        int damage = random.nextInt(attackerStrength) - (attackerStrength * 2) - defenderToughness;
-        //TODO check for critical damage
-        return damage;
+    private void playerAttack(Player player, Monster monster) {
+        if (player instanceof Player){ // behöver en try catch för att kontroll att player attackerar monster
+            monster.setDamage(player.attack() - monster.defence());
+            text.getHpLeftAfterPlayerRound(player.getName(), player.getHp(), monster.getName(), monster.getHP());
+        } else System.out.println("Error: Method is for player attacking"); // tillfällig felkod
+
+    }
+    private void monsterAttack(Monster monster, Player player){
+        if (monster instanceof Monster){ // behöver en try catch för att kontroll att monster attackerar player
+            player.setDamage(monster.attack() - player.defence());
+            text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
+        } else System.out.println("Error: Method is for monster attacking"); // tillfällig felkod
     }
 
     // in this method the transactions between shop and player are concluded
