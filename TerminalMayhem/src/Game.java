@@ -13,14 +13,14 @@ public class Game {
     Shop shop = new Shop();
 
 
-    TextClass text = new TextClass();
+    Text text = new Text();
 
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
 
     void startGame() {
         //initiate monsters
-        monsters.add(new UnikMonster("Sopgubbe", 1, 50, 10, 2, 12, 100));
+        monsters.add(new allSortsOfMonsters("Sopgubbe", 1, 50, 10, 2, 12, 100));
 
         text.getWelcomeText();
         player.setName(scanner.nextLine()); // sets player name
@@ -118,7 +118,7 @@ public class Game {
             }
 
             //Monster attack, that changes player HP
-            player.setDamage(playerAttack(monster.getStrength(), player.getToughness()));
+            monsterAttack(monster, player);
 
             text.pressToContinue();
             scanner.nextLine();
