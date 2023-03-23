@@ -14,7 +14,7 @@ public class Game {
 
     Shop shop = new Shop();
 
-    Text text = new Text(player);
+    Text text = new Text();
 
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
@@ -117,7 +117,7 @@ public class Game {
 
             //User choice to attack or use a potion
             text.getFightMenu();
-            int fightChoice = scanner.nextInt();
+            int fightChoice = userInputInt();
 
             switch (fightChoice) {
                 case 1 -> {  //Player attack, changes monster HP
@@ -176,7 +176,7 @@ public class Game {
             text.getShopMenu();
             shop.showItems();
 
-            int itemToBuy = scanner.nextInt();
+            int itemToBuy = userInputInt();
 
             if (shop.getPrice(itemToBuy) <= player.getGold()) { //check if player has enough money
 
@@ -185,7 +185,7 @@ public class Game {
                 player.addToInventory(shop.buyItem(itemToBuy)); // Add item to player inventory
 
                 text.doYouWantToBuyMore();              // if the player wants to buy more stuff
-                int buyMore = scanner.nextInt();
+                int buyMore = userInputInt();
                 try {
                     if (buyMore == 1) {
                         continue;
@@ -205,6 +205,7 @@ public class Game {
         }
     }
 
+    //Control if user input is an integer
     public int userInputInt(){
         int number;
         while (true) {
@@ -212,7 +213,7 @@ public class Game {
                 number=scanner.nextInt();
                 break;
             } catch (InputMismatchException e) {
-                System.out.println("Please enter number");
+                System.out.println("A non-numeric input has been entered. Please enter a valid input again");
                 scanner.nextLine();
             }
         }
