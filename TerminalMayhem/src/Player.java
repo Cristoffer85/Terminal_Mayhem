@@ -65,12 +65,12 @@ public class Player {
     }
 
     //Use a potion, and also check if the HP has not reached the MaxHP.
-    public void usePotion(HealingPotion potion) {
+    public void usePotion() {
+
 
         hp += potion.getPotionValue();
         if (maxHp <= hp) {
             hp = maxHp;
-
         }
     }
 
@@ -185,9 +185,10 @@ public class Player {
         System.out.println("Gold: " + gold);
         System.out.println("Inventory");
 
-        if (itemList != null) {
-            for (Item item : itemList) {
-                System.out.print(item + " ");
+        if(0<itemList.size()) {
+            for(Item item : itemList){
+            System.out.print(item + " ");
+
             }
         }
     }
