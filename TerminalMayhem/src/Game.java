@@ -141,7 +141,7 @@ public class Game {
     }
     private void monsterAttack(Monster monster, Player player){
         if (monster instanceof Monster){ // behöver en try catch för att kontroll att monster attackerar player
-            player.setDamage(monster.attack() - player.);
+            player.setDamage(monster.attack() - player.defence());
             text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
         } else System.out.println("Error: Method is for monster attacking"); // tillfällig felkod
     }
