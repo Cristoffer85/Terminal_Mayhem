@@ -13,7 +13,7 @@ public class Game {
     Shop shop = new Shop();
 
 
-    Text text = new Text();
+    Text text = new Text(player);
 
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
@@ -74,8 +74,6 @@ public class Game {
             //wait for user to press return
             text.pressToContinue();
             scanner.nextLine();
-
-
         }
     }
 
@@ -105,8 +103,8 @@ public class Game {
                     scanner.nextLine();
                 }
                 case 2 -> {  // Use potion
-                    player.usePotion(healingPotion);
-                    text.playerUsedPotion(player.getName(), healingPotion.getPotionValue());
+                    player.usePotion();
+                    text.playerUsedPotion( healingPotion.getPotionValue());
                 }
                 default -> text.getInvalidChoice();
             }
