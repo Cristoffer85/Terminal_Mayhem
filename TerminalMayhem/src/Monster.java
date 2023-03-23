@@ -66,8 +66,8 @@ public abstract class Monster {
         return randomNumber(strength * 2, strength);
     }
 
-    public  int defence(int attack){
-        return toughness + (strength / 2);
+    public  void defence(int attack){
+        setDamage(attack - this.toughness);
     }
 
     public int dropGold() {
