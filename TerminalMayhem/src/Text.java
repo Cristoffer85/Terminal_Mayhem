@@ -78,9 +78,9 @@ public class Text {
                         "2.See your current stats.\n" +
                         "3.Shop\n" +
                         "4.End game." +
-                        "\n" +
-                        "Your number of choice: "
+                        "\n"
         );
+        System.out.print("What is your number of choice: ");
     }
     //-------------------------------------------------------------
 
@@ -91,9 +91,9 @@ public class Text {
                 "Welcome to the shop!\n\n" +
                         "1.Healing Potion\n" +
                         "2.Medallion\n" +
-                        "" +
-                        "What is your number of choice? \n"
+                        ""
         );
+        System.out.print("What is your number of choice?: ");
     }
     public void youHaveBought(String item){  //Du har köpt
         System.out.println("You have bought: " + item);
@@ -116,9 +116,9 @@ public class Text {
                 "Oh no! You´re up for a fight! What do you wanna do?\n" +
                         "1.Fight!\n" +
                         "2.Drink healing potion.\n" +
-                        "" +
-                        "What is your number of choice? "
+                        ""
         );
+        System.out.print("What is your number of choice?: ");
     }
     //---------------------"The" Fight Options and choices + outputs etc-----------
     public void aMonsterAppears(String monsterName){  //
