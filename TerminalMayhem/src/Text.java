@@ -33,10 +33,7 @@ Metod getBossFightText()
  * @author Cristoffer Östberg
  */
 public class Text {
-    Player player;
-    public Text(Player player){
-           player=this.player;
-        }
+
     //----------------------INITIAL MENUS + STORY----------------------------------
     public static void getWelcomeText(){     //Initial startmeny + användaren skapar sin hero
         System.out.print(
