@@ -35,7 +35,7 @@ Metod getBossFightText()
 public class Text {
 
     //----------------------INITIAL MENUS + STORY----------------------------------
-    void getWelcomeText(){     //Initial startmeny + användaren skapar sin hero
+    public void getWelcomeText(){     //Initial startmeny + användaren skapar sin hero
         System.out.print(
                 "#############################################################\n" +
                         "   Welcome to the fantastic adventures of Terminal Mayhem    \n" +
@@ -61,7 +61,7 @@ public class Text {
         );
     }
 
-    void getMainMenutext(){        //Huvudmenytext
+    public void getMainMenutext(){        //Storytext
         System.out.println(
                 "\n" +
                         " ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤\n" +
@@ -73,7 +73,7 @@ public class Text {
                         "\n"
         );
 
-        System.out.println(
+        System.out.println(        //Huvudmenytext
                 "1.Start game.\n" +
                         "2.See your current stats.\n" +
                         "3.Shop\n" +
@@ -86,7 +86,7 @@ public class Text {
 
 
     //--------------------SHOP-------------------------------------
-    void getShopMenu(){ //Shopmeny, Div. olika saker.
+    public void getShopMenu(){ //Shopmeny, Div. olika saker.
         System.out.println(
                 "Welcome to the shop!\n\n" +
                         "1.Healing Potion\n" +
@@ -95,23 +95,23 @@ public class Text {
                         "What is your number of choice? \n"
         );
     }
-    void youHaveBought(String item){  //Du har köpt
+    public void youHaveBought(String item){  //Du har köpt
         System.out.println("You have bought: " + item);
     }
-    void doYouWantToBuyMore(){  //Köpa mer?
+    public void doYouWantToBuyMore(){  //Köpa mer?
         System.out.println("Do you want to purchase something more?");
     }
-    void inSufficient(){  //Ej tillräckligt med guld
+    public void inSufficient(){  //Ej tillräckligt med guld
         System.out.println("Insufficient Gold!");
     }
-    void thanksForShopping(){  //Tack för handling!
+    public void thanksForShopping(){  //Tack för handling!
         System.out.println("Thank you for shopping!");
     }
     //------------------------------------------------------------------
 
 
     //-----------------------FIGHT--------------------------------------
-    void getFightMenu(){  //Fightmenyn, val
+    public void getFightMenu(){  //Fightmenyn, val
         System.out.println(
                 "Oh no! You´re up for a fight! What do you wanna do?\n" +
                         "1.Fight!\n" +
@@ -120,16 +120,17 @@ public class Text {
                         "What is your number of choice? "
         );
     }
-    void aMonsterAppears(String monsterName){  //
+    //---------------------"The" Fight Options and choices + outputs etc-----------
+    public void aMonsterAppears(String monsterName){  //
         System.out.println("A wild " + monsterName + " appears!\n");
     }
-    void getBossFightText(){   //beskriver slutbossen för att ge mer inlevelse i spelet
+    public void getBossFightText(){   //beskriver slutbossen för att ge mer inlevelse i spelet
         System.out.println(".... You hear a lurge thud, the kind that only the largest form of set of multiple encyclopedias mounted together could ever perform, \nand there he was, standing right in front of you, Backgammon...");
     }
-    void youHaveLevelup(){  //
+    public void youHaveLevelup(){  //
         System.out.println("Congrats! You have leveled up!");
     }
-    void nothingHappened(){  //
+    public void nothingHappened(){  //
         System.out.println("An extremely weird day in the kingdom, where you just encountered random empty baggage carts and lost tourists from Malta.. ");
     }
     public void playerUsedPotion (String playerName, int potionvalue) {
@@ -148,10 +149,10 @@ public class Text {
     //-------------------------------------------------------------
 
     //---------------------RANDOM----------------------------------
-    void getPlayerStatText(){  //Statsen för hjälte
+    public void getPlayerStatText(){  //Statsen för hjälte
         System.out.println("Here are the current statistics of your Hero: ");
     }
-    void getInvalidChoice(){    //Ej giltigt val.
+    public void getInvalidChoice(){    //Ej giltigt val.
         System.out.println("Im sorry, but you´ve made an incorrect choice.");
     }
     public void pressToContinue() {
@@ -161,10 +162,10 @@ public class Text {
 
 
     //------------------------END----------------------------------
-    void getPlayerDead(){     //Game over
+    public void getPlayerDead(){     //Game over
         System.out.println("Sorry, you´re dead! You were overwhelmed by the dishes..");
     }
-    void ThanksForPlaying(){   //Sluttext
+    public void ThanksForPlaying(){   //Sluttext
         System.out.println("Thank you for playing! You solved all the evil airportproblems that could ever exist in this kingdom...!");
     }
 }
