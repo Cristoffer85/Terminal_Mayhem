@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Player {
 
-    private String name;
+    private static String name;
     private int level;
     private int nextLevelExp;
     private int exp ;
@@ -146,7 +146,7 @@ public class Player {
     public void setName(String name){
         this.name=name;
     }
-    public String getName(){
+    public static String getName(){
         return name;
     }
 

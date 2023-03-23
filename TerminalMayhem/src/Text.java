@@ -65,7 +65,7 @@ public class Text {
         System.out.println(
                 "\n" +
                         " ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤\n" +
-                        "|This is the story of "+"_____"+". In the land of Tyrule, you´re a tyre-changing pro and this story is about your perilous journey set right in that kingdom.                            \n" +
+                        "|This is the story of "+ Player.getName() +". In the land of Tyrule, you´re a tyre-changing pro and this story is about your perilous journey set right in that kingdom.                            \n" +
                         "|The Tyrule Kingdom is a mysterious and wonderous place in the shape of a Tyre-formed airport Terminal, where you daily scour the lands fighting various evil entities and encounters..   \n" +
                         "|\n|Your ultimate goal is to surpass all the obstacles in this kingdom, encounter both funnier and unfunnier stuffies and lastly but not least, dun-dun..                                           \n" +
                         "|Defeat the evil tyrant Backgammon, which holds your dear Welding-expert partner Welda, captured in terminal 5B.                                                                         \n" +
@@ -78,7 +78,7 @@ public class Text {
                         "2.See your current stats.\n" +
                         "3.Shop\n" +
                         "4.End game." +
-                        "" +
+                        "\n" +
                         "Your number of choice: "
         );
     }
@@ -122,7 +122,7 @@ public class Text {
     }
     //---------------------"The" Fight Options and choices + outputs etc-----------
     public void aMonsterAppears(String monsterName){  //
-        System.out.println("A wild " + monsterName + " appears!\n");
+        System.out.println("\n*** A wild " + monsterName + " appears! ***\n");
     }
     public void getBossFightText(){   //beskriver slutbossen för att ge mer inlevelse i spelet
         System.out.println(".... You hear a lurge thud, the kind that only the largest form of set of multiple encyclopedias mounted together could ever perform, \nand there he was, standing right in front of you, Backgammon...");
