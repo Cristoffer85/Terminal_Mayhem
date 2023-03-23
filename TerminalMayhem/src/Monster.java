@@ -29,7 +29,7 @@ public abstract class Monster {
             return HP;
         }
 
-        public void setHP(int HP) {
+        public void getDamage(int HP) {
             this.HP = this.HP - HP;
         }
 

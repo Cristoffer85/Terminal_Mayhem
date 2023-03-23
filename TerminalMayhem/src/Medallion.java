@@ -4,6 +4,6 @@
 public class Medallion extends Item {
 
     public Medallion() {
-        super("Medallion of Strength", 5, 40);
+        super("The Cat's Eye Amulet",5, 5, 2, 1, 0, 69);
     }
 }

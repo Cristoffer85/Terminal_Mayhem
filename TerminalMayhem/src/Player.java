@@ -66,9 +66,11 @@ public class Player {
 
     //Use a potion, and also check if the HP has not reached the MaxHP.
     public void usePotion(HealingPotion potion) {
-        hp += potion.getValue();
-        if( maxHp <= hp ){
-            hp = maxHp;
+
+        hp+=potion.getPotionValue();
+        if(maxHp<=hp){
+            hp=maxHp;
+
         }
     }
 
@@ -130,9 +132,11 @@ public class Player {
         return hp;
     }
 
+
     //Set the HP value after it has been reduced due to damage from the monster
     public void setHP(int damage){
         hp -= damage;
+
     }
 
     public int getStrength(){

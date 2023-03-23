@@ -12,14 +12,15 @@ public class Game {
 
     Shop shop = new Shop();
 
-    TextClass text = new TextClass();
+
+    Text text = new Text();
 
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
 
     void startGame() {
         //initiate monsters
-        monsters.add(new UnikMonster("Sopgubbe", 1, 50,10,2,12,100));
+        monsters.add(new allSortsOfMonsters("Sopgubbe", 1, 50, 10, 2, 12, 100));
 
         text.getWelcomeText();
         player.setName(scanner.nextLine()); // sets player name
@@ -60,21 +61,26 @@ public class Game {
                 if (monster.getLvl() == player.getLevel()) {
                     text.aMonsterAppears(monster.getName());
                     calculateBattle(player, monster);
-                    givePlayerReward(player,monster);
+                    givePlayerReward(player, monster);
                 }
             }
 
-            if (player.checkIfLeveledUp()){  // check if player has reached a new level
+            if (player.checkIfLeveledUp()) {  // check if player has reached a new level
                 text.youHaveLevelup();
                 player.levelUp();
             }
         } else {
             text.nothingHappened();
+            //wait for user to press return
+            text.pressToContinue();
+            scanner.nextLine();
+
+
         }
     }
 
     //Give player XP, gold and Hp boost
-    private void givePlayerReward(Player player,Monster monster) {
+    private void givePlayerReward(Player player, Monster monster) {
         player.setGold(monster.dropGold());
         player.setExp(monster.dropExp());
 
@@ -90,14 +96,20 @@ public class Game {
             //User choice to attack or use a potion
             text.getFightMenu();
             int fightChoice = scanner.nextInt();
-            System.out.println(player.getHp());
-            System.out.println(monster.getHP());
 
             switch (fightChoice) {
-                case 1 -> //Player attack, changes monster HP
-                        monster.setHP(attack(player.getStrength(), monster.getToughness()));
-                case 2 ->  // Use potion
-                        player.usePotion(healingPotion);
+                case 1 -> {  //Player attack, changes monster HP
+                    monster.getDamage(attack(player.getStrength(), monster.getToughness()));
+                    text.getHpLeftAfterPlayerRound(player.getName(), player.getHp(), monster.getName(), monster.getHP());
+                    text.pressToContinue();
+                    scanner.nextLine();// needs to  be two here, i am not crazy .../E.
+                    scanner.nextLine();
+
+                }
+                case 2 -> {  // Use potion
+                    player.usePotion(healingPotion);
+                    text.playerUsedPotion(player.getName(), healingPotion.getPotionValue());
+                }
                 default -> text.getInvalidChoice();
             }
 
@@ -107,7 +119,10 @@ public class Game {
             }
 
             //Monster attack, that changes player HP
-            player.setHP(attack(monster.getStrength(), player.getToughness()));
+            player.getDamage(attack(monster.getStrength(), player.getToughness()));
+            text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
+            text.pressToContinue();
+            scanner.nextLine();
 
             // If the player dies, game goes back to creating a new player
             if (player.checkIfDead()) {
@@ -126,33 +141,38 @@ public class Game {
 
     // in this method the transactions between shop and player are concluded
     private void goShopping() {
-        boolean shopmore = true;
-        while (shopmore) {
+        player.setGold(400);
+        // loop runs while true use break to exit
+        while (shop.inventorySize() > 0) { // check that the shop contains items
             text.getShopMenu();
             shop.showItems();
-            int shopChoice = scanner.nextInt();
-            shop.getPrice(shopChoice);
-            if (shop.getPrice(shopChoice) <= player.getGold()) {   //check if player has enough money
-                player.addToInventory(shop.buyItem(shopChoice));
-                player.payGold(shop.getPrice(shopChoice));      // Get Player money, for the items price
-                text.youHaveBought(shop.getName(shopChoice));   // Takes a string from the shop and sends to text class
-                text.doYouWantToBuyMore();
-                int buyMore = scanner.nextInt();        // if the player wants to buy more stuff
-                if (buyMore == 1) {
-                    goShopping();
+
+            int itemToBuy = scanner.nextInt();
+
+            if (shop.getPrice(itemToBuy) <= player.getGold()) { //check if player has enough money
+
+                text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
+                player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
+                player.addToInventory(shop.buyItem(itemToBuy)); // removes the item from the shop
+
+                text.doYouWantToBuyMore();              // if the player wants to buy more stuff
+                int buyMore = scanner.nextInt();
+                try {
+                    if (buyMore == 1) {
+                        continue;
+                    }
+                    if (buyMore == 2) {
+                        text.thanksForShopping();
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid input");
                 }
-                if (buyMore == 2) {
-                    text.thanksForShopping();
-                    shopmore = false;
-                } else {
-                    text.getInvalidChoice();
-                }
+
             } else {
                 text.inSufficient();
-                shopmore = false;
+                break;
             }
         }
     }
-
-
 }
