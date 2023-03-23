@@ -56,7 +56,6 @@ public class Game {
         boolean game = true;
         while (game) {
 
-            text.getMainMenutext(player.getName());
             int mainMenuChoice = userInputInt();
 
 
