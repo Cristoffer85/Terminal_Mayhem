@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -55,8 +56,9 @@ public class Game {
         boolean game = true;
         while (game) {
 
+            text.getMainMenutext(player.getName());
+            int mainMenuChoice = userInputInt();
 
-            int mainMenuChoice = scanner.nextInt();
 
             switch (mainMenuChoice) {
                 case 1 -> goAdventuring(player);
@@ -127,7 +129,7 @@ public class Game {
                 }
                 case 2 -> {  // Use potion
                     player.usePotion();
-                    text.playerUsedPotion( healingPotion.getPotionValue());
+                    text.playerUsedPotion( player.getName(),healingPotion.getPotionValue());
                 }
                 default -> text.getInvalidChoice();
             }
@@ -202,5 +204,19 @@ public class Game {
                 break;
             }
         }
+    }
+
+    public int userInputInt(){
+        int number;
+        while (true) {
+            try {
+                number=scanner.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter number");
+                scanner.nextLine();
+            }
+        }
+        return number;
     }
 }
