@@ -1,70 +1,72 @@
 public abstract class Monster {
 
-        private String name;
-        private int lvl;
-        private int HP;
-        private int strength;
-        private int toughness;
-        private int gold;
-        private int exp;
+    private String name;
+    private int lvl;
+    private int HP;
+    private int strength;
+    private int toughness;
+    private int gold;
+    private int exp;
 
-        public Monster(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
-            this.name = name;
-            this.lvl = lvl;
-            this.HP = HP;
-            this.strength = strength;
-            this.toughness = toughness;
-            this.gold = gold;
-            this.exp = exp;
+    public Monster(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
+        this.name = name;
+        this.lvl = lvl;
+        this.HP = HP;
+        this.strength = strength;
+        this.toughness = toughness;
+        this.gold = gold;
+        this.exp = exp;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public int getLvl() {
+        return lvl;
+    }
+
+    public int getHP() {
+        return HP;
+    }
+
+    public void setDamage(int damage) {
+        if (0 < damage){
+            this.HP -= damage;
         }
+    }
 
+    public int getStrength() {
+        return strength;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public int getToughness() {
+        return toughness;
+    }
 
-        public int getLvl(){ return lvl; }
+    public int getGold() {
+        return gold;
+    }
 
-        public int getHP() {
-            return HP;
-        }
+    public int getExp() {
+        return exp;
+    }
 
-        public void setDamage(int damamge) {
-            this.HP -= damamge;
-        }
-
-        public int getStrength() {
-            return strength;
-        }
-
-        public int getToughness() {
-            return toughness;
-        }
-
-        public int getGold() {
-            return gold;
-        }
-
-        public int getExp() {
-            return exp;
-        }
-
-    public boolean checkIfDead(){
-        if (HP <= 0){
-            return true;
-        }
-        return false;
-
+    public boolean checkIfDead() {
+        return HP <= 0;
     }
 
     public abstract int attack();
+
     public abstract int defence();
 
-    public int dropGold(){
+    public int dropGold() {
         return gold;
 
     }
-    public int dropExp(){
+
+    public int dropExp() {
         return exp;
     }
 

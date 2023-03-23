@@ -20,7 +20,7 @@ public class Game {
 
     void startGame() {
         //initiate monsters
-        monsters.add(new allSortsOfMonsters("Sopgubbe", 1, 50, 10, 2, 12, 100));
+        monsters.add(new allSortsOfMonsters("Sopgubbe", 1, 50, 30, 2, 12, 100));
 
         text.getWelcomeText();
         player.setName(scanner.nextLine()); // sets player name
@@ -90,8 +90,8 @@ public class Game {
 
     //Initiate battle between player and selected monster.
     private void calculateBattle(Player player, Monster monster) {
-        boolean isAnyOneDeadYet = true;
-        while (isAnyOneDeadYet) {
+
+        while (true) {
 
             //User choice to attack or use a potion
             text.getFightMenu();
@@ -103,7 +103,6 @@ public class Game {
                     text.pressToContinue();
                     scanner.nextLine();// needs to  be two here, i am not crazy .../E.
                     scanner.nextLine();
-
                 }
                 case 2 -> {  // Use potion
                     player.usePotion(healingPotion);
@@ -114,7 +113,7 @@ public class Game {
 
             //game exits the loop if the monster is dead
             if (monster.checkIfDead()) {
-                isAnyOneDeadYet = false;
+                break;
             }
 
             //Monster attack, that changes player HP
@@ -123,10 +122,10 @@ public class Game {
             text.pressToContinue();
             scanner.nextLine();
 
-            // If the player dies, game goes back to creating a new player
+            // If the player dies, breaks loop
             if (player.checkIfDead()) {
                 text.getPlayerDead();
-                startGame();
+                break;
             }
         }
     }
