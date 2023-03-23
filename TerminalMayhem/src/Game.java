@@ -99,8 +99,7 @@ public class Game {
 
             switch (fightChoice) {
                 case 1 -> {  //Player attack, changes monster HP
-                    monster.getDamage(attack(player.getStrength(), monster.getToughness()));
-                    text.getHpLeftAfterPlayerRound(player.getName(), player.getHp(), monster.getName(), monster.getHP());
+                    playerAttack(player, monster);
                     text.pressToContinue();
                     scanner.nextLine();// needs to  be two here, i am not crazy .../E.
                     scanner.nextLine();
@@ -119,8 +118,8 @@ public class Game {
             }
 
             //Monster attack, that changes player HP
-            player.getDamage(attack(monster.getStrength(), player.getToughness()));
-            text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
+            player.setDamage(playerAttack(monster.getStrength(), player.getToughness()));
+
             text.pressToContinue();
             scanner.nextLine();
 
@@ -133,10 +132,18 @@ public class Game {
     }
 
     //Resolve the fight between attacker and defender.
-    private int attack(int attackerStrength, int defenderToughness) {
-        int damage = random.nextInt(attackerStrength) - (attackerStrength * 2) - defenderToughness;
-        //TODO check for critical damage
-        return damage;
+    private void playerAttack(Player player, Monster monster) {
+        if (player instanceof Player){ // behöver en try catch för att kontroll att player attackerar monster
+            monster.setDamage(player.attack() - monster.defence());
+            text.getHpLeftAfterPlayerRound(player.getName(), player.getHp(), monster.getName(), monster.getHP());
+        } else System.out.println("Error: Method is for player attacking"); // tillfällig felkod
+
+    }
+    private void monsterAttack(Monster monster, Player player){
+        if (monster instanceof Monster){ // behöver en try catch för att kontroll att monster attackerar player
+            player.setDamage(monster.attack() - player.);
+            text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
+        } else System.out.println("Error: Method is for monster attacking"); // tillfällig felkod
     }
 
     // in this method the transactions between shop and player are concluded

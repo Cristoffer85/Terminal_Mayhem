@@ -110,8 +110,8 @@ public class Player {
         this.hp+=hp;
     }
 
-    public void getDamage(int hp){
-        this.hp = this.hp -hp;
+    public void setDamage(int damage){
+        this.hp -= damage;
     }
 
     public int getStrength(){

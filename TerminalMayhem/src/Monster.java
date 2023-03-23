@@ -29,8 +29,8 @@ public abstract class Monster {
             return HP;
         }
 
-        public void getDamage(int HP) {
-            this.HP = this.HP - HP;
+        public void setDamage(int damamge) {
+            this.HP -= damamge;
         }
 
         public int getStrength() {
