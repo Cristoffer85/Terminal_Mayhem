@@ -143,7 +143,7 @@ public class Text {
    
    public static void getHpLeftAfterPlayerRound(String playerName ,int playersHealth,String monsterName, int monsterHealth) {
         System.out.println("Bang! You slash the "+ monsterName + "\n" +
-                player.getName() + " has " + player.getHp() + "Healthpoints left.\n" +
+                playerName + " has " +playersHealth + "Healthpoints left.\n" +
                 "The " + monsterName + " has " + monsterHealth + " healthpoints left." );
     }
     public static void getHpLeftAfterMonsterRound(String monsterName, int monsterHealth, String playerName, int playerHealth) {

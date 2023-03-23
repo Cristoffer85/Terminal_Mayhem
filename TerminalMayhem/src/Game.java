@@ -35,7 +35,7 @@ public class Game {
         while (game) {
 
             text.getMainMenutext(player.getName());
-            int mainMenuChoice = userInput();
+            int mainMenuChoice = userInputInt();
 
             switch (mainMenuChoice) {
                 case 1 -> goAdventuring(player);
@@ -105,7 +105,7 @@ public class Game {
                 }
                 case 2 -> {  // Use potion
                     player.usePotion();
-                    text.playerUsedPotion( healingPotion.getPotionValue());
+                    text.playerUsedPotion( player.getName(),healingPotion.getPotionValue());
                 }
                 default -> text.getInvalidChoice();
             }
@@ -181,7 +181,7 @@ public class Game {
         }
     }
 
-    public int userInput(){
+    public int userInputInt(){
         int number;
         while (true) {
             try {
