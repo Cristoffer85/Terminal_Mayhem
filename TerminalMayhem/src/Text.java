@@ -166,6 +166,6 @@ public class Text {
         System.out.println("Sorry, you´re dead! You were overwhelmed by the dishes..");
     }
     public static void ThanksForPlaying(){   //Sluttext
-        System.out.println("Thank you for playing! You solved all the evil airportproblems that could ever exist in this kingdom...!");
+        System.out.println("Thank you for playing! You solved all the evil problems related to angry superstressed travellers...!");
     }
 }
