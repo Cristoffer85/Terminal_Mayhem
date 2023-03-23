@@ -132,6 +132,19 @@ public class TextClass {
     void nothingHappened(){  //
         System.out.println("An extremely weird day in the kingdom, where you just encountered random empty baggage carts and lost tourists from Malta.. ");
     }
+    public void playerUsedPotion (String playerName, int potionvalue) {
+        System.out.println( playerName + "has used a potion and added " + potionvalue +" healthpoints.");
+    }
+    public void getHpLeftAfterPlayerRound(String playerName ,int playersHealth,String monsterName, int monsterHealth) {
+        System.out.println("Bang! You slash the "+ monsterName + "\n" +
+                playerName + " has " + playersHealth + "Healthpoints left.\n" +
+                "The " + monsterName + " has " + monsterHealth + " healthpoints left." );
+    }
+    public void getHpLeftAfterMonsterRound(String monsterName, int monsterHealth, String playerName, int playerHealth) {
+        System.out.println("uuuuraahhhhh! the " + monsterName + " hits you hard!\n" +
+                playerName + " has " + playerHealth + " healthpoints left.\n" +
+                monsterName + " has " + monsterHealth + "Healthpoints left."  );
+    }
     //-------------------------------------------------------------
 
     //---------------------RANDOM----------------------------------
@@ -141,6 +154,9 @@ public class TextClass {
     void getInvalidChoice(){    //Ej giltigt val.
         System.out.println("Im sorry, but you´ve made an incorrect choice.");
     }
+    public void pressToContinue() {
+        System.out.println("Press enter to continue..");
+    }
     //-------------------------------------------------------------
 
 
@@ -148,7 +164,7 @@ public class TextClass {
     void getPlayerDead(){     //Game over
         System.out.println("Sorry, you´re dead! You were overwhelmed by the dishes..");
     }
-    void ThanksForPlaying(){   //Sluttext          TODO //Tillägg för play again fråga?
+    void ThanksForPlaying(){   //Sluttext
         System.out.println("Thank you for playing! You solved all the evil airportproblems that could ever exist in this kingdom...!");
     }
 }
