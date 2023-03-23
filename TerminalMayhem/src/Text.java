@@ -29,7 +29,7 @@ Metod thanksForPlaying()
 Metod getBossFightText()
     beskriver slutbossen för att ge mer inlevelse i spelet
 */
-public class TextClass {
+public class Text {
 
     void getWelcomeText(){     //Välkomsttext + användaren skapar sin hero
         System.out.println("#############################################################");

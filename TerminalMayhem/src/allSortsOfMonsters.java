@@ -1,7 +1,7 @@
-public class UnikMonster extends Monster {
+public class allSortsOfMonsters extends Monster {
 
 
-    public UnikMonster(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
+    public allSortsOfMonsters(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
         super(name, lvl, HP, strength, toughness, gold, exp);
     }
 
