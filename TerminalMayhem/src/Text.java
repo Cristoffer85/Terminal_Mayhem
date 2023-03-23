@@ -98,9 +98,11 @@ public class Text {
     public void youHaveBought(String item){  //Du har köpt
         System.out.println("You have bought: " + item);
     }
+
     public void doYouWantToBuyMore(){  //Köpa mer?
         System.out.println("Do you want to purchase something more? \n" +
                 "1.Yes" + "2.No");
+
     }
     public void inSufficient(){  //Ej tillräckligt med guld
         System.out.println("Insufficient Gold!");
