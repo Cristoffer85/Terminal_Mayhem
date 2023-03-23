@@ -37,7 +37,7 @@ public class Text {
     //----------------------INITIAL MENUS + STORY----------------------------------
     public static void getWelcomeText(){     //Initial startmeny + användaren skapar sin hero
         System.out.print(
-                "#############################################################\n" +
+                        "#############################################################\n" +
                         "   Welcome to the fantastic adventures of Terminal Mayhem    \n" +
                         "#############################################################\n" +
                         "                                                             \n" +
