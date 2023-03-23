@@ -60,8 +60,8 @@ public class Player {
         return damage;
     }
 
-    public void defence(){
-        defence = toughness + ( strength / 2);
+    public int defence(){
+        return toughness + ( strength / 2);
     }
 
     //Use a potion, and also check if the HP has not reached the MaxHP.
@@ -109,7 +109,7 @@ public class Player {
         return hp <= 0;
     }
 
-
+    //calculation for gold dropped by a monster
     public void setGold( int gold ){
         this.gold += gold;
     }
@@ -118,13 +118,19 @@ public class Player {
         itemList.add(item);
     }
 
+    public void removeFromInventory(Item item){
+        itemList.remove(item);
+    }
+
     // Add HP after fighting Monster
     public void addHP(){
-        hp+=(maxHp*0.1);
+        hp=maxHp - hp / 2;
     }
     public int getHp() {
         return hp;
     }
+
+    //Set the HP value after it has been reduced due to damage from the monster
     public void setHP(int damage){
         hp -= damage;
     }
@@ -136,7 +142,7 @@ public class Player {
         return toughness;
     }
 
-    //add exp
+    //Set the EXP after the player kills the monster and receives the EXP
     public void setExp(int earnedExp) {
         exp += earnedExp;
     }
@@ -145,6 +151,7 @@ public class Player {
         return gold;
     }
 
+    //Reduce the gold amount after purchasing an item
     public void payGold(int gold){
         this.gold -= gold;
     }
