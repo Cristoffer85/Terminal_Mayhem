@@ -41,7 +41,7 @@ public class Game {
 
         Text.getWelcomeText();
         player.setName(scanner.nextLine()); // sets player name
-        Text.getMainMenutext(player.getName());
+        Text.getIntrotext(player.getName());
 
         mainSwitch();
     }
@@ -50,7 +50,7 @@ public class Game {
         //Main-game loop
         boolean game = true;
         while (game) {
-
+            Text.getMainMenu();
             int mainMenuChoice = userInputInt();
 
 
@@ -59,6 +59,7 @@ public class Game {
                 case 2 -> {
                     Text.getPlayerStatText();
                     player.showHero();
+                    pressToContinue();
                 }
                 case 3 -> goShopping();
                 case 4 -> {
@@ -97,6 +98,7 @@ public class Game {
 
     private void pressToContinue() {
         Text.pressToContinue();
+        scanner.nextLine();
         scanner.nextLine();
     }
 
