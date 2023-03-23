@@ -6,16 +6,11 @@ import java.util.Scanner;
 
 public class Game {
 
+
     HealingPotion healingPotion = new HealingPotion();
     Player player = new Player(healingPotion);
-
-
     ArrayList<Monster> monsters = new ArrayList<Monster>();
-
     Shop shop = new Shop();
-
-    Text text = new Text();
-
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
 
@@ -44,9 +39,9 @@ public class Game {
         monsters.add(slime);
 
 
-        text.getWelcomeText();
+        Text.getWelcomeText();
         player.setName(scanner.nextLine()); // sets player name
-        text.getMainMenutext(player.getName());
+        Text.getMainMenutext(player.getName());
 
         mainSwitch();
     }
@@ -62,15 +57,15 @@ public class Game {
             switch (mainMenuChoice) {
                 case 1 -> goAdventuring(player);
                 case 2 -> {
-                    text.getPlayerStatText();
+                    Text.getPlayerStatText();
                     player.showHero();
                 }
                 case 3 -> goShopping();
                 case 4 -> {
-                    text.ThanksForPlaying();
+                    Text.ThanksForPlaying();
                     System.exit(0);
                 }
-                default -> text.getInvalidChoice();
+                default -> Text.getInvalidChoice();
             }
         }
     }
@@ -82,22 +77,27 @@ public class Game {
 
             for (Monster monster : monsters) {
                 if (monster.getLvl() == player.getLevel()) {
-                    text.aMonsterAppears(monster.getName());
+                    Text.aMonsterAppears(monster.getName());
                     calculateBattle(player, monster);
                     givePlayerReward(player, monster);
                 }
             }
 
             if (player.checkIfLeveledUp()) {  // check if player has reached a new level
-                text.youHaveLevelup();
+                Text.youHaveLevelup();
                 player.levelUp();
+
             }
         } else {
-            text.nothingHappened();
+            Text.nothingHappened();
             //wait for user to press return
-            text.pressToContinue();
-            scanner.nextLine();
+            pressToContinue();
         }
+    }
+
+    private void pressToContinue() {
+        Text.pressToContinue();
+        scanner.nextLine();
     }
 
     //Give player XP, gold and Hp boost
@@ -115,22 +115,22 @@ public class Game {
         while (true) {
 
             //User choice to attack or use a potion
-            text.getFightMenu();
+            Text.getFightMenu();
             int fightChoice = userInputInt();
 
             switch (fightChoice) {
                 case 1 -> {  //Player attack, changes monster HP
                     monster.defence(player.attack());
-                    text.getHpLeftAfterPlayerRound(player.getName(), player.getHp(), monster.getName(), monster.getHP());
-                    text.pressToContinue();
-                    scanner.nextLine();// needs to  be two here, i am not crazy .../E.
+                    Text.getHpLeftAfterPlayerRound(player.getName(), player.getHp(), monster.getName(), monster.getHP()); //TODO Wakana skulle visa en bra metod för att snygga till här
+                    pressToContinue();
+
                     scanner.nextLine();
                 }
                 case 2 -> {  // Use potion
                     player.usePotion();
-                    text.playerUsedPotion( player.getName(),healingPotion.getPotionValue());
+                    Text.playerUsedPotion( player.getName(),healingPotion.getPotionValue());
                 }
-                default -> text.getInvalidChoice();
+                default -> Text.getInvalidChoice();
             }
 
             //game exits the loop if the monster is dead
@@ -140,13 +140,12 @@ public class Game {
 
             //Monster attack player, that changes player HP
             player.defence(monster.attack());
-            text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
-            text.pressToContinue();
-            scanner.nextLine();
+            Text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
+            pressToContinue();
 
             // If the player dies, breaks loop
             if (player.checkIfDead()) {
-                text.getPlayerDead();
+                Text.getPlayerDead();
                 break;
             }
         }
@@ -157,25 +156,25 @@ public class Game {
         player.setGold(400); //TODO remove this when done testing
         // loop runs while true use break to exit
         while (shop.inventorySize() > 0) { // check that the shop contains items
-            text.getShopMenu();
+            Text.getShopMenu();
             shop.showItems();
 
             int itemToBuy = userInputInt();
 
             if (shop.getPrice(itemToBuy) <= player.getGold()) { //check if player has enough money
 
-                text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
+                Text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
                 player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
                 player.addToInventory(shop.buyItem(itemToBuy)); // Add item to player inventory
 
-                text.doYouWantToBuyMore();              // if the player wants to buy more stuff
+                Text.doYouWantToBuyMore();              // if the player wants to buy more stuff
                 int buyMore = userInputInt();
                 try {
                     if (buyMore == 1) {
                         continue;
                     }
                     if (buyMore == 2) {
-                        text.thanksForShopping();
+                        Text.thanksForShopping();
                         break;
                     }
                 } catch (Exception e) {
@@ -183,7 +182,7 @@ public class Game {
                 }
 
             } else {
-                text.inSufficient();
+                Text.inSufficient();
                 break;
             }
         }
