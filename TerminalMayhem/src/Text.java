@@ -74,7 +74,7 @@ public class Text {
         );
 
         System.out.println(        //Huvudmenytext
-                "1.Start game.\n" +
+                        "1.Start game.\n" +
                         "2.See your current stats.\n" +
                         "3.Shop\n" +
                         "4.End game." +
