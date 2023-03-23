@@ -31,7 +31,7 @@ public class Shop {
             index++;
         }
     }
-
+//
     public int getPrice(int itemNumber) {
         return items.get(itemNumber).getPrice();  // returns the price the class Game checks if the user can afford the item
     }
