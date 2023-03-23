@@ -33,7 +33,10 @@ Metod getBossFightText()
  * @author Cristoffer Östberg
  */
 public class Text {
-
+    Player player;
+    public Text(Player player){
+           player=this.player;
+        }
     //----------------------INITIAL MENUS + STORY----------------------------------
     public static void getWelcomeText(){     //Initial startmeny + användaren skapar sin hero
         System.out.print(
@@ -133,12 +136,14 @@ public class Text {
     public static void nothingHappened(){  //
         System.out.println("An extremely weird day in the kingdom, where you just encountered random empty baggage carts and lost tourists from Malta.. ");
     }
+
     public static void playerUsedPotion (String playerName, int potionvalue) {
         System.out.println( playerName + "has used a potion and added " + potionvalue +" healthpoints.");
     }
-    public static void getHpLeftAfterPlayerRound(String playerName ,int playersHealth,String monsterName, int monsterHealth) {
+   
+   public static void getHpLeftAfterPlayerRound(String playerName ,int playersHealth,String monsterName, int monsterHealth) {
         System.out.println("Bang! You slash the "+ monsterName + "\n" +
-                playerName + " has " + playersHealth + "Healthpoints left.\n" +
+                player.getName() + " has " + player.getHp() + "Healthpoints left.\n" +
                 "The " + monsterName + " has " + monsterHealth + " healthpoints left." );
     }
     public static void getHpLeftAfterMonsterRound(String monsterName, int monsterHealth, String playerName, int playerHealth) {
