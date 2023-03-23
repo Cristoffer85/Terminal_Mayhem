@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -34,7 +35,7 @@ public class Game {
         while (game) {
 
             text.getMainMenutext(player.getName());
-            int mainMenuChoice = scanner.nextInt();
+            int mainMenuChoice = userInput();
 
             switch (mainMenuChoice) {
                 case 1 -> goAdventuring(player);
@@ -178,5 +179,19 @@ public class Game {
                 break;
             }
         }
+    }
+
+    public int userInput(){
+        int number;
+        while (true) {
+            try {
+                number=scanner.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter number");
+                scanner.nextLine();
+            }
+        }
+        return number;
     }
 }
