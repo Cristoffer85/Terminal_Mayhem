@@ -110,7 +110,7 @@ public class Player {
         this.hp+=hp;
     }
 
-    public void setHP(int hp){
+    public void getDamage(int hp){
         this.hp = this.hp -hp;
     }
 

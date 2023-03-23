@@ -129,4 +129,24 @@ public class TextClass {
     void doYouWantToBuyMore(){    //Köpa mer?
         System.out.println("Do you want to purchase something more? 1 for yes, 2 for no");
     }
+
+    public void playerUsedPotion (String playerName, int potionvalue) {
+        System.out.println( playerName + "has used a potion and added " + potionvalue +" healthpoints.");
+    }
+
+    public void getHpLeftAfterPlayerRound(String playerName ,int playersHealth,String monsterName, int monsterHealth) {
+        System.out.println("Bang! You slash the "+ monsterName + "\n" +
+                playerName + " has " + playersHealth + "Healthpoints left.\n" +
+                "The " + monsterName + " has " + monsterHealth + " healthpoints left." );
+    }
+
+    public void getHpLeftAfterMonsterRound(String monsterName, int monsterHealth, String playerName, int playerHealth) {
+        System.out.println("uuuuraahhhhh! the " + monsterName + " hits you hard!\n" +
+                playerName + " has " + playerHealth + " healthpoints left.\n" +
+                monsterName + " has " + monsterHealth + "Healthpoints left."  );
+    }
+
+    public void pressToContinue() {
+        System.out.println("Press enter to continue..");
+    }
 }
