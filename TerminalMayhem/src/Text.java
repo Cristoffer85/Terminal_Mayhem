@@ -102,7 +102,8 @@ public class Text {
         System.out.println("You have bought: " + item);
     }
     public static void doYouWantToBuyMore(){  //Köpa mer?
-        System.out.println("Do you want to purchase something more?");
+        System.out.println("Do you want to purchase something more? \n" +
+                "1.Yes" + "2.No");
     }
     public static void inSufficient(){  //Ej tillräckligt med guld
         System.out.println("Insufficient Gold!");
