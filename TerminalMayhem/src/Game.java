@@ -143,7 +143,7 @@ public class Game {
 
             // Text.afterCombatRound(player, monster); // displays health of player and monster after one round
 
-            pressToContinue();  // todo? move to text class?
+            Text.pressToContinue();  // todo? move to text class?
 
             // If the player dies, breaks loop, add function to play again
             if (player.checkIfDead()) {

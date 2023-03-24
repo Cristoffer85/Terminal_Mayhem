@@ -187,4 +187,8 @@ public class Text {
     static void ThanksForPlaying() {   //Sluttext
         System.out.println("Thank you for playing! You solved all the evil problems related to angry superstressed travellers...!");
     }
+    static void doYouWantToPlayAgain(){
+            System.out.println("Do you want to play again?" +
+                    "1.Yes" + "2.No");
+    }
 }
