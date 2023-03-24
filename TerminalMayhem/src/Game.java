@@ -120,8 +120,7 @@ public class Game {
                     monster.defence(player, monster); //Player attack, changes monster HP and displays message of damage
                 }
                 case 2 -> {  // Use potion
-                    player.usePotion();
-                    Text.playerUsedPotion( player.getName(),healingPotion.getPotionValue()); // todo move to the player class?
+                    player.usePotion(); // FIX where does the healingPotion come from?
                 }
                 default -> Text.getInvalidChoice();
             }
