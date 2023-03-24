@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class Player {
@@ -17,14 +18,14 @@ public class Player {
 
     Random random;
     //Save the instance that is sent from the game to create a link between the Healing Potion and the player.
-    HealingPotion potion;
+    // HealingPotion potion; // todo remove?
 
     //ArrayList for saving bought Item
     ArrayList<Item> itemList;
 
     //a constructor for setting up all the values, calling the random function, and initializing the ArrayList
     public Player(HealingPotion potion) {
-        this.potion = potion;
+        //this.potion = potion; // todo remove?
         random = new Random();
         itemList = new ArrayList<>();
         makePlayer();
@@ -74,10 +75,17 @@ public class Player {
     //Use a potion, and also check if the HP has not reached the MaxHP.
     public void usePotion() {
 
-
-        hp += potion.getPotionValue();
-        if (maxHp <= hp) {
-            hp = maxHp;
+        for (Item item : itemList) {  // look for healing potion in inventory
+            if (item instanceof HealingPotion) {
+                int hpToRegain = this.maxHp - this.hp;
+                hpToRegain = (Math.min(hpToRegain, item.getPotionValue())); // to prevent over healing
+                Text.playerUsedPotion(this.getName(), hpToRegain);
+                this.hp += hpToRegain;
+                itemList.remove(item);
+                break;
+            } else {
+                Text.playerDontHavePotion();
+            }
         }
     }
 

@@ -79,8 +79,7 @@ public class Game {
             for (Monster monster : monsters) {
                 if (monster.getLvl() == player.getLevel()) {
                     Text.aMonsterAppears(monster.getName());
-                    calculateBattle(player, monster);
-                    givePlayerReward(player, monster);
+                    combat(player, monster);
                 }
             }
 
@@ -112,7 +111,7 @@ public class Game {
     }
 
     //Initiate battle between player and selected monster.
-    private void calculateBattle(Player player, Monster monster) {
+    private void combat(Player player, Monster monster) {
 
         while (true) {
 
@@ -125,22 +124,17 @@ public class Game {
                     monster.defence(player, monster); //Player attack, changes monster HP and displays message of damage
                 }
                 case 2 -> {  // Use potion
-                    player.usePotion();
-                    Text.playerUsedPotion( player.getName(),healingPotion.getPotionValue()); // todo move to the player class?
+                    player.usePotion(); // player uses healing potion
                 }
                 default -> Text.getInvalidChoice();
             }
 
-            //game exits the loop if the monster is dead
-            if (monster.checkIfDead()) {
-                // Text.afterCombatRound(player, monster); // todo does this really need to be here?
+            if (monster.checkIfDead()) { //game exits the loop if the monster is dead
                 givePlayerReward(player, monster); // gives the player loot
                 break;
             }
             //If Monster is alive it attacks player
             player.defence(player, monster); // changes the player health and displays damage message
-
-            // Text.afterCombatRound(player, monster); // displays health of player and monster after one round
 
             pressToContinue();  // todo? move to text class?
 
