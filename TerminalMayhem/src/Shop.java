@@ -21,7 +21,7 @@ public class Shop {
 
     public void showItems() { // loop to meet requirements for the assignment
         // display all available items in the shop
-        int index = 0;  // number to select items from when buying
+        int index = 1;  // number to select items from when buying
         for (Item item : items) {  // used for each loop to make the code more readable
             if (item instanceof HealingPotion) {   // Done to show of usage of instanceof
                 System.out.println(index + " " + item.getName() + ", gives " + item.getPotionValue() + " Health points, costs: " + item.getPrice() + " gold");
@@ -31,7 +31,7 @@ public class Shop {
             index++;
         }
     }
-
+//
     public int getPrice(int itemNumber) {
         return items.get(itemNumber).getPrice();  // returns the price the class Game checks if the user can afford the item
     }
