@@ -35,7 +35,7 @@ Metod getBossFightText()
 public class Text {
 
     //----------------------INITIAL MENUS + STORY----------------------------------
-    public static void getWelcomeText(){     //Initial startmeny + användaren skapar sin hero
+    static void getWelcomeText(){     //Initial startmeny + användaren skapar sin hero
         System.out.print(
                         "#############################################################\n" +
                         "   Welcome to the fantastic adventures of Terminal Mayhem    \n" +
@@ -61,7 +61,7 @@ public class Text {
         );
     }
 
-    public static void getMainMenutext(String playerName){        //Storytext
+    static void getIntrotext(String playerName){        //Storytext
         System.out.println(
                 "\n" +
                         " ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤\n" +
@@ -72,8 +72,10 @@ public class Text {
                         " ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤" +
                         "\n"
         );
+    }
 
-        System.out.println(        //Huvudmenytext
+    static void getMainMenu() {
+        System.out.println(
                         "1.Start game.\n" +
                         "2.See your current stats.\n" +
                         "3.Shop\n" +
@@ -86,7 +88,7 @@ public class Text {
 
 
     //--------------------SHOP-------------------------------------
-    public static void getShopMenu(){ //Shopmeny, Div. olika saker.
+    static void getShopMenu(){ //Shopmeny, Div. olika saker.
         System.out.println(
                 "Welcome to the shop!\n\n" +
                         "1.Healing Potion\n" +
@@ -95,23 +97,26 @@ public class Text {
         );
         System.out.print("What is your number of choice?: ");
     }
-    public static void youHaveBought(String item){  //Du har köpt
+    static void youHaveBought(String item){  //Du har köpt
         System.out.println("You have bought: " + item);
     }
-    public static void doYouWantToBuyMore(){  //Köpa mer?
-        System.out.println("Do you want to purchase something more?");
+
+    static void doYouWantToBuyMore(){  //Köpa mer?
+        System.out.println("Do you want to purchase something more? \n" +
+                "1.Yes" + "2.No");
+
     }
-    public static void inSufficient(){  //Ej tillräckligt med guld
+    static void inSufficient(){  //Ej tillräckligt med guld
         System.out.println("Insufficient Gold!");
     }
-    public static void thanksForShopping(){  //Tack för handling!
+    static void thanksForShopping(){  //Tack för handling!
         System.out.println("Thank you for shopping!");
     }
     //------------------------------------------------------------------
 
 
     //-----------------------FIGHT--------------------------------------
-    public static void getFightMenu(){  //Fightmenyn, val
+    static void getFightMenu(){  //Fightmenyn, val
         System.out.println(
                 "Oh no! You´re up for a fight! What do you wanna do?\n" +
                         "1.Fight!\n" +
@@ -121,27 +126,29 @@ public class Text {
         System.out.print("What is your number of choice?: ");
     }
     //---------------------"The" Fight Options and choices + outputs etc-----------
-    public static void aMonsterAppears(String monsterName){  //
+    static void aMonsterAppears(String monsterName){  //
         System.out.println("\n*** A wild " + monsterName + " appears! ***\n");
     }
-    public static void getBossFightText(){   //beskriver slutbossen för att ge mer inlevelse i spelet
+    static void getBossFightText(){   //beskriver slutbossen för att ge mer inlevelse i spelet
         System.out.println(".... You hear a lurge thud, the kind that only the largest form of set of multiple encyclopedias mounted together could ever perform, \nand there he was, standing right in front of you, Backgammon...");
     }
-    public static void youHaveLevelup(){  //
+    static void youHaveLevelup(){  //
         System.out.println("Congrats! You have leveled up!");
     }
-    public static void nothingHappened(){  //
+    static void nothingHappened(){  //
         System.out.println("An extremely weird day in the kingdom, where you just encountered random empty baggage carts and lost tourists from Malta.. ");
     }
-    public static void playerUsedPotion (String playerName, int potionvalue) {
+
+    static void playerUsedPotion (String playerName, int potionvalue) {
         System.out.println( playerName + "has used a potion and added " + potionvalue +" healthpoints.");
     }
-    public static void getHpLeftAfterPlayerRound(String playerName ,int playersHealth,String monsterName, int monsterHealth) {
+   
+   static void getHpLeftAfterPlayerRound(String playerName ,int playersHealth,String monsterName, int monsterHealth) {
         System.out.println("Bang! You slash the "+ monsterName + "\n" +
-                playerName + " has " + playersHealth + "Healthpoints left.\n" +
+                playerName + " has " +playersHealth + "Healthpoints left.\n" +
                 "The " + monsterName + " has " + monsterHealth + " healthpoints left." );
     }
-    public static void getHpLeftAfterMonsterRound(String monsterName, int monsterHealth, String playerName, int playerHealth) {
+    static void getHpLeftAfterMonsterRound(String monsterName, int monsterHealth, String playerName, int playerHealth) {
         System.out.println("uuuuraahhhhh! the " + monsterName + " hits you hard!\n" +
                 playerName + " has " + playerHealth + " healthpoints left.\n" +
                 monsterName + " has " + monsterHealth + "Healthpoints left."  );
@@ -149,23 +156,23 @@ public class Text {
     //-------------------------------------------------------------
 
     //---------------------RANDOM----------------------------------
-    public static void getPlayerStatText(){  //Statsen för hjälte
+    static void getPlayerStatText(){  //Statsen för hjälte
         System.out.println("Here are the current statistics of your Hero: ");
     }
-    public static void getInvalidChoice(){    //Ej giltigt val.
+    static void getInvalidChoice(){    //Ej giltigt val.
         System.out.println("Im sorry, but you´ve made an incorrect choice.");
     }
-    public static void pressToContinue() {
+    static void pressToContinue() {
         System.out.println("Press enter to continue..");
     }
     //-------------------------------------------------------------
 
 
     //------------------------END----------------------------------
-    public static void getPlayerDead(){     //Game over
+    static void getPlayerDead(){     //Game over
         System.out.println("Sorry, you´re dead! You were overwhelmed by the dishes..");
     }
-    public static void ThanksForPlaying(){   //Sluttext
-        System.out.println("Thank you for playing! You solved all the evil airportproblems that could ever exist in this kingdom...!");
+    static void ThanksForPlaying(){   //Sluttext
+        System.out.println("Thank you for playing! You solved all the evil problems related to angry superstressed travellers...!");
     }
 }

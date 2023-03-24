@@ -9,7 +9,7 @@ public class Player {
     private int exp;
     private int maxHp;
     private int hp;
-    private int defence;
+    private int defence;  // Todo remove?
     private int strength;
     private int toughness;
     private int gold;
@@ -40,7 +40,7 @@ public class Player {
         toughness = 4;
         criticalChance = 5;
         gold = 0;
-        defence();
+
     }
 
     //make random number
@@ -60,17 +60,17 @@ public class Player {
         return damage;
     }
 
-    public int defence() {
-        return toughness + (strength / 2);
-    }
+    public void defence(int attack) { // The ability to migrate damage with defence before changing health points
+        setDamage(attack - (this.toughness + (this.strength / 2))); // migrates defence and half of the player strength
+        }
 
     //Use a potion, and also check if the HP has not reached the MaxHP.
-    public void usePotion(HealingPotion potion) {
+    public void usePotion() {
+
 
         hp += potion.getPotionValue();
         if (maxHp <= hp) {
             hp = maxHp;
-
         }
     }
 
@@ -134,7 +134,7 @@ public class Player {
     }
 
     //Set the HP value after it has been reduced due to damage from the monster
-    public void setDamage(int damage) {
+    private void setDamage(int damage) {
         if (0 < damage){
             this.hp -= damage;
         }
@@ -185,9 +185,10 @@ public class Player {
         System.out.println("Gold: " + gold);
         System.out.println("Inventory");
 
-        if (itemList != null) {
-            for (Item item : itemList) {
-                System.out.print(item + " ");
+        if(0<itemList.size()) {
+            for(Item item : itemList){
+            System.out.print(item + " ");
+
             }
         }
     }
