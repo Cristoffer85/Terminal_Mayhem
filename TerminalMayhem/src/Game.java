@@ -130,6 +130,7 @@ public class Game {
                 }
                 default -> Text.getInvalidChoice();
             }
+
             //game exits the loop if the monster is dead
             if (monster.checkIfDead()) {
                 // Text.afterCombatRound(player, monster); // todo does this really need to be here?

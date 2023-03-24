@@ -192,11 +192,12 @@ public class Player {
         System.out.println("Gold: " + gold);
         System.out.println("Inventory");
 
-        if (0 < itemList.size()) {
-            for (Item item : itemList) {
-                System.out.print(item + " ");
-
+        if(0<itemList.size()) {
+            for(Item item : itemList) {
+                System.out.println(item.getName() + " ");
             }
         }
     }
+
+
 }
