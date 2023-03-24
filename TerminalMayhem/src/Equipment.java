@@ -1,9 +1,9 @@
 /**
  * @author Kristian Karlson
  */
-public class Medallion extends Item {
+public class Equipment extends Item {
 
-    public Medallion() {
+    public Equipment() {
         super("The Cat's Eye Amulet",5, 5, 2, 1, 0, 69);
     }
 }
