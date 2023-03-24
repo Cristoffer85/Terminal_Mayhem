@@ -29,10 +29,14 @@ Metod thanksForPlaying()
 Metod getBossFightText()
     beskriver slutbossen för att ge mer inlevelse i spelet
 */
+
+import java.util.Scanner;
+
 /**
  * @author Cristoffer Östberg
  */
 public class Text {
+    static Scanner scanner = new Scanner(System.in);
 
     //----------------------INITIAL MENUS + STORY----------------------------------
     static void getWelcomeText() {     //Initial startmeny + användaren skapar sin hero
@@ -90,12 +94,11 @@ public class Text {
     //--------------------SHOP-------------------------------------
     static void getShopMenu() { //Shopmeny, Div. olika saker.
         System.out.println(
-                "Welcome to the shop!\n\n" +
-                        "1.Healing Potion\n" +
-                        "2.Medallion\n" +
-                        ""
+                "------------Welcome to the shop!------------\nThis are the wares available right now."
         );
-        System.out.print("What is your number of choice?: ");
+        System.out.println("What is your number of choice?: ");
+        System.out.println();
+
     }
 
     static void youHaveBought(String item) {  //Du har köpt
@@ -104,7 +107,8 @@ public class Text {
 
     static void doYouWantToBuyMore() {  //Köpa mer?
         System.out.println("Do you want to purchase something more? \n" +
-                "1.Yes" + "2.No");
+                "1.Yes or 2.No");
+        System.out.println();
 
     }
 
@@ -119,9 +123,8 @@ public class Text {
 
 
     //-----------------------FIGHT--------------------------------------
-    static void getFightMenu() {  //Fightmenyn, val
+    static void getFightMenu() {  //Fightmenu
         System.out.println(
-                "Oh no! You´re up for a fight! What do you wanna do?\n" +
                         "1.Fight!\n" +
                         "2.Drink healing potion.\n" +
                         ""
@@ -147,7 +150,7 @@ public class Text {
     }
 
     static void playerUsedPotion(String playerName, int healingPoints) {
-        System.out.println(playerName + " has used a potion and added " + healingPoints + " healthpoints.");
+        System.out.println(playerName + " has used a potion and added " + healingPoints + " health-points.");
     }
     static void playerDontHavePotion(){
         System.out.println("You tried to heal but don't have a potion, Turn successfully wasted.");
@@ -155,16 +158,25 @@ public class Text {
 
 
     // todo add attack damage output for player.defence() and monster.defence() to call
-    static void playerDamageDone(Player player, Monster monster, int damge) {
-        System.out.println("Bang! You slash the " + monster.getName() + " for " + damge + " the monster blocks "
-                + monster.getToughness() + " damage, the monster have " + monster.getHP() + " health");
+    static void playerDamageDone(Player player, Monster monster, int damage) {
+        System.out.println("Bang! You slash the " + monster.getName() + " for " + damage + " damage-points." +
+                "\nThe " + monster.getName() + " blocks " + monster.getToughness() + " damage-points." +
+                "\nThe " + monster.getName() + " have " + monster.getHP() + " health left");
     }
 
     static void monsterDamageDone(Player player, Monster monster, int damage) {
-        System.out.println("uuuuraahhhhh! the " + monster.getName() + " hits you hard! " +
-                "you successfully blocks " + player.getArmorValue() + " but you still take " + damage + " damage " +
-                "you have " + player.getHp() + " health");
+        System.out.println("uuuuraahhhhh! the " + monster.getName() + " hits you hard!\n" +
+                "You successfully block " + player.getArmorValue() + " but you still take " + damage + " damage-points\n"
+                + "You have " + player.getHp() + " health left");
     }
+
+    public static void getRewardtext(Player player, Monster monster) {
+        System.out.println(player.getName() + " recived:\n" +
+                monster.dropGold() + " Gold\n" +
+                monster.dropExp() + " Exp\n" +
+                player.getAddHp() + " Health-points");
+    }
+
     //-------------------------------------------------------------
 
     //---------------------RANDOM----------------------------------
@@ -177,9 +189,9 @@ public class Text {
     }
 
     static void pressToContinue() {
-        System.out.println("Press enter to continue..");
-        System.out.println();
-        System.out.println();
+        System.out.println("Press enter twice to continue..");
+        scanner.nextLine();
+        scanner.nextLine();
     }
     //-------------------------------------------------------------
 
@@ -192,4 +204,6 @@ public class Text {
     static void ThanksForPlaying() {   //Sluttext
         System.out.println("Thank you for playing! You solved all the evil problems related to angry superstressed travellers...!");
     }
+
+
 }

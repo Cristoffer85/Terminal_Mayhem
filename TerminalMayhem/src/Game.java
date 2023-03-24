@@ -52,11 +52,11 @@ public class Game {
         if (isItAFight >= 10) {
 
             if (player.getLevel() == 9) {
-                for (Monster monster: monsters) {
+                for (Monster monster : monsters) {
                     if (monster.getLvl() == 10) {
                         Text.getBossFightText();
                         combat(player, monster);
-                }
+                    }
 
                 }
             } else {
@@ -78,14 +78,11 @@ public class Game {
         }
     }
 
-
-
     //Give player XP, gold and Hp boost
     private void givePlayerReward(Player player, Monster monster) {
+        Text.getRewardtext(player, monster);
         player.setGold(monster.dropGold());
         player.setExp(monster.dropExp());
-
-        //TODO player gets an HP boost, based on what?
         player.addHP();
     }
 
@@ -101,6 +98,7 @@ public class Game {
             switch (fightChoice) {
                 case 1 -> {
                     monster.defence(player, monster); //Player attack, changes monster HP and displays message of damage
+                    Text.pressToContinue();
                 }
                 case 2 -> {  // Use potion
                     player.usePotion(); // player uses healing potion
@@ -167,11 +165,11 @@ public class Game {
     }
 
     //Control if user input is an integer
-    public int userInputInt(){
+    public int userInputInt() {
         int number;
         while (true) {
             try {
-                number=scanner.nextInt();
+                number = scanner.nextInt();
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("A non-numeric input has been entered. Please enter a valid input again");
@@ -182,6 +180,8 @@ public class Game {
     }
 
     private void makeMonsters() {
+
+        //initiate all monsters
         //level 1
         Goblin goblin1 = new Goblin("Goblin", 1, 40, 10, 0, 10, 100);
         Orc orc1 = new Orc("Orc", 1, 40, 10, 0, 10, 100);
@@ -244,6 +244,7 @@ public class Game {
         //Bossmonster
         BossMonster bossMonster = new BossMonster("Slime", 10, 200, 28, 20, 1000, 1000);
 
+        //Add all monsters to list
         monsters.add(goblin1);
         monsters.add(orc1);
         monsters.add(skeleton1);
