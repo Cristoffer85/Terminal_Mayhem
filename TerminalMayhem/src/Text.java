@@ -147,7 +147,7 @@ public class Text {
     }
 
     static void playerUsedPotion(String playerName, int healingPotion) {
-        System.out.println(playerName + "has used a potion and added " + healingPotion + " healthpoints.");
+        System.out.println(playerName + " has used a potion and added " + healingPotion + " healthpoints.");
     }
 
 

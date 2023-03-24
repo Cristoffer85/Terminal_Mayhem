@@ -74,17 +74,21 @@ public class Player {
 
     //Use a potion, and also check if the HP has not reached the MaxHP.
     public void usePotion() {
-        itemList.add(new HealingPotion());
-        
-        if ( 0 < itemList.indexOf(Item instanceof  HealingPotion)) {
 
-            this.hp += itemList.indexOf(); potion.getPotionValue();
+        for (Item item: itemList) {  // look for healing potion in inventory
+            if (item instanceof HealingPotion){
+                int missingHp = this.maxHp - this.hp;
 
-            if (maxHp <= hp) hp = maxHp;
+                this.hp += item.getPotionValue();
 
-            Text.playerUsedPotion(this.getName(), potion.getPotionValue());
-        } else {
-            System.out.println("error or no healing potion in inventory");
+
+
+                Text.playerUsedPotion(this.getName(), item.getPotionValue());
+                itemList.remove(item);
+                break;
+            } else { System.out.println("error or no healing potion in inventory"); // todo remove temporary code
+            }
+        if (maxHp <= hp) hp = maxHp; // make sure there is no over healing. // todo how does it keep track of item bonuses?
         }
     }
 
