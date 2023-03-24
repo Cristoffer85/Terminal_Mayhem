@@ -206,4 +206,8 @@ public class Text {
     }
 
 
+    public static void getnoMoreWares() {
+        System.out.println("Sorry, there are no more wares to buy right now!");
+        pressToContinue();
+    }
 }

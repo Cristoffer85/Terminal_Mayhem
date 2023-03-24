@@ -135,28 +135,31 @@ public class Game {
             Text.getShopMenu();
             shop.showItems();
 
-            int itemToBuy = userInputInt();
+            int itemToBuy = userInputInt() -1;
 
             if (shop.getPrice(itemToBuy) <= player.getGold()) { //check if player has enough money
 
                 Text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
                 player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
                 player.addToInventory(shop.buyItem(itemToBuy)); // Add item to player inventory
-
-                Text.doYouWantToBuyMore();              // if the player wants to buy more stuff
-                int buyMore = userInputInt();
-                try {
-                    if (buyMore == 1) {
-                        continue;
+                if (shop.inventorySize() <= 0){
+                    Text.getnoMoreWares();
+                    mainSwitch();
+                } else {
+                    Text.doYouWantToBuyMore();              // if the player wants to buy more stuff
+                    int buyMore = userInputInt();
+                    try {
+                        if (buyMore == 1) {
+                            continue;
+                        }
+                        if (buyMore == 2) {
+                            Text.thanksForShopping();
+                            break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Invalid input");
                     }
-                    if (buyMore == 2) {
-                        Text.thanksForShopping();
-                        break;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Invalid input");
                 }
-
             } else {
                 Text.inSufficient();
                 break;
