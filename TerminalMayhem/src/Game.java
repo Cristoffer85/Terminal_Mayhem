@@ -11,7 +11,7 @@ public class Game {
     Player player = new Player(healingPotion);
     ArrayList<Monster> monsters = new ArrayList<Monster>();
     Shop shop = new Shop();
-    Scanner scanner = new Scanner(System.in).useDelimiter("\n");;
+    Scanner scanner = new Scanner(System.in);
     Random random = new Random();
 
     void startGame() {
@@ -60,7 +60,6 @@ public class Game {
                     Text.getPlayerStatText();
                     player.showHero();
                     pressToContinue();
-                    scanner.nextLine();
                 }
                 case 3 -> goShopping();
                 case 4 -> {
@@ -94,12 +93,12 @@ public class Game {
             Text.nothingHappened();
             //wait for user to press return
             pressToContinue();
-            scanner.nextLine();
         }
     }
 
     private void pressToContinue() {
         Text.pressToContinue();
+        scanner.nextLine();
         scanner.nextLine();
     }
 
@@ -122,30 +121,28 @@ public class Game {
             int fightChoice = userInputInt();
 
             switch (fightChoice) {
-                case 1 -> {  //Player attack, changes monster HP
-                    monster.defence(player.attack());
-                    Text.getHpLeftAfterPlayerRound(player.getName(), player.getHp(), monster.getName(), monster.getHP()); //TODO Wakana skulle visa en bra metod för att snygga till här
-                    pressToContinue();
-
-                    scanner.nextLine();
+                case 1 -> {
+                    monster.defence(player, monster); //Player attack, changes monster HP and displays message of damage
                 }
                 case 2 -> {  // Use potion
                     player.usePotion();
-                    Text.playerUsedPotion( player.getName(),healingPotion.getPotionValue());
+                    Text.playerUsedPotion( player.getName(),healingPotion.getPotionValue()); // todo move to the player class?
                 }
                 default -> Text.getInvalidChoice();
             }
 
             //game exits the loop if the monster is dead
             if (monster.checkIfDead()) {
+                // Text.afterCombatRound(player, monster); // todo does this really need to be here?
+                givePlayerReward(player, monster); // gives the player loot
                 break;
             }
+            //If Monster is alive it attacks player
+            player.defence(player, monster); // changes the player health and displays damage message
 
-            //Monster attack player, that changes player HP
-            player.defence(monster.attack());
-            Text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
-            pressToContinue();
-            scanner.nextLine();
+            // Text.afterCombatRound(player, monster); // displays health of player and monster after one round
+
+            pressToContinue();  // todo? move to text class?
 
             // If the player dies, breaks loop
             if (player.checkIfDead()) {
