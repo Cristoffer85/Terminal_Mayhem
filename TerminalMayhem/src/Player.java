@@ -65,7 +65,7 @@ public class Player {
 
         int damage = monster.attack(); // the damage is random store the actual damage to make sure the output is right
         setDamage(damage - getArmorValue()); // migrates defence and half of the player strength
-        Text.monsterDamageDone(player, monster, damage);
+        Text.monsterDamageDone(player, monster, (damage - getArmorValue()));
     }
 
     public int getArmorValue() {
