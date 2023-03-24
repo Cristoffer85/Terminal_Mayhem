@@ -146,8 +146,11 @@ public class Text {
         System.out.println("An extremely weird day in the kingdom, where you just encountered random empty baggage carts and lost tourists from Malta.. ");
     }
 
-    static void playerUsedPotion(String playerName, int healingPotion) {
-        System.out.println(playerName + " has used a potion and added " + healingPotion + " healthpoints.");
+    static void playerUsedPotion(String playerName, int healingPoints) {
+        System.out.println(playerName + " has used a potion and added " + healingPoints + " healthpoints.");
+    }
+    static void playerDontHavePotion(){
+        System.out.println("You tried to heal but don't have a potion, Turn successfully wasted.");
     }
 
 
@@ -160,7 +163,7 @@ public class Text {
     static void monsterDamageDone(Player player, Monster monster, int damage) {
         System.out.println("uuuuraahhhhh! the " + monster.getName() + " hits you hard! " +
                 "you successfully blocks " + player.getArmorValue() + " but you still take " + damage + " damage " +
-                "yoy have " + player.getHp() + " health");
+                "you have " + player.getHp() + " health");
     }
     //-------------------------------------------------------------
 
