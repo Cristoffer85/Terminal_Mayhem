@@ -33,7 +33,7 @@ public class Player {
 
     //The initial status of the player
     public void makePlayer() {
-        level = 9;
+        level = 1;
         maxHp = 100;
         hp = maxHp;
         exp = 0;
@@ -144,6 +144,10 @@ public class Player {
         hp = maxHp - hp / 2;
     }
 
+    public int getAddHp(){
+        return this.hp = this.maxHp - this.hp / 2;
+    }
+
     public int getHp() {
         return hp;
     }
@@ -198,7 +202,7 @@ public class Player {
         System.out.println("toughness: " + toughness);
         System.out.println("Critical Chance: " + criticalChance);
         System.out.println("Gold: " + gold);
-        System.out.println("Inventory");
+        System.out.println("Inventory : ");
 
         if(0<itemList.size()) {
             for(Item item : itemList) {
