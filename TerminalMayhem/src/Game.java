@@ -153,7 +153,7 @@ public class Game {
                 if (userInputInt() == 1){
                     Player.resetPlayer();
                     Monster.resetMonster();
-                    Shop.resetStore();
+                    Shop.resetShop();
                     startGame();
 
                 }
