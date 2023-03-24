@@ -146,8 +146,8 @@ public class Text {
         System.out.println("An extremely weird day in the kingdom, where you just encountered random empty baggage carts and lost tourists from Malta.. ");
     }
 
-    static void playerUsedPotion(String playerName, HealingPotion healingPotion) {
-        System.out.println(playerName + "has used a potion and added " + healingPotion.getPotionValue() + " healthpoints.");
+    static void playerUsedPotion(String playerName, int healingPotion) {
+        System.out.println(playerName + "has used a potion and added " + healingPotion + " healthpoints.");
     }
 
 
