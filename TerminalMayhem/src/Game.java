@@ -11,7 +11,7 @@ public class Game {
     Player player = new Player(healingPotion);
     ArrayList<Monster> monsters = new ArrayList<Monster>();
     Shop shop = new Shop();
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in).useDelimiter("\n");;
     Random random = new Random();
 
     void startGame() {
@@ -60,6 +60,7 @@ public class Game {
                     Text.getPlayerStatText();
                     player.showHero();
                     pressToContinue();
+                    scanner.nextLine();
                 }
                 case 3 -> goShopping();
                 case 4 -> {
@@ -93,12 +94,12 @@ public class Game {
             Text.nothingHappened();
             //wait for user to press return
             pressToContinue();
+            scanner.nextLine();
         }
     }
 
     private void pressToContinue() {
         Text.pressToContinue();
-        scanner.nextLine();
         scanner.nextLine();
     }
 
@@ -144,6 +145,7 @@ public class Game {
             player.defence(monster.attack());
             Text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
             pressToContinue();
+            scanner.nextLine();
 
             // If the player dies, breaks loop
             if (player.checkIfDead()) {

@@ -186,10 +186,10 @@ public class Player {
         System.out.println("Inventory");
 
         if(0<itemList.size()) {
-            for(Item item : itemList){
-            System.out.print(item + " ");
-
+            for(Item item : itemList) {
+                System.out.println(item.getName() + " ");
             }
+
         }
     }
 

@@ -9,7 +9,7 @@ public class Shop {
 
     public Shop() {
         // Fills the shop with items
-        this.items.add(new Medallion());
+        this.items.add(new Equipment());
         this.items.add(new HealingPotion());
         this.items.add(new HealingPotion());
 
