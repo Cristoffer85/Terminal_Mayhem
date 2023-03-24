@@ -151,7 +151,11 @@ public class Game {
                 Text.getPlayerDead();
                 Text.doYouWantToPlayAgain();
                 if (userInputInt() == 1){
-                    mainSwitch();}
+                    Player.resetPlayer();
+                    Monster.resetMonster();
+                    Shop.resetStore();
+                    startGame();
+                }
                 else{Text.ThanksForPlaying();}
                 break;
             }
