@@ -74,7 +74,7 @@ public class Player {
     //Use a potion, and also check if the HP has not reached the MaxHP.
     public void usePotion() {
 
-        if (this.itemList.contains(item.hea)){
+        if (this.itemList.contains(potion.getName())){
 
             this.hp += potion.getPotionValue();
 
