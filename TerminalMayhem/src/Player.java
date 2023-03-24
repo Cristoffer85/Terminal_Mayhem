@@ -33,7 +33,7 @@ public class Player {
 
     //The initial status of the player
     public void makePlayer() {
-        level = 1;
+        level = 9;
         maxHp = 100;
         hp = maxHp;
         exp = 0;
