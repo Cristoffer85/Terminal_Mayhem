@@ -93,7 +93,7 @@ public class Text {
                 "Welcome to the shop!\n\n" +
                         "1.Healing Potion\n" +
                         "2.Medallion\n" +
-                        ""
+                        "\n"
         );
         System.out.print("What is your number of choice?: ");
     }
