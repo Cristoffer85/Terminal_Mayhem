@@ -155,6 +155,7 @@ public class Game {
                     Monster.resetMonster();
                     Shop.resetStore();
                     startGame();
+
                 }
                 else{Text.ThanksForPlaying();}
                 break;
