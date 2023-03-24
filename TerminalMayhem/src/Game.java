@@ -141,6 +141,10 @@ public class Game {
             // If the player dies, breaks loop
             if (player.checkIfDead()) {
                 Text.getPlayerDead();
+                player.resetPlayer();
+                shop.resetShop();
+                startGame();
+
                 break;
             }
         }

@@ -5,14 +5,28 @@ import java.util.ArrayList;
  */
 public class Shop {
 
-    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Item> items;
+    Equipment equipment;
+    HealingPotion healingPotion;
 
     public Shop() {
         // Fills the shop with items
-        this.items.add(new Equipment());
-        this.items.add(new HealingPotion());
-        this.items.add(new HealingPotion());
+        equipment = new Equipment();
+        healingPotion = new HealingPotion();
+        items = new ArrayList<>();
 
+        addDefaultItems();
+    }
+
+    public void addDefaultItems(){
+        this.items.add(equipment);
+        this.items.add(healingPotion);
+        this.items.add(healingPotion);
+    }
+
+    public void resetShop(){
+        items.clear();
+        addDefaultItems();
     }
 
     public int inventorySize(){
