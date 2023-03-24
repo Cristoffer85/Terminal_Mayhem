@@ -11,7 +11,7 @@ public class Game {
     Player player = new Player(healingPotion);
     ArrayList<Monster> monsters = new ArrayList<Monster>();
     Shop shop = new Shop();
-    Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
     Random random = new Random();
 
     void startGame() {
@@ -59,7 +59,7 @@ public class Game {
                     case 2 -> {
                         Text.getPlayerStatText();
                         player.showHero();
-                        pressToContinue();
+                        Text.pressToContinue();
                     }
                     case 3 -> goShopping();
                     case 4 -> {
@@ -93,14 +93,8 @@ public class Game {
         } else {
             Text.nothingHappened();
             //wait for user to press return
-            pressToContinue();
+            Text.pressToContinue();
         }
-    }
-
-    private void pressToContinue() {
-        Text.pressToContinue();
-        scanner.nextLine();
-        scanner.nextLine();
     }
 
     //Give player XP, gold and Hp boost
