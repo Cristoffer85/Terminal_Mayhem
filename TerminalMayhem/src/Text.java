@@ -178,6 +178,8 @@ public class Text {
 
     static void pressToContinue() {
         System.out.println("Press enter to continue..");
+        System.out.println();
+        System.out.println();
     }
     //-------------------------------------------------------------
 
