@@ -60,7 +60,6 @@ public class Text {
                         "Please enter your hero:s name: "
         );
     }
-
     static void getIntrotext(String playerName){        //Storytext
         System.out.println(
                 "\n" +
@@ -73,7 +72,6 @@ public class Text {
                         "\n"
         );
     }
-
     static void getMainMenu() {
         System.out.println(
                         "1.Start game.\n" +
@@ -90,7 +88,7 @@ public class Text {
     //--------------------SHOP-------------------------------------
     static void getShopMenu(){ //Shopmeny, Div. olika saker.
         System.out.println(
-                "Welcome to the shop!\n\n" +
+                "\nWelcome to the shop!\n" +
                         "1.Healing Potion\n" +
                         "2.Medallion\n" +
                         "\n"
@@ -104,7 +102,6 @@ public class Text {
     static void doYouWantToBuyMore(){  //Köpa mer?
         System.out.println("Do you want to purchase something more? \n" +
                 "1.Yes" + "2.No");
-
     }
     static void inSufficient(){  //Ej tillräckligt med guld
         System.out.println("Insufficient Gold!");
@@ -173,6 +170,9 @@ public class Text {
         System.out.println("Sorry, you´re dead! You were overwhelmed by the dishes..");
     }
     static void ThanksForPlaying(){   //Sluttext
-        System.out.println("Thank you for playing! You solved all the evil problems related to angry superstressed travellers...!");
+        System.out.println("Thank you for playing! You solved all the evil problems related to angry superstressed travellers...!");}
+    static void doYouWantToPlayAgain(){
+        System.out.println("Do you want to play again?" +
+                    "1.Yes" + "2.No");
     }
 }

@@ -49,27 +49,28 @@ public class Game {
     private void mainSwitch() {
         //Main-game loop
         boolean game = true;
-        while (game) {
-            Text.getMainMenu();
-            int mainMenuChoice = userInputInt();
 
+            while (game) {
+                Text.getMainMenu();
+                int mainMenuChoice = userInputInt();
 
-            switch (mainMenuChoice) {
-                case 1 -> goAdventuring(player);
-                case 2 -> {
-                    Text.getPlayerStatText();
-                    player.showHero();
-                    pressToContinue();
+                switch (mainMenuChoice) {
+                    case 1 -> goAdventuring(player);
+                    case 2 -> {
+                        Text.getPlayerStatText();
+                        player.showHero();
+                        pressToContinue();
+                    }
+                    case 3 -> goShopping();
+                    case 4 -> {
+                        Text.ThanksForPlaying();
+                        System.exit(0);
+                    }
+                    default -> Text.getInvalidChoice();
                 }
-                case 3 -> goShopping();
-                case 4 -> {
-                    Text.ThanksForPlaying();
-                    System.exit(0);
-                }
-                default -> Text.getInvalidChoice();
             }
-        }
     }
+
 
     // 90 % chance of going to battle, match monster with player level
     private void goAdventuring(Player player) {
@@ -145,9 +146,13 @@ public class Game {
             Text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
             pressToContinue();
 
-            // If the player dies, breaks loop
+            // If the player dies, breaks loop, add function to play again
             if (player.checkIfDead()) {
                 Text.getPlayerDead();
+                Text.doYouWantToPlayAgain();
+                if (userInputInt() == 1){
+                    mainSwitch();}
+                else{Text.ThanksForPlaying();}
                 break;
             }
         }
