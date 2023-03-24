@@ -61,7 +61,7 @@ public abstract class Monster {
     }
 
     public int attack(){
-        return random.nextInt((strength* 2) - strength)-strength;
+        return random.nextInt((strength* 2))+strength;
     }
 
     public  void defence(Player player, Monster monster){
