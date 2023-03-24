@@ -122,29 +122,28 @@ public class Game {
             int fightChoice = userInputInt();
 
             switch (fightChoice) {
-                case 1 -> {  //Player attack, changes monster HP
-                    monster.defence(player.attack());
-                    Text.getHpLeftAfterPlayerRound(player.getName(), player.getHp(), monster.getName(), monster.getHP()); //TODO Wakana skulle visa en bra metod för att snygga till här
-                    pressToContinue();
-
-                    scanner.nextLine();
+                case 1 -> {
+                    monster.defence(player, monster); //Player attack, changes monster HP and displays message of damage
                 }
                 case 2 -> {  // Use potion
                     player.usePotion();
-                    Text.playerUsedPotion( player.getName(),healingPotion.getPotionValue());
+                    Text.playerUsedPotion( player.getName(),healingPotion.getPotionValue()); // todo move to the player class?
                 }
                 default -> Text.getInvalidChoice();
             }
 
             //game exits the loop if the monster is dead
             if (monster.checkIfDead()) {
+                // Text.afterCombatRound(player, monster); // todo does this really need to be here?
+                givePlayerReward(player, monster); // gives the player loot
                 break;
             }
+            //If Monster is alive it attacks player
+            player.defence(player, monster); // changes the player health and displays damage message
 
-            //Monster attack player, that changes player HP
-            player.defence(monster.attack());
-            Text.getHpLeftAfterMonsterRound(monster.getName(),monster.getHP(),player.getName() , player.getHp());
-            pressToContinue();
+            // Text.afterCombatRound(player, monster); // displays health of player and monster after one round
+
+            pressToContinue();  // todo? move to text class?
 
             // If the player dies, breaks loop, add function to play again
             if (player.checkIfDead()) {

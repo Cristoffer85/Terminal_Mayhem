@@ -60,9 +60,16 @@ public class Player {
         return damage;
     }
 
-    public void defence(int attack) { // The ability to migrate damage with defence before changing health points
-        setDamage(attack - (this.toughness + (this.strength / 2))); // migrates defence and half of the player strength
-        }
+    public void defence(Player player, Monster monster) { // The ability to migrate damage with defence before changing health points
+
+        int damage = monster.attack(); // the damage is random store the actual damage to make sure the output is right
+        setDamage(damage - getArmorValue()); // migrates defence and half of the player strength
+        Text.monsterDamageDone(player, monster, damage);
+    }
+
+    public int getArmorValue() {
+        return (this.toughness + (this.strength / 2));
+    }
 
     //Use a potion, and also check if the HP has not reached the MaxHP.
     public void usePotion() {
@@ -135,7 +142,7 @@ public class Player {
 
     //Set the HP value after it has been reduced due to damage from the monster
     private void setDamage(int damage) {
-        if (0 < damage){
+        if (0 < damage) {
             this.hp -= damage;
         }
     }
@@ -186,9 +193,8 @@ public class Player {
         System.out.println("Inventory");
 
         if(0<itemList.size()) {
-            for(Item item : itemList){
-            System.out.print(item + " ");
-
+            for(Item item : itemList) {
+                System.out.println(item.getName() + " ");
             }
         }
     }
