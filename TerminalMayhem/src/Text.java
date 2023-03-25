@@ -143,6 +143,7 @@ public class Text {
 
     static void youHaveLevelup() {  //
         System.out.println("Congrats! You have leveled up!");
+        System.out.println("");
     }
 
     static void nothingHappened() {  //

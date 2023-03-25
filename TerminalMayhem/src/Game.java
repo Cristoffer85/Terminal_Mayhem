@@ -66,10 +66,7 @@ public class Game {
                         combat(player, monster);
                     }
                 }
-                if (player.checkIfLeveledUp()) {  // check if player has reached a new level
-                    Text.youHaveLevelup();
-                    player.levelUp();
-                }
+
             }
         } else {
             Text.nothingHappened();
@@ -108,8 +105,11 @@ public class Game {
 
             if (monster.checkIfDead()) { //game exits the loop if the monster is dead
                 givePlayerReward(player, monster); // gives the player loot
+                if (player.checkIfLeveledUp()) {  // check if player has reached a new level
+                    Text.youHaveLevelup();
+                    player.levelUp();
+                }
                 mainSwitch();
-
             }
             //If Monster is alive it attacks player
             player.defence(player, monster); // changes the player health and displays damage message
