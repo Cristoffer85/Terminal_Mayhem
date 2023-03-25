@@ -36,7 +36,7 @@ import java.util.Scanner;
  * @author Cristoffer Östberg
  */
 public class Text {
-    static Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
     //----------------------INITIAL MENUS + STORY----------------------------------
     static void getWelcomeText() {     //Initial startmeny + användaren skapar sin hero
@@ -189,8 +189,7 @@ public class Text {
     }
 
     static void pressToContinue() {
-        System.out.println("Press enter twice to continue..");
-        scanner.nextLine();
+        System.out.println("Press enter to continue..");
         scanner.nextLine();
     }
     //-------------------------------------------------------------
