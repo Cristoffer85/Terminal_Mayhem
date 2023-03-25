@@ -64,11 +64,11 @@ public abstract class Monster {
         return random.nextInt((strength* 2))+strength;
     }
 
-    public  void defence(Player player, Monster monster){
+    public  void defence(Player player){
 
         int damage = player.attack(); // the damage is random store the actual damage to make sure the output is right
         setDamage(damage - this.toughness);
-        Text.playerDamageDone(player, monster, (damage - this.toughness));
+        Text.playerDamageDone(player, this, (damage - this.toughness));
     }
 
     public int dropGold() {

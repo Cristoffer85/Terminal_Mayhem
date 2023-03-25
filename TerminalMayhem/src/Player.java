@@ -61,11 +61,11 @@ public class Player {
         return damage;
     }
 
-    public void defence(Player player, Monster monster) { // The ability to migrate damage with defence before changing health points
+    public void defence(Monster monster) { // The ability to migrate damage with defence before changing health points
 
         int damage = monster.attack(); // the damage is random store the actual damage to make sure the output is right
         setDamage(damage - getArmorValue()); // migrates defence and half of the player strength
-        Text.monsterDamageDone(player, monster, (damage - getArmorValue()));
+        Text.monsterDamageDone(this, monster, (damage - getArmorValue()));
     }
 
     public int getArmorValue() {
@@ -140,13 +140,13 @@ public class Player {
     }
 
     // Add HP after fighting Monster
-    public void addHP() {
+    public void addHP() { // todo? remove unused  method
         hp = maxHp - hp / 2;
     }
 
     public int getAddHp(){
-        return this.hp = this.maxHp - this.hp / 2;
-    }
+        return (this.maxHp - this.hp) / 2;
+    }  // player regains halv of the missing hp after combat
 
     public int getHp() {
         return hp;
