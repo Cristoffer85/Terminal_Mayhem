@@ -57,16 +57,20 @@ public class Game {
                         Text.getBossFightText();
                         combat(player, monster);
                     }
-
                 }
+
             } else {
                 for (Monster monster : monsters) {
                     if (monster.getLvl() == player.getLevel()) {
                         Text.aMonsterAppears(monster.getName());
                         combat(player, monster);
+                        break;
                     }
                 }
-
+                if (player.checkIfLeveledUp()) {  // check if player has reached a new level
+                    Text.youHaveLevelup();
+                    player.levelUp();
+                }
             }
         } else {
             Text.nothingHappened();
@@ -105,11 +109,8 @@ public class Game {
 
             if (monster.checkIfDead()) { //game exits the loop if the monster is dead
                 givePlayerReward(player, monster); // gives the player loot
-                if (player.checkIfLeveledUp()) {  // check if player has reached a new level
-                    Text.youHaveLevelup();
-                    player.levelUp();
-                }
-                mainSwitch();
+
+                break;
             }
             //If Monster is alive it attacks player
             player.defence(player, monster); // changes the player health and displays damage message
