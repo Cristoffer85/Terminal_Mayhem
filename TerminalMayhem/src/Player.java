@@ -194,6 +194,7 @@ public class Player {
     public void addToInventory(Item item) {
         boughtItemList.add(item);
         equipHero(item);
+
     }
 
     public void equipHero(Item item) {
@@ -201,6 +202,7 @@ public class Player {
         for (Item equipedItem: equippedItemList) {
             addEquipedItemStats(equipedItem);
         }
+        equippedItemList.remove(item);
     }
 
     private void addEquipedItemStats(Item item) {
