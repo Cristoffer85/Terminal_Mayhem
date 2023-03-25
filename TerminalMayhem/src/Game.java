@@ -53,6 +53,9 @@ public class Game {
                     if (monster.getLvl() == 10) {
                         Text.getBossFightText();
                         combat(player, monster);
+                        Text.ThanksForPlaying();//TODO Check if we use this message after we killed the boss
+                        resetToDefault();
+                        break;
                     }
                 }
 
@@ -118,13 +121,16 @@ public class Game {
             // If the player dies, breaks loop
             if (player.checkIfDead()) {
                 Text.getPlayerDead();
-                player.resetPlayer();
-                shop.resetShop();
-                startGame();
-
+                resetToDefault();
                 break;
             }
         }
+    }
+
+    public void resetToDefault(){
+        player.resetPlayer();
+        shop.resetShop();
+        startGame();
     }
 
     // in this method the transactions between shop and player are concluded

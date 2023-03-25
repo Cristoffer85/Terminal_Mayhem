@@ -202,6 +202,7 @@ public class Player {
         System.out.println("toughness: " + toughness);
         System.out.println("Critical Chance: " + criticalChance);
         System.out.println("Gold: " + gold);
+        System.out.println(exp); //delete sen
         System.out.println("Inventory : ");
 
         if(0<itemList.size()) {

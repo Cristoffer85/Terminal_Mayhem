@@ -181,7 +181,7 @@ public class Text {
                 monster.dropGold() + " Gold\n" +
                 monster.dropExp() + " Exp\n" +
                 player.getAddHp() + " Health-points");
-        System.out.println("");
+        System.out.println(" ");
     }
 
     //-------------------------------------------------------------
@@ -205,10 +205,12 @@ public class Text {
     //------------------------END----------------------------------
     static void getPlayerDead() {     //Game over
         System.out.println("Sorry, you´re dead! You were overwhelmed by the dishes..");
+        System.out.println(" ");
     }
 
     static void ThanksForPlaying() {   //Sluttext
         System.out.println("Thank you for playing! You solved all the evil problems related to angry superstressed travellers...!");
+        System.out.println(" " );
     }
 
 
