@@ -80,7 +80,7 @@ public class Game {
         Text.getRewardtext(player, monster);
         player.setGold(monster.dropGold());
         player.setExp(monster.dropExp());
-        player.addHP();
+        player.getAddHp();
     }
 
     //Initiate battle between player and selected monster.
@@ -94,8 +94,8 @@ public class Game {
 
             switch (fightChoice) {
                 case 1 -> {
-                    monster.defence(player, monster); //Player attack, changes monster HP and displays message of damage
-                    Text.pressToContinue();
+                    monster.defence(player); //Player attack, changes monster HP and displays message of damage
+                    Text.pressToContinue();  //todo do we want to wait for user input?
                 }
                 case 2 -> {  // Use potion
                     player.usePotion(); // player uses healing potion
@@ -109,10 +109,10 @@ public class Game {
                     Text.youHaveLevelup();
                     player.levelUp();
                 }
-                mainSwitch();
+                break;
             }
             //If Monster is alive it attacks player
-            player.defence(player, monster); // changes the player health and displays damage message
+            player.defence(monster); // changes the player health and displays damage message
 
             Text.pressToContinue();
 
