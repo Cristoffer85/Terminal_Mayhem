@@ -108,7 +108,8 @@ public class Game {
 
             if (monster.checkIfDead()) { //game exits the loop if the monster is dead
                 givePlayerReward(player, monster); // gives the player loot
-                break;
+                mainSwitch();
+
             }
             //If Monster is alive it attacks player
             player.defence(player, monster); // changes the player health and displays damage message

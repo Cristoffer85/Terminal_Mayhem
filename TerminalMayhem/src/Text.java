@@ -175,6 +175,7 @@ public class Text {
                 monster.dropGold() + " Gold\n" +
                 monster.dropExp() + " Exp\n" +
                 player.getAddHp() + " Health-points");
+        System.out.println("");
     }
 
     //-------------------------------------------------------------
