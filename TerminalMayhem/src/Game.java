@@ -103,7 +103,7 @@ public class Game {
                 default -> Text.getInvalidChoice();
             }
 
-            if (monster.checkIfDead()) { //game exits the loop if the monster is dead
+            if (monster.checkIfDead()) { //exit the loop if the monster is dead
                 givePlayerReward(player, monster); // gives the player loot
                 if (player.checkIfLeveledUp()) {  // check if player has reached a new level
                     Text.youHaveLevelup();
