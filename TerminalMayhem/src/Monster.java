@@ -21,6 +21,10 @@ public abstract class Monster {
         this.exp = exp;
     }
 
+    public  void calculategold() {
+        this.gold = random.nextInt(this.gold*2);
+    }
+
 
     public String getName() {
         return name;
@@ -49,6 +53,7 @@ public abstract class Monster {
     }
 
     public int getGold() {
+
         return gold;
     }
 

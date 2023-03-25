@@ -3,10 +3,7 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-
 public class Game {
-
-
     HealingPotion healingPotion = new HealingPotion();
     Player player = new Player(healingPotion);
     ArrayList<Monster> monsters = new ArrayList<>();
@@ -81,6 +78,7 @@ public class Game {
 
     //Give player XP, gold and Hp boost
     private void givePlayerReward(Player player, Monster monster) {
+        monster.calculategold();
         Text.getRewardtext(player, monster);
         player.setGold(monster.dropGold());
         player.setExp(monster.dropExp());
