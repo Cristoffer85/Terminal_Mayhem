@@ -9,86 +9,68 @@ public class Game {
 
     HealingPotion healingPotion = new HealingPotion();
     Player player = new Player(healingPotion);
-    ArrayList<Monster> monsters = new ArrayList<Monster>();
+    ArrayList<Monster> monsters = new ArrayList<>();
     Shop shop = new Shop();
-    static Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in).useDelimiter("\n");
     Random random = new Random();
 
     void startGame() {
-        //initiate monsters
-        Goblin goblin = new Goblin("Goblin", 1, 40, 10, 0, 10, 100);
-        Orc orc = new Orc("Orc", 2, 43, 12, 2, 20, 100);
-        Skeleton skeleton = new Skeleton("Skeleton", 3, 46, 14, 4, 30, 150);
-        Mercenary mercenary = new Mercenary("Mercenary", 4, 49, 16, 6, 40, 200);
-        Zombie zombie = new Zombie("Zombie", 5, 52, 18, 8, 50, 250);
-        Minotauros minotauros = new Minotauros("Minotauros", 6, 55, 20, 10, 60, 300);
-        Knight knight = new Knight("Knight", 7, 58, 22, 12, 70, 350);
-        Dragon dragon = new Dragon("Dragon", 8, 61, 24, 14, 80, 400);
-        Demon demon = new Demon("Demon", 9, 64, 26, 16, 90, 450);
-        Slime slime = new Slime("Slime", 10, 200, 28, 20, 1000, 1000);
-
-        monsters.add(goblin);
-        monsters.add(orc);
-        monsters.add(skeleton);
-        monsters.add(mercenary);
-        monsters.add(zombie);
-        monsters.add(minotauros);
-        monsters.add(knight);
-        monsters.add(dragon);
-        monsters.add(demon);
-        monsters.add(slime);
-
-
+        makeMonsters();  //initiate monsters
         Text.getWelcomeText();
         player.setName(scanner.nextLine()); // sets player name
         Text.getIntrotext(player.getName());
-
         mainSwitch();
     }
 
     private void mainSwitch() {
         //Main-game loop
         boolean game = true;
+        while (game) {
+            Text.getMainMenu();
+            int mainMenuChoice = userInputInt();
 
-            while (game) {
-                Text.getMainMenu();
-                int mainMenuChoice = userInputInt();
-
-                switch (mainMenuChoice) {
-                    case 1 -> goAdventuring(player);
-                    case 2 -> {
-                        Text.getPlayerStatText();
-                        player.showHero();
-                        Text.pressToContinue();
-                    }
-                    case 3 -> goShopping();
-                    case 4 -> {
-                        Text.ThanksForPlaying();
-                        System.exit(0);
-                    }
-                    default -> Text.getInvalidChoice();
+            switch (mainMenuChoice) {
+                case 1 -> goAdventuring(player);
+                case 2 -> {
+                    Text.getPlayerStatText();
+                    player.showHero();
+                    Text.pressToContinue();
                 }
+                case 3 -> goShopping();
+                case 4 -> {
+                    Text.ThanksForPlaying();
+                    System.exit(0);
+                }
+                default -> Text.getInvalidChoice();
             }
+        }
     }
-
 
     // 90 % chance of going to battle, match monster with player level
     private void goAdventuring(Player player) {
         int isItAFight = random.nextInt(100);
         if (isItAFight >= 10) {
 
-            for (Monster monster : monsters) {
-                if (monster.getLvl() == player.getLevel()) {
-                    Text.aMonsterAppears(monster.getName());
-                    calculateBattle(player, monster);
-                    givePlayerReward(player, monster);
+            if (player.getLevel() == 9) {
+                for (Monster monster : monsters) {
+                    if (monster.getLvl() == 10) {
+                        Text.getBossFightText();
+                        combat(player, monster);
+                    }
                 }
-            }
 
-            if (player.checkIfLeveledUp()) {  // check if player has reached a new level
-                Text.youHaveLevelup();
-                player.levelUp();
-
+            } else {
+                for (Monster monster : monsters) {
+                    if (monster.getLvl() == player.getLevel()) {
+                        Text.aMonsterAppears(monster.getName());
+                        combat(player, monster);
+                        break;
+                    }
+                }
+                if (player.checkIfLeveledUp()) {  // check if player has reached a new level
+                    Text.youHaveLevelup();
+                    player.levelUp();
+                }
             }
         } else {
             Text.nothingHappened();
@@ -99,15 +81,14 @@ public class Game {
 
     //Give player XP, gold and Hp boost
     private void givePlayerReward(Player player, Monster monster) {
+        Text.getRewardtext(player, monster);
         player.setGold(monster.dropGold());
         player.setExp(monster.dropExp());
-
-        //TODO player gets an HP boost, based on what?
-        player.addHP();
+        player.getAddHp();
     }
 
     //Initiate battle between player and selected monster.
-    private void calculateBattle(Player player, Monster monster) {
+    private void combat(Player player, Monster monster) {
 
         while (true) {
 
@@ -117,39 +98,32 @@ public class Game {
 
             switch (fightChoice) {
                 case 1 -> {
-                    monster.defence(player, monster); //Player attack, changes monster HP and displays message of damage
+                    monster.defence(player); //Player attack, changes monster HP and displays message of damage
+                    Text.pressToContinue();  //todo do we want to wait for user input?
                 }
                 case 2 -> {  // Use potion
-                    player.usePotion(); // todo get this working
+                    player.usePotion(); // player uses healing potion
                 }
                 default -> Text.getInvalidChoice();
             }
-            //game exits the loop if the monster is dead
-            if (monster.checkIfDead()) {
-                // Text.afterCombatRound(player, monster); // todo does this really need to be here?
-                givePlayerReward(player, monster); // gives the player loot
-                mainSwitch();
 
+            if (monster.checkIfDead()) { //exit the loop if the monster is dead
+                givePlayerReward(player, monster); // gives the player loot
+
+                break;
             }
             //If Monster is alive it attacks player
-            player.defence(player, monster); // changes the player health and displays damage message
+            player.defence(monster); // changes the player health and displays damage message
 
-            // Text.afterCombatRound(player, monster); // displays health of player and monster after one round
+            Text.pressToContinue();
 
-            Text.pressToContinue();  // todo? move to text class?
-
-            // If the player dies, breaks loop, add function to play again
+            // If the player dies, breaks loop
             if (player.checkIfDead()) {
                 Text.getPlayerDead();
-                Text.doYouWantToPlayAgain();
-                if (userInputInt() == 1){
-                    Player.resetPlayer();
-                    Monster.resetMonster();
-                    Shop.resetShop();
-                    startGame();
+                player.resetPlayer();
+                shop.resetShop();
+                startGame();
 
-                }
-                else{Text.ThanksForPlaying();}
                 break;
             }
         }
@@ -196,11 +170,11 @@ public class Game {
     }
 
     //Control if user input is an integer
-    public int userInputInt(){
+    public int userInputInt() {
         int number;
         while (true) {
             try {
-                number=scanner.nextInt();
+                number = scanner.nextInt();
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("A non-numeric input has been entered. Please enter a valid input again");
@@ -208,5 +182,115 @@ public class Game {
             }
         }
         return number;
+    }
+
+    private void makeMonsters() {
+
+        //initiate all monsters
+        //level 1
+        Goblin goblin1 = new Goblin("Goblin", 1, 40, 10, 0, 10, 100);
+        Orc orc1 = new Orc("Orc", 1, 40, 10, 0, 10, 100);
+        Skeleton skeleton1 = new Skeleton("Skeleton", 1, 40, 10, 0, 10, 100);
+        Mercenary mercenary1 = new Mercenary("Mercenary", 1, 40, 10, 0, 10, 100);
+        Zombie zombie1 = new Zombie("Zombie", 1, 40, 10, 0, 10, 100);
+
+        //level 2
+        Goblin goblin2 = new Goblin("Hairless Goblin", 2, 43, 12, 2, 20, 100);
+        Orc orc2 = new Orc("Gruesome Orc", 2, 43, 12, 2, 20, 100);
+        Skeleton skeleton2 = new Skeleton("Skeleton", 2, 43, 12, 2, 20, 100);
+        Mercenary mercenary2 = new Mercenary("Mercenary", 2, 43, 12, 2, 20, 100);
+        Zombie zombie2 = new Zombie("Zombie", 2, 43, 12, 2, 20, 100);
+
+        //level 3
+        Goblin goblin3 = new Goblin("Goblin", 3, 46, 14, 4, 30, 150);
+        Orc orc3 = new Orc("Orc", 3, 46, 14, 4, 30, 150);
+        Skeleton skeleton3 = new Skeleton("Skeleton", 3, 46, 14, 4, 30, 150);
+        Mercenary mercenary3 = new Mercenary("Mercenary", 3, 46, 14, 4, 30, 150);
+        Zombie zombie3 = new Zombie("Zombie", 3, 46, 14, 4, 30, 150);
+
+        //level 4
+        Goblin goblin4 = new Goblin("Goblin", 4, 49, 16, 6, 40, 200);
+        Orc orc4 = new Orc("Orc", 4, 49, 16, 6, 40, 200);
+        Skeleton skeleton4 = new Skeleton("Skeleton", 4, 49, 16, 6, 40, 200);
+        Mercenary mercenary4 = new Mercenary("Mercenary", 4, 49, 16, 6, 40, 200);
+        Zombie zombie4 = new Zombie("Zombie", 4, 49, 16, 6, 40, 200);
+
+        //level 5
+        Goblin goblin5 = new Goblin("Goblin", 5, 52, 18, 8, 50, 250);
+        Orc orc5 = new Orc("Bald orc", 5, 52, 18, 8, 50, 250);
+        Skeleton skeleton5 = new Skeleton("Skeleton", 5, 52, 18, 8, 50, 250);
+        Mercenary mercenary5 = new Mercenary("Mercenary", 5, 52, 18, 8, 50, 250);
+        Zombie zombie5 = new Zombie("Not yet dead zombie", 5, 52, 18, 8, 50, 250);
+
+        //level 6
+        Goblin goblin6 = new Goblin("Goblin", 6, 55, 20, 10, 60, 300);
+        Orc orc6 = new Orc("Orc", 6, 55, 20, 10, 60, 300);
+        Skeleton skeleton6 = new Skeleton("Skeleton", 6, 55, 20, 10, 60, 300);
+        Minotauros minotauros6 = new Minotauros("Minotauros", 6, 55, 20, 10, 60, 300);
+
+        //level 7
+        Minotauros minotauros7 = new Minotauros("Minotauros", 7, 58, 22, 12, 70, 350);
+        Knight knight7 = new Knight("Desperat knight", 7, 58, 22, 12, 70, 350);
+        Skeleton skeleton7 = new Skeleton("Half decomposed Skeleton", 7, 58, 22, 12, 70, 350);
+        Dragon dragon7 = new Dragon("Dragon", 7, 58, 22, 12, 70, 350);
+
+        //level 8
+        Dragon dragon8 = new Dragon(" Ice Dragon", 8, 61, 24, 14, 80, 400);
+        Mercenary mercenary8 = new Mercenary("Crazed Mercenary", 8, 61, 24, 14, 80, 400);
+        Knight knight8 = new Knight("Black knight", 8, 61, 24, 14, 80, 400);
+        Demon demon8 = new Demon("Pinhead demon", 8, 61, 24, 14, 80, 400);
+
+        //level 9
+        Demon demon9 = new Demon("Fire demon", 9, 64, 26, 16, 90, 450);
+        Dragon dragon9 = new Dragon("Fire dragon", 9, 64, 26, 16, 90, 450);
+        Minotauros minotauros9 = new Minotauros("Axe welding minotauros", 9, 64, 26, 16, 90, 450);
+        Knight knight9 = new Knight("Knight called Marcus Medina", 9, 64, 26, 16, 90, 450);
+
+        //Bossmonster
+        BossMonster bossMonster = new BossMonster("Slime", 10, 200, 28, 20, 1000, 1000);
+
+        //Add all monsters to list
+        monsters.add(goblin1);
+        monsters.add(orc1);
+        monsters.add(skeleton1);
+        monsters.add(mercenary1);
+        monsters.add(zombie1);
+        monsters.add(goblin2);
+        monsters.add(orc2);
+        monsters.add(skeleton2);
+        monsters.add(mercenary2);
+        monsters.add(zombie2);
+        monsters.add(goblin3);
+        monsters.add(orc3);
+        monsters.add(skeleton3);
+        monsters.add(mercenary3);
+        monsters.add(zombie3);
+        monsters.add(goblin4);
+        monsters.add(orc4);
+        monsters.add(skeleton4);
+        monsters.add(mercenary4);
+        monsters.add(zombie4);
+        monsters.add(goblin5);
+        monsters.add(orc5);
+        monsters.add(skeleton5);
+        monsters.add(mercenary5);
+        monsters.add(zombie5);
+        monsters.add(goblin6);
+        monsters.add(orc6);
+        monsters.add(skeleton6);
+        monsters.add(minotauros6);
+        monsters.add(minotauros7);
+        monsters.add(knight7);
+        monsters.add(skeleton7);
+        monsters.add(dragon7);
+        monsters.add(dragon8);
+        monsters.add(mercenary8);
+        monsters.add(knight8);
+        monsters.add(demon8);
+        monsters.add(demon9);
+        monsters.add(dragon9);
+        monsters.add(minotauros9);
+        monsters.add(knight9);
+        monsters.add(bossMonster);
     }
 }
