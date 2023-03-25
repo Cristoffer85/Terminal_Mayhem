@@ -53,7 +53,7 @@ public class Game {
                     if (monster.getLvl() == 10) {
                         Text.getBossFightText();
                         combat(player, monster);
-                        Text.ThanksForPlaying();//TODO Check if we use this message after we killed the boss
+                        Text.ThanksForPlaying();//TODO change message to after killed boss message
                         resetToDefault();
                         break;
                     }
