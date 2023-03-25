@@ -128,7 +128,8 @@ public class Game {
             if (monster.checkIfDead()) {
                 // Text.afterCombatRound(player, monster); // todo does this really need to be here?
                 givePlayerReward(player, monster); // gives the player loot
-                break;
+                mainSwitch();
+
             }
             //If Monster is alive it attacks player
             player.defence(player, monster); // changes the player health and displays damage message
