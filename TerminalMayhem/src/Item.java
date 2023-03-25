@@ -11,6 +11,9 @@ public abstract class Item {
     private int potionValue;
     private int price;
 
+    public Item(String name) {
+        this.name = name;
+    }
     public Item(String name, int maxHpBoost, int strengthBoost, int toughnessBoost, int criticalChanceBoost, int potionValue, int price) {
         this.name = name;
         this.maxHpBoost = maxHpBoost;
