@@ -3,4 +3,9 @@ public class Minotauros extends Monster {
         super(name, lvl, HP, strength, toughness, gold, exp);
     }
 
+    @Override
+    String monsterScream() {
+        return  "MOUUUUUUUUUUUUU!";
+    }
+
 }

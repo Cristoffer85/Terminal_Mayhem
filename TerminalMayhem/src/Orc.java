@@ -3,4 +3,9 @@ public class Orc extends Monster {
         super(name, lvl, HP, strength, toughness, gold, exp);
     }
 
+    @Override
+    String monsterScream() {
+       return "Uhhaaa it smells like a human here!";
+    }
+
 }

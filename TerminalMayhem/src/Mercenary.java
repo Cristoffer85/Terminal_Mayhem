@@ -3,4 +3,9 @@ public class Mercenary extends Monster {
         super(name, lvl, HP, strength, toughness, gold, exp);
     }
 
+    @Override
+    String monsterScream() {
+        return "Shout up and give me you money or else!";
+    }
+
 }
