@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Random;
 
 public class Player {
@@ -21,13 +20,15 @@ public class Player {
     // HealingPotion potion; // todo remove?
 
     //ArrayList for saving bought Item
-    ArrayList<Item> itemList;
+    ArrayList<Item> boughtItemList;
+    ArrayList<Item> equippedItemList;
 
     //a constructor for setting up all the values, calling the random function, and initializing the ArrayList
     public Player(HealingPotion potion) {
         //this.potion = potion; // todo remove?
         random = new Random();
-        itemList = new ArrayList<>();
+        boughtItemList = new ArrayList<>();
+        equippedItemList = new ArrayList<>();
         makePlayer();
     }
 
@@ -75,13 +76,13 @@ public class Player {
     //Use a potion, and also check if the HP has not reached the MaxHP.
     public void usePotion() {
 
-        for (Item item : itemList) {  // look for healing potion in inventory
+        for (Item item : boughtItemList) {  // look for healing potion in inventory
             if (item instanceof HealingPotion) {
                 int hpToRegain = this.maxHp - this.hp;
                 hpToRegain = (Math.min(hpToRegain, item.getPotionValue())); // to prevent over healing
                 Text.playerUsedPotion(this.getName(), hpToRegain);
                 this.hp += hpToRegain;
-                itemList.remove(item);
+                boughtItemList.remove(item);
                 break;
             } else {
                 Text.playerDontHavePotion();
@@ -114,7 +115,7 @@ public class Player {
     //reset all the values
     public void resetPlayer() {
         makePlayer();
-        itemList.clear();
+        boughtItemList.clear();
     }
 
     //Check if the user has reached level 9 and is ready to face the final boss
@@ -132,11 +133,12 @@ public class Player {
     }
 
     public void addToInventory(Item item) {
-        itemList.add(item);
+        boughtItemList.add(item);
+        equipHero(item);
     }
 
     public void removeFromInventory(Item item) {
-        itemList.remove(item);
+        boughtItemList.remove(item);
     }
 
     // Add HP after fighting Monster
@@ -193,6 +195,25 @@ public class Player {
         return name;
     }
 
+    public void equipHero(Item item) {
+        equippedItemList.add(item);
+        for (Item equipedItem: equippedItemList) {
+            addEquipedItemStats(equipedItem);
+        }
+
+    }
+
+    private void addEquipedItemStats(Item item) {
+        for (Item boughtitem : boughtItemList){
+            if (boughtitem instanceof Equipment) {
+                this.maxHp += item.getMaxHpBoost();
+                this.strength += item.getStrengthBoost();
+                this.toughness += item.getToughnessBoost();
+                this.criticalChance += item.getCriticalChanceBoost();
+            }
+        }
+    }
+
 
     public void showHero() {
         System.out.println("Name: " + name);
@@ -205,8 +226,8 @@ public class Player {
         System.out.println(exp); //delete sen
         System.out.println("Inventory : ");
 
-        if(0<itemList.size()) {
-            for(Item item : itemList) {
+        if(0< boughtItemList.size()) {
+            for(Item item : boughtItemList) {
                 System.out.println(item.getName() + " ");
             }
         }

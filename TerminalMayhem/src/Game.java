@@ -138,7 +138,7 @@ public class Game {
         player.setGold(400); //TODO remove this when done testing
         // loop runs while true use break to exit
         while (shop.inventorySize() > 0) { // check that the shop contains items
-            Text.getShopMenu();
+            Text.getShopMenu(player);
             shop.showItems();
 
             int itemToBuy = userInputInt() -1;
@@ -201,12 +201,12 @@ public class Game {
         //level 2
         Goblin goblin2 = new Goblin("Hairless Goblin", 2, 43, 12, 2, 20, 100);
         Orc orc2 = new Orc("Gruesome Orc", 2, 43, 12, 2, 20, 100);
-        Skeleton skeleton2 = new Skeleton("Skeleton", 2, 43, 12, 2, 20, 100);
+        Skeleton skeleton2 = new Skeleton("Half skeleton", 2, 43, 12, 2, 20, 100);
         Mercenary mercenary2 = new Mercenary("Mercenary", 2, 43, 12, 2, 20, 100);
         Zombie zombie2 = new Zombie("Zombie", 2, 43, 12, 2, 20, 100);
 
         //level 3
-        Goblin goblin3 = new Goblin("Goblin", 3, 46, 14, 4, 30, 150);
+        Goblin goblin3 = new Goblin("Murky goblin", 3, 46, 14, 4, 30, 150);
         Orc orc3 = new Orc("Orc", 3, 46, 14, 4, 30, 150);
         Skeleton skeleton3 = new Skeleton("Skeleton", 3, 46, 14, 4, 30, 150);
         Mercenary mercenary3 = new Mercenary("Mercenary", 3, 46, 14, 4, 30, 150);
