@@ -48,7 +48,7 @@ public class Game {
         int isItAFight = random.nextInt(100);
         if (isItAFight >= 10) {
 
-            if (player.getLevel() == 9) {
+            if (player.checkIfReadyForFinalBoss()) {
                 for (Monster monster : monsters) {
                     if (monster.getLvl() == 10) {
                         Text.getBossFightText();
