@@ -25,6 +25,7 @@ public abstract class Monster {
         this.gold = random.nextInt(this.gold*2);
     }
 
+    abstract String monsterScream();
 
     public String getName() {
         return name;

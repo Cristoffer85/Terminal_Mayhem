@@ -132,10 +132,6 @@ public class Player {
         this.gold += gold;
     }
 
-    public void addToInventory(Item item) {
-        boughtItemList.add(item);
-        equipHero(item);
-    }
 
     public void removeFromInventory(Item item) {
         boughtItemList.remove(item);
@@ -195,12 +191,16 @@ public class Player {
         return name;
     }
 
+    public void addToInventory(Item item) {
+        boughtItemList.add(item);
+        equipHero(item);
+    }
+
     public void equipHero(Item item) {
         equippedItemList.add(item);
         for (Item equipedItem: equippedItemList) {
             addEquipedItemStats(equipedItem);
         }
-
     }
 
     private void addEquipedItemStats(Item item) {

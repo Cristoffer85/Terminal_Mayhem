@@ -3,4 +3,9 @@ public class Dragon extends Monster {
         super(name, lvl, HP, strength, toughness, gold, exp);
     }
 
+    @Override
+    String monsterScream() {
+        return "Taste my dragon-fire, silly human!";
+    }
+
 }

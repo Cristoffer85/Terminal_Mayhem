@@ -62,7 +62,7 @@ public class Game {
             } else {
                 for (Monster monster : monsters) {
                     if (monster.getLvl() == player.getLevel()) {
-                        Text.aMonsterAppears(monster.getName());
+                        Text.aMonsterAppears(monster, monster.getName());
                         combat(player, monster);
                         break;
                     }
@@ -195,6 +195,8 @@ public class Game {
 
     private void makeMonsters() {
 
+        //TODO do we really want all monsters?
+
         //initiate all monsters
         //level 1
         Goblin goblin1 = new Goblin("Goblin", 1, 40, 10, 0, 10, 100);
@@ -204,29 +206,29 @@ public class Game {
         Zombie zombie1 = new Zombie("Zombie", 1, 40, 10, 0, 10, 100);
 
         //level 2
-        Goblin goblin2 = new Goblin("Hairless Goblin", 2, 43, 12, 2, 20, 100);
+        //Goblin goblin2 = new Goblin("Hairless Goblin", 2, 43, 12, 2, 20, 100);
         Orc orc2 = new Orc("Gruesome Orc", 2, 43, 12, 2, 20, 100);
         Skeleton skeleton2 = new Skeleton("Half skeleton", 2, 43, 12, 2, 20, 100);
         Mercenary mercenary2 = new Mercenary("Mercenary", 2, 43, 12, 2, 20, 100);
         Zombie zombie2 = new Zombie("Zombie", 2, 43, 12, 2, 20, 100);
 
         //level 3
-        Goblin goblin3 = new Goblin("Murky goblin", 3, 46, 14, 4, 30, 150);
-        Orc orc3 = new Orc("Orc", 3, 46, 14, 4, 30, 150);
+        //Goblin goblin3 = new Goblin("Murky goblin", 3, 46, 14, 4, 30, 150);
+        //Orc orc3 = new Orc("Orc", 3, 46, 14, 4, 30, 150);
         Skeleton skeleton3 = new Skeleton("Skeleton", 3, 46, 14, 4, 30, 150);
         Mercenary mercenary3 = new Mercenary("Mercenary", 3, 46, 14, 4, 30, 150);
         Zombie zombie3 = new Zombie("Zombie", 3, 46, 14, 4, 30, 150);
 
         //level 4
-        Goblin goblin4 = new Goblin("Goblin", 4, 49, 16, 6, 40, 200);
+        //Goblin goblin4 = new Goblin("Goblin", 4, 49, 16, 6, 40, 200);
         Orc orc4 = new Orc("Orc", 4, 49, 16, 6, 40, 200);
         Skeleton skeleton4 = new Skeleton("Skeleton", 4, 49, 16, 6, 40, 200);
         Mercenary mercenary4 = new Mercenary("Mercenary", 4, 49, 16, 6, 40, 200);
         Zombie zombie4 = new Zombie("Zombie", 4, 49, 16, 6, 40, 200);
 
         //level 5
-        Goblin goblin5 = new Goblin("Goblin", 5, 52, 18, 8, 50, 250);
-        Orc orc5 = new Orc("Bald orc", 5, 52, 18, 8, 50, 250);
+        //Goblin goblin5 = new Goblin("Goblin", 5, 52, 18, 8, 50, 250);
+        //Orc orc5 = new Orc("Bald orc", 5, 52, 18, 8, 50, 250);
         Skeleton skeleton5 = new Skeleton("Skeleton", 5, 52, 18, 8, 50, 250);
         Mercenary mercenary5 = new Mercenary("Mercenary", 5, 52, 18, 8, 50, 250);
         Zombie zombie5 = new Zombie("Not yet dead zombie", 5, 52, 18, 8, 50, 250);
@@ -264,23 +266,23 @@ public class Game {
         monsters.add(skeleton1);
         monsters.add(mercenary1);
         monsters.add(zombie1);
-        monsters.add(goblin2);
+        //monsters.add(goblin2);
         monsters.add(orc2);
         monsters.add(skeleton2);
         monsters.add(mercenary2);
         monsters.add(zombie2);
-        monsters.add(goblin3);
-        monsters.add(orc3);
+        //monsters.add(goblin3);
+        //monsters.add(orc3);
         monsters.add(skeleton3);
         monsters.add(mercenary3);
         monsters.add(zombie3);
-        monsters.add(goblin4);
+        //monsters.add(goblin4);
         monsters.add(orc4);
         monsters.add(skeleton4);
         monsters.add(mercenary4);
         monsters.add(zombie4);
-        monsters.add(goblin5);
-        monsters.add(orc5);
+        //monsters.add(goblin5);
+        //monsters.add(orc5);
         monsters.add(skeleton5);
         monsters.add(mercenary5);
         monsters.add(zombie5);
