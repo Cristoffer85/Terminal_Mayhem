@@ -11,17 +11,18 @@ public class Shop {
 
     public Shop() {
         // Fills the shop with items
-        equipment = new Equipment();
-        healingPotion = new HealingPotion();
+        // equipment = new Equipment("The Cat's Eye Amulet"); //todo remove
+        // healingPotion = new HealingPotion(); // todo remove
         items = new ArrayList<>();
 
         addDefaultItems();
     }
 
     public void addDefaultItems(){
-        this.items.add(equipment);
-        this.items.add(healingPotion);
-        this.items.add(healingPotion);
+        // new Equipment (String name, int maxHpBoost, int strengthBoost, int toughnessBoost, int criticalChanceBoost, int potionValue, int price)
+        this.items.add(new Equipment("The Cat's Eye Amulet",5, 5, 2, 1, 0, 69 ));
+        this.items.add(new HealingPotion());
+        this.items.add(new HealingPotion());
     }
 
     public void resetShop(){
