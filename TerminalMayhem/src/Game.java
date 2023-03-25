@@ -48,11 +48,14 @@ public class Game {
         int isItAFight = random.nextInt(100);
         if (isItAFight >= 10) {
 
-            if (player.getLevel() == 9) {
+            if (player.checkIfReadyForFinalBoss()) {
                 for (Monster monster : monsters) {
                     if (monster.getLvl() == 10) {
                         Text.getBossFightText();
                         combat(player, monster);
+                        Text.ThanksForPlaying();//TODO change message to after killed boss message
+                        resetToDefault();
+                        break;
                     }
                 }
 
@@ -118,13 +121,16 @@ public class Game {
             // If the player dies, breaks loop
             if (player.checkIfDead()) {
                 Text.getPlayerDead();
-                player.resetPlayer();
-                shop.resetShop();
-                startGame();
-
+                resetToDefault();
                 break;
             }
         }
+    }
+
+    public void resetToDefault(){
+        player.resetPlayer();
+        shop.resetShop();
+        startGame();
     }
 
     // in this method the transactions between shop and player are concluded
