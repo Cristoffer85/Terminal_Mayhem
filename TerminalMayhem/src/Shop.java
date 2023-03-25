@@ -21,6 +21,9 @@ public class Shop {
     public void addDefaultItems(){
         // new Equipment (String name, int maxHpBoost, int strengthBoost, int toughnessBoost, int criticalChanceBoost, int potionValue, int price)
         this.items.add(new Equipment("The Cat's Eye Amulet",5, 5, 2, 1, 0, 69 ));
+        this.items.add(new Equipment("The Ring of the Unlucky",0, 0, 0, -10, 0, 10 ));
+        this.items.add(new Equipment("The Ruby axe of Joy",0, 8, 0, 4, 0, 200 ));
+        this.items.add(new Equipment("The Helmet of Uni-Brow",0, 0, 6, 0, 0, 100 ));
         this.items.add(new HealingPotion());
         this.items.add(new HealingPotion());
     }
