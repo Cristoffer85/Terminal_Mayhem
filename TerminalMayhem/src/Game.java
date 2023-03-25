@@ -11,7 +11,7 @@ public class Game {
     Player player = new Player(healingPotion);
     ArrayList<Monster> monsters = new ArrayList<>();
     Shop shop = new Shop();
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in).useDelimiter("\n");
     Random random = new Random();
 
     void startGame() {
