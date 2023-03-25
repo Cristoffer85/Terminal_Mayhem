@@ -92,10 +92,12 @@ public class Text {
 
 
     //--------------------SHOP-------------------------------------
-    static void getShopMenu() { //Shopmeny, Div. olika saker.
+    static void getShopMenu(Player player) { //Shopmeny, Div. olika saker.
         System.out.println(
                 "------------Welcome to the shop!------------\nThis are the wares available right now."
         );
+        System.out.println("You have :" + player.getGold() + " Gold");
+        System.out.println();
         System.out.println("What is your number of choice?: ");
         System.out.println();
 
