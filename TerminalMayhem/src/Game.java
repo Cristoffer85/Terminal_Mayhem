@@ -140,42 +140,46 @@ public class Game {
         while (shop.inventorySize() > 0) { // check that the shop contains items
             Text.getShopMenu(player);
             shop.showItems();
+            try{
+                int itemToBuy = userInputInt() -1;
 
-            int itemToBuy = userInputInt() -1;
+                if (shop.getPrice(itemToBuy) <= player.getGold()) { //check if player has enough money
 
-            if (shop.getPrice(itemToBuy) <= player.getGold()) { //check if player has enough money
-
-                Text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
-                player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
-                player.addToInventory(shop.buyItem(itemToBuy)); // Add item to player inventory
-                if (shop.inventorySize() <= 0){
-                    Text.getnoMoreWares();
-                    mainSwitch();
-                } else {
-                    Text.doYouWantToBuyMore();              // if the player wants to buy more stuff
-                    int buyMore = userInputInt();
-                    try {
-                        if (buyMore == 1) {
-                            continue;
+                    Text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
+                    player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
+                    player.addToInventory(shop.buyItem(itemToBuy)); // Add item to player inventory
+                    if (shop.inventorySize() <= 0){
+                        Text.getnoMoreWares();
+                        mainSwitch();
+                    } else {
+                        Text.doYouWantToBuyMore();              // if the player wants to buy more stuff
+                        int buyMore = userInputInt();
+                        try {
+                            if (buyMore == 1) {
+                                continue;
+                            }
+                            if (buyMore == 2) {
+                                Text.thanksForShopping();
+                                break;
+                            }
+                        } catch (Exception e) {
+                            Text.getInvalidChoice();
                         }
-                        if (buyMore == 2) {
-                            Text.thanksForShopping();
-                            break;
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Invalid input");
                     }
+                } else {
+                    Text.inSufficient();
+                    break;
                 }
-            } else {
-                Text.inSufficient();
-                break;
+
+            } catch (Exception e) {
+                Text.getInvalidChoice();
             }
         }
     }
 
     //Control if user input is an integer
     public int userInputInt() {
-        int number;
+        int number = 0;
         while (true) {
             try {
                 number = scanner.nextInt();
@@ -183,6 +187,7 @@ public class Game {
             } catch (InputMismatchException e) {
                 System.out.println("A non-numeric input has been entered. Please enter a valid input again");
                 scanner.nextLine();
+                break;
             }
         }
         return number;
