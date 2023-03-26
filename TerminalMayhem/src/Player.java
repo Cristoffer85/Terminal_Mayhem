@@ -76,17 +76,23 @@ public class Player {
     //Use a potion, and also check if the HP has not reached the MaxHP.
     public void usePotion() {
 
+        boolean successful = false;
+        int hpToRegain = this.maxHp - this.hp; // Player will only regain hp up to maxHp. no over healing
+
         for (Item item : boughtItemList) {  // look for healing potion in inventory
             if (item instanceof HealingPotion) {
-                int hpToRegain = this.maxHp - this.hp;
-                hpToRegain = (Math.min(hpToRegain, item.getPotionValue())); // to prevent over healing
-                Text.playerUsedPotion(this.getName(), hpToRegain);
+
+                hpToRegain = (Math.min(hpToRegain, item.getPotionValue())); // if missing health smaller than potionValue only regain the smaller value.
                 this.hp += hpToRegain;
                 boughtItemList.remove(item);
+                successful = true;
                 break;
-            } else {
-                Text.playerDontHavePotion();
             }
+        }
+        if (successful) {  // displays appropriate message to user
+            Text.playerUsedPotion(this.getName(), hpToRegain);
+        } else {
+            Text.playerDontHavePotion();
         }
     }
 

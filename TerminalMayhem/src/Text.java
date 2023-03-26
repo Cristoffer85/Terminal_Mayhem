@@ -196,7 +196,7 @@ public class Text {
         System.out.println(playerName + " has used a potion and added " + healingPoints + " health-points.");
     }
     static void playerDontHavePotion(){
-        System.out.println("You tried to heal but don't have a potion, Turn successfully wasted.");
+        System.out.println("You look in your bag for a healing potion but find none! Turn successfully wasted.");
     }
 
 
