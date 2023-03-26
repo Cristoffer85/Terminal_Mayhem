@@ -8,6 +8,6 @@ public class Equipment extends Item {
     }
 
     public Equipment(String name, int maxHpBoost, int strengthBoost, int toughnessBoost, int criticalChanceBoost, int potionValue, int price) {
-        super(name,5, 5, 2, 1, 0, 69);
+        super(name,maxHpBoost, strengthBoost, toughnessBoost, criticalChanceBoost, potionValue, price);
     }
 }
