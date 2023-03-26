@@ -142,39 +142,39 @@ public class Text {
     //---------------------"The" Fight Options and choices + outputs etc-----------
     static void aMonsterAppears(Monster monster,String monsterName) {
         if (monster instanceof Goblin){
-            System.out.println("From a cave you hear someone scream \n" + monster.monsterScream());
+            System.out.println("From a terminal enterence you hear someone scream \n" + monster.monsterScream());
             System.out.println("\n*** A wild " + monsterName + " appears! ***\n");
         }
         if (monster instanceof Demon){
-            System.out.println("From a far distant dimension a piercing scream says \n" + monster.monsterScream());
+            System.out.println("From a far distant dimension, that could also be a airplane motor a piercing scream says \n" + monster.monsterScream());
             System.out.println("\n*** A wild " + monsterName + " appears! ***\n");
         }
         if (monster instanceof Dragon){
-            System.out.println("From a the skies a piercing scream says \n" + monster.monsterScream());
+            System.out.println("When you pass between buildings a a piercing scream from the skies says \n" + monster.monsterScream());
             System.out.println("\n*** A wild " + monsterName + " appears! ***\n");
         }
         if (monster instanceof Knight){
-            System.out.println("You turn around to see a man scream \n" + monster.monsterScream());
+            System.out.println("When you casually walk from the torched barista place for your daily java, \nyou turn around to see a man scream \n" + monster.monsterScream());
             System.out.println("\n*** A wild " + monsterName + " appears! ***\n");
         }
         if (monster instanceof Mercenary){
-            System.out.println("Someone jumps out infront of you and whispers \n" + monster.monsterScream());
+            System.out.println("Some ragged looking fella jumps out of the roof-panels, sticks a knife in your face and whispers \n" + monster.monsterScream());
             System.out.println("\n*** A wild " + monsterName + " appears! ***\n");
         }
         if (monster instanceof Skeleton){
-            System.out.println("Something is moving in the darkness, you hear \n" + monster.monsterScream());
+            System.out.println("Something is moving in the darkness of the old toilets on terminal 12, you hear \n" + monster.monsterScream());
             System.out.println("\n*** A wild " + monsterName + " appears! ***\n");
         }
         if (monster instanceof Minotauros){
-            System.out.println("The ground shakes and you hear a roaring \n" + monster.monsterScream());
+            System.out.println("When meeting a man who says his hat of foil might be the next big thing,\n the ground suddenly shakes and you hear a roaring \n" + monster.monsterScream());
             System.out.println("\n*** A wild " + monsterName + " appears! ***\n");
         }
         if (monster instanceof Orc){
-            System.out.println("As you enter a abandoned mine you hear  \n" + monster.monsterScream());
+            System.out.println("As you enter a half wrecked bagage-trolly, you hear someone outside say  \n" + monster.monsterScream());
             System.out.println("\n*** A wild " + monsterName + " appears! ***\n");
         }
         if (monster instanceof Zombie){
-            System.out.println("The air suddenly smells foul and you hear \n" + monster.monsterScream());
+            System.out.println("You try to catch some Z´s in a watchstore in terminal 3, but the ticktock keeps you awake\n, luckely for you cuz the air suddenly smells foul and you hear \n" + monster.monsterScream());
             System.out.println("\n*** A wild " + monsterName + " appears! ***\n");
         }
     }

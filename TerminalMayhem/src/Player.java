@@ -141,9 +141,9 @@ public class Player {
 
     public void removeFromInventory(Item item) {
         boughtItemList.remove(item);
-    }
+    } //TODO remove?
 
-    // Add HP after fighting Monster
+    // Add HP after fighting Monster //TODO remove?
     public void addHP() { // todo? remove unused  method
         hp = maxHp - hp / 2;
     }
@@ -197,31 +197,22 @@ public class Player {
         return name;
     }
 
+    //Add the item to the inventory and equips the item
     public void addToInventory(Item item) {
         boughtItemList.add(item);
         equipHero(item);
-
     }
 
+    //adds the item to the list equippeditems  and add the stats to the player, then removes the item from the list
     public void equipHero(Item item) {
         equippedItemList.add(item);
-        for (Item equipedItem: equippedItemList) {
-            addEquipedItemStats(equipedItem);
-        }
-        equippedItemList.remove(item);
-    }
-
-    private void addEquipedItemStats(Item item) {
-        for (Item boughtitem : boughtItemList){
-            if (boughtitem instanceof Equipment) {
-                this.maxHp += item.getMaxHpBoost();
-                this.strength += item.getStrengthBoost();
-                this.toughness += item.getToughnessBoost();
-                this.criticalChance += item.getCriticalChanceBoost();
-            }
+        if (item instanceof Equipment) {
+            this.maxHp += item.getMaxHpBoost();
+            this.strength += item.getStrengthBoost();
+            this.toughness += item.getToughnessBoost();
+            this.criticalChance += item.getCriticalChanceBoost();
         }
     }
-
 
     public void showHero() {
         System.out.println("Name: " + name);
@@ -231,7 +222,7 @@ public class Player {
         System.out.println("toughness: " + toughness);
         System.out.println("Critical Chance: " + criticalChance);
         System.out.println("Gold: " + gold);
-        System.out.println(exp); //delete sen
+        System.out.println(exp); // TODO delete sen
         System.out.println("Inventory : ");
 
         if(0< boughtItemList.size()) {
