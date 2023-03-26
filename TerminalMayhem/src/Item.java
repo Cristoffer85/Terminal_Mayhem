@@ -55,10 +55,10 @@ public abstract class Item {
     @Override
     public String toString() {
        return this.name + ", " +
-                ( maxHpBoost > 0 ? "increases max Hp + " + maxHpBoost + ", " : "") +
-                ( strengthBoost > 0 ? "increases strength + " + strengthBoost + ", " : "") +
-                ( toughnessBoost > 0 ? " increases toughness + " + toughnessBoost + ", " : "") +
-                ( criticalChanceBoost > 0 ? " increases critical chance + " + criticalChanceBoost + ", " : "") +
+                ( maxHpBoost != 0 ? "increases max Hp + " + maxHpBoost + ", " : "") +
+                ( strengthBoost != 0 ? "increases strength + " + strengthBoost + ", " : "") +
+                ( toughnessBoost != 0 ? " increases toughness + " + toughnessBoost + ", " : "") +
+                ( criticalChanceBoost != 0 ? " increases critical chance + " + criticalChanceBoost + ", " : "") +
                 " price " + this.price + " gold";
     }
 }
