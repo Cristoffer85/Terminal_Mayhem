@@ -28,7 +28,7 @@ public class Shop {
         this.items.add(new HealingPotion());
     }
 
-    public void resetShop(){
+    public void resetShop(){  // todo instead of reset shop delete the shop object and create an new one?
         items.clear();
         addDefaultItems();
     }
