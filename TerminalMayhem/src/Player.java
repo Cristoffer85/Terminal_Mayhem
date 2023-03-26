@@ -116,6 +116,7 @@ public class Player {
         strength += 2;
         toughness += 1;
         nextLevelExp();
+        System.out.println(name + " gains:\n+10 Max HP\n+1 Critical Chance\n+2 Strength\n+1 Toughness");
     }
 
     //reset all the values

@@ -76,6 +76,7 @@ public class Game {
                 if (player.checkIfLeveledUp()) {  // check if player has reached a new level
                     Text.youHaveLevelup();
                     player.levelUp();
+                    Text.pressToContinue();
                 }
             }
         } else {
@@ -91,6 +92,7 @@ public class Game {
         player.setGold(monster.dropGold());
         player.setExp(monster.dropExp());
         player.getAddHp();
+
     }
 
     //Initiate battle between player and selected monster.
