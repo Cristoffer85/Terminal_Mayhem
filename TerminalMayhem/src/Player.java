@@ -33,7 +33,7 @@ public class Player {
     }
 
     //The initial status of the player
-    public void makePlayer() {
+    public void makePlayer() { // todo suggestion to reset the game delete the player object and create an new one
         level = 1;
         maxHp = 100;
         hp = maxHp;
@@ -62,21 +62,21 @@ public class Player {
         return damage;
     }
 
-    public void defence(Monster monster) { // The ability to migrate damage with defence before changing health points
+    public void defence(Monster monster) { // the ability to take damage and migrate som of it with armor
 
         int damage = monster.attack(); // the damage is random store the actual damage to make sure the output is right
-        setDamage(damage - getArmorValue()); // migrates defence and half of the player strength
+        setDamage(damage - getArmorValue()); // reduce health point after armor reduction
         Text.monsterDamageDone(this, monster, (damage - getArmorValue()));
     }
 
-    public int getArmorValue() {
+    public int getArmorValue() { // calculates how much damage will be migrated
         return (this.toughness + (this.strength / 2));
     }
 
-    //Use a potion, and also check if the HP has not reached the MaxHP.
-    public void usePotion() {
 
-        boolean successful = false;
+    public void usePotion() { //Use a  healing potion, and also check if the HP has not reached the MaxHP.
+
+        boolean successful = false; // to keep track of outcome and display the correct message to user
         int hpToRegain = this.maxHp - this.hp; // Player will only regain hp up to maxHp. no over healing
 
         for (Item item : boughtItemList) {  // look for healing potion in inventory
@@ -98,12 +98,12 @@ public class Player {
 
 
     //Calculate the leveling up process
-    public void nextLevelExp() {
+    public void nextLevelExp() { // todo does this really work as intended?
         nextLevelExp = level * 2;
     }
 
     //Check if the player has leveled up
-    public boolean checkIfLeveledUp() {
+    public boolean checkIfLeveledUp() { // todo does this really work as intended?
         return nextLevelExp <= exp;
     }
 

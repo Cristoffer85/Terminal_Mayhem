@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Shop {
 
     private ArrayList<Item> items;
-    Equipment equipment;
-    HealingPotion healingPotion;
+    Equipment equipment; // todo remove
+    HealingPotion healingPotion; // todo remove
 
     public Shop() {
         // Fills the shop with items
@@ -15,25 +15,25 @@ public class Shop {
         // healingPotion = new HealingPotion(); // todo remove
         items = new ArrayList<>();
 
-        addDefaultItems();
+        addDefaultItems();  // todo instead of reset shop delete the shop object and create an new one?
     }
 
-    public void addDefaultItems(){
+    public void addDefaultItems() {
         // new Equipment (String name, int maxHpBoost, int strengthBoost, int toughnessBoost, int criticalChanceBoost, int potionValue, int price)
-        this.items.add(new Equipment("The Cat's Eye Amulet",5, 5, 2, 1, 0, 69 ));
-        this.items.add(new Equipment("The Ring of the Unlucky",0, 0, 0, -10, 0, 10 ));  // ide? ge varan negativt pris och ge spelaren möjlighet att inte equipa den
-        this.items.add(new Equipment("The Ruby axe of Joy",0, 8, 0, 4, 0, 200 ));
-        this.items.add(new Equipment("The Helmet of Uni-Brow",0, 0, 6, 0, 0, 100 ));
+        this.items.add(new Equipment("The Cat's Eye Amulet", 5, 5, 2, 1, 0, 69));
+        this.items.add(new Equipment("The Ring of the Unlucky", 0, 0, 0, -10, 0, 10));  // idé? ge varan negativt pris och ge spelaren möjlighet att inte equipa den
+        this.items.add(new Equipment("The Ruby axe of Joy", 0, 8, 0, 4, 0, 200));
+        this.items.add(new Equipment("The Helmet of Uni-Brow", 0, 0, 6, 0, 0, 100));
         this.items.add(new HealingPotion());
         this.items.add(new HealingPotion());
     }
 
-    public void resetShop(){  // todo instead of reset shop delete the shop object and create an new one?
+    public void resetShop() {  // todo instead of reset shop delete the shop object and create an new one?
         items.clear();
         addDefaultItems();
     }
 
-    public int inventorySize(){
+    public int inventorySize() {
         return items.size();
     } // used by game to not open the shop if its empty
 
@@ -49,7 +49,7 @@ public class Shop {
             index++;
         }
     }
-//
+
     public int getPrice(int itemNumber) {
         return items.get(itemNumber).getPrice();  // returns the price the class Game checks if the user can afford the item
     }
@@ -63,9 +63,6 @@ public class Shop {
     public String getName(int itemNumber) {
         return items.get(itemNumber).getName();
     }
-
-
-
 }
 
 
