@@ -75,8 +75,8 @@ public class Text {
                 "|This is the story of " + playerName + ", sibling of KLink (who is now on a well-earned vacation somewhere in the midwest Maldives..)                                                      \n" +
                 "|In the land of Tyrule, you´re a tyre-changing pro and this story is about your perilous journey set right in that kingdom.                                                                \n" +
                 "|                                                                                                                                                                                          \n" +
-                "|The Tyrule Kingdom is a mysterious and wonderous place in the shape of a Tyre-formed airport Terminal, where you daily scour the lands fighting various evil entities and encounters..    \n" +
-                "|Your ultimate goal is to surpass all the obstacles in this kingdom, encounter both funnier and unfunnier stuffies and lastly but not least, dun-dun..                                     \n" +
+                "|The Tyrule Kingdom is a mysterious and wonderous airport terminal in the shape of a Tyre, where you daily scour the lands fighting various evil entities and encounters..    \n" +
+                "|Your ultimate goal is to surpass all the obstacles in this kingdom, encounter both funnier and unfunnier stuffs and lastly but not least, dun-dun..                                     \n" +
                 "|Defeat the evil tyrant Backgammon, which holds your dear Welding-expert partner Welda captured in terminal 5B.                                                                            \n" +
                 " ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤" +
                 "\n" + ANSI_RESET
