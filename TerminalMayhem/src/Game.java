@@ -12,8 +12,12 @@ public class Game {
     ArrayList<Monster> monsters = new ArrayList<>();
     Shop shop = new Shop();
 
-    //TODO skriv en kommentar om vad denna gör exakt, det kommer han fråga om.
+
     Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+    /*The nextLine() method of the Scanner class retrieves the input until it reads the newline character.
+        Therefore, there is a possibility that the newline character that was not read by the previous nextLine() call may affect the next nextLine() call.
+        You can set the Scanner object to use the newline character as the delimiter by calling Scanner(System.in).useDelimiter("\n").
+        This way, the newline character will be used as the delimiter and the problem will be resolved.*/
     Random random = new Random();
 
     //Starts the game
@@ -169,16 +173,16 @@ public class Game {
                         while (run) {
                             // if the player wants to buy more stuff
                             Text.doYouWantToBuyMore();
-                            int buyMore = userInputInt();
-                            if (buyMore == 1) {
+                            int buyMore = userInputInt(); //save userInput
+                            if (buyMore == 1) {           // Go back to main shopping menu
                                 runGoShopping = true;
                                 run = false;
-                            } else if (buyMore == 2) {
+                            } else if (buyMore == 2) { //end shopping menu
                                 Text.thanksForShopping();
                                 runGoShopping = false;
                                 run = false;
                             } else {
-                                Text.getInvalidChoice();
+                                Text.getInvalidChoice();  //showing error message
                             }
                         }
 

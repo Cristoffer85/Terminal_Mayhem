@@ -3,15 +3,15 @@ import java.util.Random;
 
 public class Player {
 
-    private String name;
-    private int level;
-    private int exp;
-    private int maxHp;
-    private int hp;
-    private int strength;
-    private int toughness;
-    private int gold;
-    private int criticalChance;
+    private String name;     //Save Players Name
+    private int level;      //Save Players Level
+    private int exp;        //Save Players EXP
+    private int maxHp;      //Save Players maxHp
+    private int hp;         //save Players HP
+    private int strength;   //save players Strength
+    private int toughness;  //save Players toughness
+    private int gold;       //save Players gold
+    private int criticalChance; // save Players ciritical Chance
 
     Random random;
 
@@ -119,11 +119,12 @@ public class Player {
         equippedItemList.clear();
     }
 
-    //Check if the user has reached level 9 and is ready to face the final boss
+    //Check if the player has reached level 9 and is ready to face the final boss
     public boolean readyForFinalBoss() {
         return level == 9;
     }
 
+    //Check if the player has not dead.
     public boolean checkIfDead() {
         return hp <= 0;
     }
@@ -137,6 +138,7 @@ public class Player {
         return (this.maxHp - this.hp) / 2;
     }  // player regains halv of the missing hp after combat
 
+    //return players HP
     public int getHp() {
         return hp;
     }
@@ -148,10 +150,11 @@ public class Player {
         }
     }
 
+    //return players strength
     public int getStrength() {
         return strength;
     }
-
+    //return players toughness
     public int getToughness() {
         return toughness;
     }
@@ -160,7 +163,7 @@ public class Player {
     public void setExp(int earnedExp) {
         exp += earnedExp;
     }
-
+   //return players gold
     public int getGold() {
         return gold;
     }
@@ -169,15 +172,15 @@ public class Player {
     public void payGold(int gold) {
         this.gold -= gold;
     }
-
+    //return players level
     public int getLevel() {
         return level;
     }
-
+    //set players name
     public void setName(String name) {
         this.name = name;
     }
-
+    //return players name
     public String getName() {
         return name;
     }
@@ -201,6 +204,7 @@ public class Player {
         }
     }
 
+    //Show Players status
     public void showHero() {
         System.out.println("Name: " + name);
         System.out.println("Level: " + level);
@@ -209,12 +213,11 @@ public class Player {
         System.out.println("toughness: " + toughness);
         System.out.println("Critical Chance: " + criticalChance);
         System.out.println("Gold: " + gold);
-        System.out.println(exp); // TODO delete sen
         System.out.println("Inventory : ");
-
+        //showing Players inventory
         if(0< boughtItemList.size()) {
             for(Item item : boughtItemList) {
-                System.out.println(item.getName() + " ");
+                System.out.println(item.getName());
             }
         }
     }
