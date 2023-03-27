@@ -7,7 +7,7 @@ public class Game {
 
     //initiate objects
     HealingPotion healingPotion = new HealingPotion();
-    Player player = new Player(healingPotion);
+    Player player = new Player();
     ArrayList<Monster> monsters = new ArrayList<>();
     Shop shop = new Shop();
 
