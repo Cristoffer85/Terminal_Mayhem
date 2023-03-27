@@ -85,11 +85,12 @@ public class Text {
 
     static void getMainMenu() {               //Färg Vit
         System.out.println(
-                "1.Start game.\n" +
-                        "2.See your current stats.\n" +
-                        "3.Shop\n" +
-                        "4.End game." +
-                        "\n"
+                """
+                        1.Start game.
+                        2.See your current stats.
+                        3.Shop
+                        4.End game.
+                        """
         );
         System.out.print("What is your number of choice: ");
     }
@@ -135,9 +136,10 @@ public class Text {
     //-----------------------FIGHT--------------------------------------
     static void getFightMenu() {  //Fightmenu
         System.out.println(
-                        "1.Fight!\n" +
-                        "2.Drink healing potion.\n" +
-                        ""
+                """
+                        1.Fight!
+                        2.Drink healing potion.
+                        """
         );
         System.out.print("What is your number of choice?: ");
     }
@@ -194,7 +196,6 @@ public class Text {
 
     static void youHaveLevelup() {  //
         System.out.println(ANSI_YELLOW + "Congrats! You have leveled up!" + ANSI_RESET);
-
     }
 
     static void nothingHappened() {  //
@@ -208,18 +209,30 @@ public class Text {
         System.out.println(ANSI_YELLOW + "You look in your bag for a healing potion but find none! Turn successfully wasted." + ANSI_RESET);
     }
 
+    // print out for player damage done to the monster
     static void playerDamageDone(Monster monster, int damage) {
         System.out.println(ANSI_RED + "BANG!\n" + ANSI_RESET +
                 "You slash the " + monster.getName() + " for " + damage + " damage-points." +
-                "\nThe " + monster.getName() + " blocks " + monster.getToughness() + " damage-points." +
-                "\nThe " + monster.getName() + " have " + monster.getHP() + " health left");
+                "\nThe " + monster.getName() + " blocks " + monster.getToughness() + " damage-points.");
+                if (monster.getHP() <= 0){ // if monster health is less than or equal to 0, print only 0, to avoid negative numbers
+                    System.out.println("The " + monster.getName() + " have 0 health left");
+                } else  {
+                    System.out.println("The " + monster.getName() + " have " + monster.getHP() + " health left");
+                }
     }
 
+    // print out for monster damage done to the player
     static void monsterDamageDone(Player player, Monster monster, int damage) {
         System.out.println(ANSI_RED + "Uuuuraahhhhh!\n" + ANSI_RESET +
-                "the " + monster.getName() + " hits you hard!\n" +
-                "You successfully block " + player.getArmorValue() + " but you still take " + damage + " damage-points\n"
-                + "You have " + player.getHp() + " health left");
+                "the " + monster.getName() + " hits you hard!\n");
+                if (damage <= 0) {  // if damage is less than or equal to 0, alter print to avoid negative numbers
+                    System.out.println("You successfully block the " + monster.getName() + "s attack\n"
+                            + "You have " + player.getHp() + " health left");
+        } else {   // if damage is more than 0, the player takes damage
+                    System.out.println("You successfully block " + player.getArmorValue() + " but you still take " + damage + " damage-points\n"
+                            + "You have " + player.getHp() + " health left");
+                }
+
     }
 
     public static void getRewardtext(Player player, Monster monster) {
