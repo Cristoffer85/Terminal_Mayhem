@@ -58,7 +58,8 @@ public class Game {
                     if (monster.getLvl() == 10) {  // check if monster is final boss
                         Text.getBossFightText();
                         combat(player, monster);
-                        Text.ThanksForPlaying();//TODO change message to after killed boss message
+                        Text.getBossFightOverText();
+                        Text.pressToContinue();
                         resetToDefault();
                         break;
                     }
@@ -87,7 +88,7 @@ public class Game {
 
     //Give player XP, gold and Hp boost
     private void givePlayerReward(Player player, Monster monster) {
-        monster.calculategold(); // calculates gold drop
+        monster.calculateGold(); // calculates gold drop
         Text.getRewardtext(player, monster);
         player.setGold(monster.dropGold());
         player.setExp(monster.dropExp());
@@ -110,6 +111,7 @@ public class Game {
                 }
                 case 2 -> {  // Use potion
                     player.usePotion(); // player uses healing potion
+                    Text.pressToContinue();
                 }
                 default -> Text.getInvalidChoice();
             }
@@ -133,6 +135,7 @@ public class Game {
 
     public void resetToDefault(){
         player.resetPlayer();
+        makeMonsters();
         shop.resetShop();
         startGame();
     }
@@ -189,15 +192,19 @@ public class Game {
 
 
     //Control if user input is an integer
-    public int userInputInt() {
+    public int userInputInt() { // makes sure that the userInput is int
+
         int number = 0;
+
         while (true) {
             try {
                 number = scanner.nextInt();
-                break;
+                break; // only break the loop when user inputs integer
             } catch (InputMismatchException e) {
-                Text.getInvalidChoice();
-                scanner.nextLine();
+
+                System.out.print("A non-numeric input has been detected.\nPlease enter a valid input: ");
+                scanner.nextLine(); // here to eat the feed line that scanner.nextInt() misses
+
             }
         }
         return number;
@@ -206,9 +213,6 @@ public class Game {
     // method to initiate all monsters
     private void makeMonsters() {
 
-        //TODO do we really want all monsters?
-
-        //initiate all monsters
         //level 1
         Goblin goblin1 = new Goblin("Goblin", 1, 40, 10, 0, 10, 100);
         Orc orc1 = new Orc("Orc", 1, 40, 10, 0, 10, 100);
