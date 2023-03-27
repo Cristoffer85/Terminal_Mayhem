@@ -34,7 +34,7 @@ import java.util.Scanner;
 
 public class Text {
 
-    static final String ANSI_RESET = "\u001B[0m";
+    static final String ANSI_RESET = "\u001B[0m";        //Some color to make the output nicer
     static final String ANSI_RED = "\u001B[31m";
     static final String ANSI_GREEN = "\u001B[32m";
     static final String ANSI_YELLOW = "\u001B[33m";
@@ -42,33 +42,33 @@ public class Text {
     static Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
     //----------------------INITIAL MENUS + STORY----------------------------------
-    static void getWelcomeText() {     //Initial startmeny + användaren skapar sin hero
-        System.out.print(ANSI_GREEN +
+    static void getWelcomeText() {     //Initial startmenu, user create hero
+        System.out.print(ANSI_RED +
                 "#############################################################\n" +
-                        "   Welcome to the fantastic adventures of Terminal Mayhem    \n" +
-                        "#############################################################\n" +
-                        "                                                             \n" +
-                        ANSI_RED +"                     ---^---      ---^---                    \n" +
-                        "                    |       |    |       |                   \n" +
-                        "                    |       |    |       |                   \n" +
-                        "                     ------- ---- -------                    \n" +
-                        "              -------|   |          |   |-------             \n" +
-                        "             |       |      |    |      |       |            \n" +
-                        "            <        |----------------- |        >           \n" +
-                        "             |       |      |    |      |       |            \n" +
-                        "              -------|   |          |   |-------             \n" +
-                        "                     ------- ---- -------                    \n" +
-                        "                    |       |    |       |                   \n" +
-                        "                    |       |    |       |                   \n" +
-                        "                     ---v---      ---v---                    \n" + ANSI_RESET +
-                        ANSI_GREEN + "                                                             \n" +
-                        "#############################################################\n" +
-                        "                                                             \n" +
-                        "Please enter your hero:s name: " + ANSI_RESET
+                        "   Welcome to the fantastic adventures of Terminal Mayhem     \n" +
+                        "############################################################# \n" +
+                        "                                                              \n" +
+                        "                        %%%%%%%%%%%%%@@                       \n" +
+                        "                   %%%%%@      |      /@%%%@                  \n" +
+                        "                @%%&/|         |        | @%%&                \n" +
+                        "              @%%(     |       |      |     @%%@              \n" +
+                        "            @%%          |     |    |         @%%@            \n" +
+                        "           #%%@             |  |  |            #%%@           \n" +
+                        "           @%%@--------------------------------@%%@           \n" +
+                        "            %%@             |  |  |            (%%@           \n" +
+                        "            /%%@         |     |    |         /%%@            \n" +
+                        "              &%%@     |       |      |     @%%@              \n" +
+                        "                .&%%@|         |        |@%%%@                \n" +
+                        "                    /@%%%      |      %%%%@                   \n" +
+                        "                        %%%%%%%%%%%%%@@                       \n" +
+                        "                                                              \n" +
+                        "############################################################# \n" +
+                        "                                                              \n" + ANSI_RESET +
+                        ANSI_GREEN + "Please enter your hero:s name: " + ANSI_RESET
         );
     }
 
-    static void getIntrotext(String playerName) {        //Storytext
+    static void getIntrotext(String playerName) {        //Textstory
         System.out.println(ANSI_GREEN +
                 "\n" +
                 " ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤\n" +
@@ -83,7 +83,7 @@ public class Text {
         );
     }
 
-    static void getMainMenu() {               //Färg Vit
+    static void getMainMenu() {               //Main Menu of choices
         System.out.println(
                 """
                         1.Start game.
@@ -98,7 +98,7 @@ public class Text {
 
 
     //--------------------SHOP-------------------------------------
-    static void getShopMenu(Player player) { //Shopmeny, Div. olika saker.
+    static void getShopMenu(Player player) { //Shopmenu div.
         System.out.println(ANSI_GREEN +
                 "------------Welcome to the shop!------------\nThis are the wares available right now." + ANSI_RESET
         );
@@ -271,7 +271,4 @@ public class Text {
         System.out.println(ANSI_GREEN + "Thank you for playing!" + ANSI_RESET);
         System.out.println(" " );
     }
-
-
-
 }
