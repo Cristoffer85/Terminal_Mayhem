@@ -83,7 +83,7 @@ public abstract class Monster {
     public void defence(Player player) {
         int damage = player.attack(); // the damage is random store the actual damage to make sure the output is right
         setDamage(damage - this.toughness);
-        Text.playerDamageDone(this, (damage - this.toughness));
+        Text.playerDamageDone(this, (damage));
     }
 
     //drop monster gold if dead

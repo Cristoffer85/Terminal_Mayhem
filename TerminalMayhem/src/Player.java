@@ -63,7 +63,6 @@ public class Player {
     }
 
     public void defence(Monster monster) { // the ability to take damage and migrate som of it with armor
-
         int damage = monster.attack(); // the damage is random store the actual damage to make sure the output is right
         setDamage(damage - getArmorValue()); // reduce health point after armor reduction
         Text.monsterDamageDone(this, monster, (damage - getArmorValue()));
