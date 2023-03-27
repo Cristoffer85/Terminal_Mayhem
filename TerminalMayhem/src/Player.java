@@ -20,7 +20,7 @@ public class Player {
     ArrayList<Item> equippedItemList;
 
     //a constructor for setting up all the values, calling the random function, and initializing the ArrayList
-    public Player(HealingPotion potion) {
+    public Player() {
 
         random = new Random();
         boughtItemList = new ArrayList<>();
@@ -120,7 +120,7 @@ public class Player {
     }
 
     //Check if the user has reached level 9 and is ready to face the final boss
-    public boolean checkIfReadyForFinalBoss() {
+    public boolean readyForFinalBoss() {
         return level == 9;
     }
 
