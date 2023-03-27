@@ -264,8 +264,16 @@ public class Text {
 
 
     static void pressToContinue() {
-        System.out.println(ANSI_YELLOW + "Press enter to continue.." + ANSI_RESET);
-        scanner.nextLine();
+        boolean run=true;
+        while(run) {
+            System.out.println(ANSI_YELLOW + "Press enter to continue.." + ANSI_RESET);
+            String input = scanner.nextLine();
+            if (input.equals("")) {
+                run = false;
+            } else {
+                System.out.println(ANSI_RED+"Invalid input."+ANSI_RESET);
+            }
+        }
     }
     //-------------------------------------------------------------
 
