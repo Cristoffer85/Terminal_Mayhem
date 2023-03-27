@@ -83,7 +83,7 @@ public class Text {
         );
     }
 
-    static void getMainMenu() {
+    static void getMainMenu() {               //Färg Vit
         System.out.println(
                 "1.Start game.\n" +
                         "2.See your current stats.\n" +
@@ -105,7 +105,6 @@ public class Text {
         System.out.println();
         System.out.println(ANSI_GREEN + "What is your number of choice?: " + ANSI_RESET);
         System.out.println();
-
     }
 
     static void youHaveBought(String item) {  //Du har köpt
@@ -113,10 +112,9 @@ public class Text {
     }
 
     static void doYouWantToBuyMore() {  //Köpa mer?
-        System.out.println("Do you want to purchase something more? \n" +
-                "1.Yes or 2.No");
+        System.out.println(ANSI_YELLOW + "Do you want to purchase something more? \n" + ANSI_RESET);
+        System.out.println("1.Yes or 2.No");
         System.out.println();
-
     }
 
     public static void getnoMoreWares() {
@@ -129,7 +127,7 @@ public class Text {
     }
 
     static void thanksForShopping() {  //Tack för handling!
-        System.out.println("Thank you for shopping!");
+        System.out.println(ANSI_YELLOW + "Thank you for shopping!" + ANSI_RESET);
     }
     //------------------------------------------------------------------
 
@@ -210,14 +208,16 @@ public class Text {
         System.out.println(ANSI_YELLOW + "You look in your bag for a healing potion but find none! Turn successfully wasted." + ANSI_RESET);
     }
 
-    static void playerDamageDone(Player player, Monster monster, int damage) {
-        System.out.println("Bang! You slash the " + monster.getName() + " for " + damage + " damage-points." +
+    static void playerDamageDone(Monster monster, int damage) {
+        System.out.println(ANSI_RED + "BANG!\n" + ANSI_RESET +
+                "You slash the " + monster.getName() + " for " + damage + " damage-points." +
                 "\nThe " + monster.getName() + " blocks " + monster.getToughness() + " damage-points." +
                 "\nThe " + monster.getName() + " have " + monster.getHP() + " health left");
     }
 
     static void monsterDamageDone(Player player, Monster monster, int damage) {
-        System.out.println("uuuuraahhhhh! the " + monster.getName() + " hits you hard!\n" +
+        System.out.println(ANSI_RED + "Uuuuraahhhhh!\n" + ANSI_RESET +
+                "the " + monster.getName() + " hits you hard!\n" +
                 "You successfully block " + player.getArmorValue() + " but you still take " + damage + " damage-points\n"
                 + "You have " + player.getHp() + " health left");
     }
@@ -233,8 +233,8 @@ public class Text {
     //-------------------------------------------------------------
 
     //---------------------RANDOM----------------------------------
-    static void getPlayerStatText() {  //Statsen för hjälte
-        System.out.println("Here are the current statistics of your Hero: ");
+    static void getPlayerStatText() {  //Statsen för hjälte        //
+        System.out.println(ANSI_GREEN + "Here are the current statistics of your Hero: " + ANSI_RESET);
     }
 
     static void getInvalidChoice() {    //Ej giltigt val.
@@ -242,7 +242,7 @@ public class Text {
     }
 
     static void pressToContinue() {
-        System.out.println("Press enter to continue..");
+        System.out.println(ANSI_YELLOW + "Press enter to continue.." + ANSI_RESET);
         scanner.nextLine();
     }
     //-------------------------------------------------------------
