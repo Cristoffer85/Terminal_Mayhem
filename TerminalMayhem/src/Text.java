@@ -104,8 +104,10 @@ public class Text {
         );
         System.out.println("You have :" + player.getGold() + " Gold");
         System.out.println();
+        System.out.println(ANSI_GREEN + "If you dont want to buy anything right now press 0" + ANSI_RESET);
         System.out.println(ANSI_GREEN + "What is your number of choice?: " + ANSI_RESET);
         System.out.println();
+
     }
 
     static void youHaveBought(String item) {  //Du har köpt
