@@ -11,6 +11,9 @@ public abstract class Item {
     private int potionValue;
     private int price;
 
+    public Item(String name) {
+        this.name = name;
+    }
     public Item(String name, int maxHpBoost, int strengthBoost, int toughnessBoost, int criticalChanceBoost, int potionValue, int price) {
         this.name = name;
         this.maxHpBoost = maxHpBoost;
@@ -50,12 +53,16 @@ public abstract class Item {
     }
 
     @Override
-    public String toString() {
+    public String toString() { // lines for printing + and - stats separated to avoid nested ternary ifs
        return this.name + ", " +
-                ( maxHpBoost > 0 ? "increases max Hp + " + maxHpBoost + ", " : "") +
-                ( strengthBoost > 0 ? "increases strength + " + strengthBoost + ", " : "") +
-                ( toughnessBoost > 0 ? " increases toughness + " + toughnessBoost + ", " : "") +
-                ( criticalChanceBoost > 0 ? " increases critical chance + " + criticalChanceBoost + ", " : "") +
-                " price " + this.price + " gold";
+                ( maxHpBoost > 0 ? "increases max Hp +" + maxHpBoost + ", " : "") +
+                ( maxHpBoost < 0 ? "increases max Hp " + maxHpBoost + ", " : "") +
+                ( strengthBoost > 0 ? "increases strength +" + strengthBoost + ", " : "") +
+                ( strengthBoost < 0 ? "increases strength " + strengthBoost + ", " : "") +
+                ( toughnessBoost > 0 ? " increases toughness +" + toughnessBoost + ", " : "") +
+                ( toughnessBoost < 0 ? " increases toughness " + toughnessBoost + ", " : "") +
+                ( criticalChanceBoost > 0 ? " increases critical chance +" + criticalChanceBoost + ", " : "") +
+                ( criticalChanceBoost < 0 ? " increases critical chance " + criticalChanceBoost + ", " : "") +
+                "price " + this.price + " gold";
     }
 }
