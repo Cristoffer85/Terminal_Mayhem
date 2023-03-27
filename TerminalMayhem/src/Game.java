@@ -32,7 +32,7 @@ public class Game {
             int mainMenuChoice = userInputInt();
 
             switch (mainMenuChoice) {
-                case 1 -> goAdventuring(player);
+                case 1 -> game = goAdventuring(player, game);
                 case 2 -> {
                     Text.getPlayerStatText();
                     player.showHero();
@@ -46,40 +46,50 @@ public class Game {
                 default -> Text.getInvalidChoice();
             }
         }
+        System.exit(0);
     }
 
     //method to go look for monsters
-    private void goAdventuring(Player player) {
-        int isItAFight = random.nextInt(100);
-        if (isItAFight >= 10) { // 90% chance of a fight
+    private boolean goAdventuring(Player player, boolean game) {
 
-            if (player.checkIfReadyForFinalBoss()) {    // check if player is ready for final boss
-                for (Monster monster : monsters) {
-                    if (monster.getLvl() == 10) {  // check if monster is final boss
-                        Text.getBossFightText();
-                        combat(player, monster);
-                        Text.getBossFightOverText();
-                        System.exit(0);
-                        break;
-                    }
-                }
+        int isItAFight = random.nextInt(100);
+
+        if (isItAFight <= 10) { // 90% chance of a fight
+
+            Text.nothingHappened(); // 10% chance of nothing happening, prints message about it
+            Text.pressToContinue(); // waits for user input to continue
+
+        } else {
+
+            if (player.readyForFinalBoss()) {    // check if player is ready for final boss
+                game = finalEncounter(player, game); // last fight in the game
 
             } else {
                 for (Monster monster : monsters) {
                     if (monster.getLvl() == player.getLevel()) {
-                        Text.aMonsterAppears(monster, monster.getName());
-                        combat(player, monster);
+                        game = combat(player, monster, game);
                         monsters.remove(monster); // remove monster from list once defeated
                         break;
                     }
                 }
-                player.checkIfLevelUp();  // check if player has reached a new level and adds stats
-
             }
-        } else {
-            Text.nothingHappened(); // 10% chance of nothing happening, prints message about it
-            Text.pressToContinue(); // waits for user input to continue
         }
+        player.checkIfLevelUp();  // check if player has reached a new level and adds stats
+        return game;
+    }
+
+    private boolean finalEncounter(Player player, boolean game) {
+        for (Monster monster : monsters) {
+            if (monster.getLvl() == 10) {  // check if monster is final boss
+                Text.getBossFightText();
+                combat(player, monster, game);
+                Text.getBossFightOverText();
+                Text.pressToContinue();
+                return  !game; // breaks the mainSwitch while loop
+            }
+        }
+        System.out.println("Game.finalEncounter() exited with condition true"); // for debugging purpose only
+        return game; // not possible to en up here
     }
 
     //Give player XP, gold and Hp boost
@@ -93,7 +103,9 @@ public class Game {
     }
 
     //Initiate battle between player and selected monster.
-    private void combat(Player player, Monster monster) {
+    private boolean combat(Player player, Monster monster, boolean game) {
+
+        Text.aMonsterAppears(monster, monster.getName());
 
         while (true) {
             //User choice to attack or use a potion
@@ -123,10 +135,11 @@ public class Game {
             // If the player dies, breaks loop
             if (player.checkIfDead()) {
                 Text.getPlayerDead();
-                System.exit(0);
-                break;
+                return !game; // player died break mainSwitch
+
             }
         }
+        return game;
     }
 
     // in this method the transactions between shop and player are concluded
@@ -183,6 +196,7 @@ public class Game {
             }
         }
     }
+
 
 
     //Control if user input is an integer
