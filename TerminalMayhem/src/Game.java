@@ -187,11 +187,11 @@ public class Game {
         while (true) {
             try {
                 number = scanner.nextInt();
+
                 break;
             } catch (InputMismatchException e) {
-                System.out.println("A non-numeric input has been entered. Please enter a valid input again");
+                System.out.print("A non-numeric input has been detected.\nPlease enter a valid input: ");
                 scanner.nextLine();
-                break;
             }
         }
         return number;
