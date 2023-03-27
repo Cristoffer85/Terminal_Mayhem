@@ -110,7 +110,7 @@ public class Game {
                     player.usePotion(); // player uses healing potion
                     Text.pressToContinue();
                 }
-                default -> Text.getInvalidChoice();
+                default -> Text.getWastedTurnText();
             }
 
             if (monster.checkIfDead()) { //exit the loop if the monster is dead

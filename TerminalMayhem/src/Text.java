@@ -254,6 +254,13 @@ public class Text {
         System.out.println(ANSI_RED + "Im sorry, but you´ve made an incorrect choice." + ANSI_RESET);
     }
 
+    static void getWastedTurnText() {    //Ej giltigt val.
+        System.out.println(ANSI_RED + "Im sorry, but you´ve made an incorrect choice..\n" +
+                "...no im not , you just wasted your turn!" + ANSI_RESET);
+    }
+
+
+
     static void pressToContinue() {
         System.out.println(ANSI_YELLOW + "Press enter to continue.." + ANSI_RESET);
         scanner.nextLine();
