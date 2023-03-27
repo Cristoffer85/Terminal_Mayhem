@@ -120,7 +120,7 @@ public class Player {
     }
 
     //Check if the user has reached level 9 and is ready to face the final boss
-    public boolean readyForFinalBoss() {
+    public boolean checkIfReadyForFinalBoss() {
         return level == 9;
     }
 
