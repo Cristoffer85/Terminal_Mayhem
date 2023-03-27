@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class Game {
 
     //initiate objects
-    HealingPotion healingPotion = new HealingPotion();
+    private boolean game = true; // used by mainSwitch() for keeping loop running
+    HealingPotion healingPotion = new HealingPotion(); // todo remove
     Player player = new Player();
     ArrayList<Monster> monsters = new ArrayList<>();
     Shop shop = new Shop();
@@ -26,13 +27,13 @@ public class Game {
 
     // main game loop method
     private void mainSwitch() {
-        boolean game = true; //
+
         while (game) {
             Text.getMainMenu();
             int mainMenuChoice = userInputInt();
 
             switch (mainMenuChoice) {
-                case 1 -> game = goAdventuring(player, game);
+                case 1 -> goAdventuring(player);
                 case 2 -> {
                     Text.getPlayerStatText();
                     player.showHero();
@@ -46,11 +47,11 @@ public class Game {
                 default -> Text.getInvalidChoice();
             }
         }
-        System.exit(0);
+        System.exit(0); // todo remove?
     }
 
     //method to go look for monsters
-    private boolean goAdventuring(Player player, boolean game) {
+    private void goAdventuring(Player player) {
 
         int isItAFight = random.nextInt(100);
 
@@ -60,36 +61,33 @@ public class Game {
             Text.pressToContinue(); // waits for user input to continue
 
         } else {
-
-            if (player.readyForFinalBoss()) {    // check if player is ready for final boss
-                game = finalEncounter(player, game); // last fight in the game
-
-            } else {
-                for (Monster monster : monsters) {
-                    if (monster.getLvl() == player.getLevel()) {
-                        game = combat(player, monster, game);
-                        monsters.remove(monster); // remove monster from list once defeated
-                        break;
-                    }
+            // // Final boss
+            if (player.readyForFinalBoss()) { // "I Found Freedom. Losing All Hope Was Freedom."
+                finalEncounter(player);// last fight in the game
+                return;
+            }
+            // Players below level 9 fight regular monsters
+            for (Monster monster : monsters) {
+                if (monster.getLvl() == player.getLevel()) {
+                    combat(player, monster);
+                    monsters.remove(monster); // remove monster from list once defeated
+                    break;
                 }
             }
         }
-        player.checkIfLevelUp();  // check if player has reached a new level and adds stats
-        return game;
+        player.checkIfLevelUp();  // check if player has reached a new level and adds stats. Can trigger multiple level++
     }
 
-    private boolean finalEncounter(Player player, boolean game) {
+    private void finalEncounter(Player player) {  // for final boss text and select final boss as monster
         for (Monster monster : monsters) {
             if (monster.getLvl() == 10) {  // check if monster is final boss
                 Text.getBossFightText();
-                combat(player, monster, game);
+                combat(player, monster);  //  combat()
                 Text.getBossFightOverText();
                 Text.pressToContinue();
-                return  !game; // breaks the mainSwitch while loop
+                this.game = false; // False breaks the mainSwitch loop. Hard typed to false for prevent bug with player dying.
             }
         }
-        System.out.println("Game.finalEncounter() exited with condition true"); // for debugging purpose only
-        return game; // not possible to en up here
     }
 
     //Give player XP, gold and Hp boost
@@ -103,7 +101,7 @@ public class Game {
     }
 
     //Initiate battle between player and selected monster.
-    private boolean combat(Player player, Monster monster, boolean game) {
+    private void combat(Player player, Monster monster) {  // "Without Pain, Without Sacrifice, We Would Have Nothing."
 
         Text.aMonsterAppears(monster, monster.getName());
 
@@ -135,15 +133,14 @@ public class Game {
             // If the player dies, breaks loop
             if (player.checkIfDead()) {
                 Text.getPlayerDead();
-                return !game; // player died break mainSwitch
-
+                this.game = false; // player died break mainSwitch
             }
         }
-        return game;
+
     }
 
     // in this method the transactions between shop and player are concluded
-    private void goShopping() {
+    private void goShopping() { // "The Things You Own End Up Owning You."
         player.setGold(400); //TODO remove this when done testing
         boolean runGoShopping = true;
         while (shop.inventorySize() > 0 && runGoShopping) { // loop runs until the shop is out of items
