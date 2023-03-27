@@ -183,6 +183,12 @@ public class Text {
         System.out.println(".... You hear a lurge thud, the kind that only the largest form of set of multiple encyclopedias mounted together could ever perform, \nand there he was, standing right in front of you, Backgammon...");
     }
 
+    public static void getBossFightOverText() {
+        System.out.println("You wipe off your sharpened propeller-wing, and look down on the chopped up pieces of Backgammon.\n" +
+                "Sitting in a corner of terminal 58, you notice Welda looking at you.\n" +
+                "he says, and where the hell have you been! ");
+    }
+
     static void youHaveLevelup() {  //
         System.out.println("Congrats! You have leveled up!");
         System.out.println("");

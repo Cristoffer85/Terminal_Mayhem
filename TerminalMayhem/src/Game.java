@@ -58,7 +58,7 @@ public class Game {
                     if (monster.getLvl() == 10) {  // check if monster is final boss
                         Text.getBossFightText();
                         combat(player, monster);
-                        Text.ThanksForPlaying();//TODO change message to after killed boss message
+                        Text.getBossFightOverText();
                         resetToDefault();
                         break;
                     }
