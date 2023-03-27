@@ -73,11 +73,8 @@ public class Game {
                         break;
                     }
                 }
-                if (player.checkIfLeveledUp()) {  // check if player has reached a new level
-                    Text.youHaveLevelup();
-                    player.levelUp();
-                    Text.pressToContinue();
-                }
+                player.checkIfLevelUp();  // check if player has reached a new level and adds stats
+
             }
         } else {
             Text.nothingHappened(); // 10% chance of nothing happening, prints message about it
