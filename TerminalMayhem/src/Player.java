@@ -93,9 +93,9 @@ public class Player {
 
     public void checkIfLevelUp() { // check if player has reached a new level and adds stats
 
-        final int  XP_PER_LEVEL = 100;  // condition for leveling up
+        final int XP_PER_LEVEL = 100;  // condition for leveling up
 
-        if ( level * XP_PER_LEVEL <= exp ) { // 900xp = level 10
+        while (level * XP_PER_LEVEL <= exp) { // lets the player level until level matches experience
             Text.youHaveLevelup();
             levelUp();                  // adds stats to player
             Text.pressToContinue();
@@ -120,7 +120,7 @@ public class Player {
     }
 
     //Check if the user has reached level 9 and is ready to face the final boss
-    public boolean checkIfReadyForFinalBoss() {
+    public boolean readyForFinalBoss() {
         return level == 9;
     }
 

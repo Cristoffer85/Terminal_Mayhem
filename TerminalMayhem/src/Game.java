@@ -109,7 +109,7 @@ public class Game {
                     player.usePotion(); // player uses healing potion
                     Text.pressToContinue();
                 }
-                default -> Text.getInvalidChoice();
+                default -> Text.getWastedTurnText();
             }
 
             if (monster.checkIfDead()) { //exit the loop if the monster is dead
@@ -132,35 +132,41 @@ public class Game {
     // in this method the transactions between shop and player are concluded
     private void goShopping() {
         player.setGold(400); //TODO remove this when done testing
-        boolean runGoShopping=true;
-        while (shop.inventorySize() > 0 && runGoShopping ) { // loop runs until the shop is out of items
+        boolean runGoShopping = true;
+        while (shop.inventorySize() > 0 && runGoShopping) { // loop runs until the shop is out of items
             Text.getShopMenu(player);
             shop.showItems();
 
-            try{ // try catch to catch invalid input
-                int itemToBuy = userInputInt() -1;
+            try { // try catch to catch invalid input
+                int itemToBuy = userInputInt() - 1;
 
+                if (itemToBuy + 1 == 0) {
+                    Text.thanksForShopping();
+                    Text.pressToContinue();
+                    runGoShopping = false;
+                    break;
+                }
                 if (shop.getPrice(itemToBuy) <= player.getGold()) { //check if player has enough money
                     Text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
                     player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
                     player.addToInventory(shop.buyItem(itemToBuy)); // Add item to player inventory and equips it
 
-                    if (shop.inventorySize() <= 0){ // if the shop is out of items it prints a message and exits the loop
+                    if (shop.inventorySize() <= 0) { // if the shop is out of items it prints a message and exits the loop
                         Text.getnoMoreWares();
                         mainSwitch();
                     } else {
-                         boolean run=true;
-                         while(run) {
-                             // if the player wants to buy more stuff
-                              Text.doYouWantToBuyMore();
+                        boolean run = true;
+                        while (run) {
+                            // if the player wants to buy more stuff
+                            Text.doYouWantToBuyMore();
                             int buyMore = userInputInt();
                             if (buyMore == 1) {
-                                runGoShopping=true;
-                                run=false;
+                                runGoShopping = true;
+                                run = false;
                             } else if (buyMore == 2) {
                                 Text.thanksForShopping();
-                                runGoShopping=false;
-                                run=false;
+                                runGoShopping = false;
+                                run = false;
                             } else {
                                 Text.getInvalidChoice();
                             }
@@ -177,7 +183,6 @@ public class Game {
             }
         }
     }
-
 
 
     //Control if user input is an integer
