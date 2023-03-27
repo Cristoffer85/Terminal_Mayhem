@@ -104,8 +104,10 @@ public class Text {
         );
         System.out.println("You have :" + player.getGold() + " Gold");
         System.out.println();
+        System.out.println(ANSI_GREEN + "If you dont want to buy anything right now press 0" + ANSI_RESET);
         System.out.println(ANSI_GREEN + "What is your number of choice?: " + ANSI_RESET);
         System.out.println();
+
     }
 
     static void youHaveBought(String item) {  //Du har köpt
@@ -253,6 +255,13 @@ public class Text {
     static void getInvalidChoice() {    //Ej giltigt val.
         System.out.println(ANSI_RED + "Im sorry, but you´ve made an incorrect choice." + ANSI_RESET);
     }
+
+    static void getWastedTurnText() {    //Ej giltigt val.
+        System.out.println(ANSI_RED + "Im sorry, but you´ve made an incorrect choice..\n" +
+                "...no im not , you just wasted your turn!" + ANSI_RESET);
+    }
+
+
 
     static void pressToContinue() {
         System.out.println(ANSI_YELLOW + "Press enter to continue.." + ANSI_RESET);
