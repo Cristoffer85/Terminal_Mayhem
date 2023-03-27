@@ -140,7 +140,8 @@ public class Game {
     // in this method the transactions between shop and player are concluded
     private void goShopping() {
         player.setGold(400); //TODO remove this when done testing
-        while (shop.inventorySize() > 0) { // loop runs until the shop is out of items
+        boolean runGoShopping=true;
+        while (shop.inventorySize() > 0 && runGoShopping ) { // loop runs until the shop is out of items
             Text.getShopMenu(player);
             shop.showItems();
 
@@ -156,30 +157,36 @@ public class Game {
                         Text.getnoMoreWares();
                         mainSwitch();
                     } else {
-                        Text.doYouWantToBuyMore();              // if the player wants to buy more stuff
-                        int buyMore = userInputInt();
-                        try { // try catch to catch invalid input
+                         boolean run=true;
+                         while(run) {
+                             // if the player wants to buy more stuff
+                              Text.doYouWantToBuyMore();
+                            int buyMore = userInputInt();
                             if (buyMore == 1) {
-                                continue;
-                            }
-                            if (buyMore == 2) {
+                                runGoShopping=true;
+                                run=false;
+                            } else if (buyMore == 2) {
                                 Text.thanksForShopping();
-                                break;
+                                runGoShopping=false;
+                                run=false;
+                            } else {
+                                Text.getInvalidChoice();
                             }
-                        } catch (Exception e) { // catch invalid input
-                            Text.getInvalidChoice();
                         }
+
                     }
                 } else {
                     Text.inSufficient(); // if the player does not have enough gold
                     break;
                 }
 
-            } catch (Exception e) { // catch invalid input
+            } catch (IndexOutOfBoundsException e) { // catch invalid input
                 Text.getInvalidChoice();
             }
         }
     }
+
+
 
     //Control if user input is an integer
     public int userInputInt() {
@@ -189,9 +196,8 @@ public class Game {
                 number = scanner.nextInt();
                 break;
             } catch (InputMismatchException e) {
-                System.out.println("A non-numeric input has been entered. Please enter a valid input again");
+                Text.getInvalidChoice();
                 scanner.nextLine();
-                break;
             }
         }
         return number;
