@@ -250,7 +250,7 @@ public class Text {
 
     //------------------------END----------------------------------
     static void getPlayerDead() {     //Game over
-        System.out.println(ANSI_GREEN + "Sorry, you´re dead! Airtraffic seems like maybe not your main. Maybe try taxiindustry instead?" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "Sorry, you´re dead! Airtraffic seems like maybe not your main. Maybe try the taxiindustry instead?" + ANSI_RESET);
         System.out.println(" ");
     }
 
