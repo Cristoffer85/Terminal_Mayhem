@@ -26,7 +26,7 @@ public abstract class Monster {
     }
 
     //calculate the gold the monster drops, by  using random based on monsters base-value of gold
-    public void calculategold() {
+    public void calculateGold() {
         this.gold = random.nextInt(this.gold * 2);
     }
 
@@ -83,7 +83,7 @@ public abstract class Monster {
     public void defence(Player player) {
         int damage = player.attack(); // the damage is random store the actual damage to make sure the output is right
         setDamage(damage - this.toughness);
-        Text.playerDamageDone(player, this, (damage - this.toughness));
+        Text.playerDamageDone(this, (damage - this.toughness));
     }
 
     //drop monster gold if dead

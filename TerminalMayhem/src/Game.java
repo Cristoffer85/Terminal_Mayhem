@@ -88,7 +88,7 @@ public class Game {
 
     //Give player XP, gold and Hp boost
     private void givePlayerReward(Player player, Monster monster) {
-        monster.calculategold(); // calculates gold drop
+        monster.calculateGold(); // calculates gold drop
         Text.getRewardtext(player, monster);
         player.setGold(monster.dropGold());
         player.setExp(monster.dropExp());
