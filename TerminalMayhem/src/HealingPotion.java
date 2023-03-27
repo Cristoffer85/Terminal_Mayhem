@@ -4,6 +4,6 @@
 public class HealingPotion extends Item {
 
     public HealingPotion() {
-        super("Potion of life", 0, 0, 0,0, 55, 10);
+        super("\u001B[31mPotion of life\u001B[0m", 0, 0, 0,0, 55, 10);
     }
 }
