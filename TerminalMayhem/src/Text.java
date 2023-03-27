@@ -183,13 +183,13 @@ public class Text {
     }
 
     static void getBossFightText() {   //beskriver slutbossen för att ge mer inlevelse i spelet
-        System.out.println(ANSI_GREEN + ".... You hear a lurge thud, the kind that only the largest form of set of multiple encyclopedias mounted together could ever perform, \nand there he was, standing right in front of you, Backgammon..." + ANSI_RESET);
+        System.out.println(ANSI_GREEN + ".... You hear a lurge thud, the kind that only the largest set of multiple encyclopedias mounted together could ever perform, \nand there he was, standing right in front of you, Backgammon..." + ANSI_RESET);
     }
 
     public static void getBossFightOverText() {
         System.out.println(ANSI_GREEN + "You wipe off your sharpened propeller-wing, and look down on the chopped up pieces of Backgammon.\n" +
-                "Sitting in a corner of terminal 58, you notice Welda looking at you.\n" +
-                "he says, and where the hell have you been! " + ANSI_RESET);
+                "Sitting in a corner of terminal 5B, you notice Welda looking at you.\n" +
+                "he/she says: - And where the hell have you been! ? " + ANSI_RESET);
     }
 
     static void youHaveLevelup() {  //
