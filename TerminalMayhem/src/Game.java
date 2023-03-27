@@ -185,16 +185,17 @@ public class Game {
     }
 
     //Control if user input is an integer
-    public int userInputInt() {
+    public int userInputInt() { // makes sure that the userInput is int
+
         int number = 0;
+
         while (true) {
             try {
                 number = scanner.nextInt();
-                break;
+                break; // only break the loop when user inputs integer
             } catch (InputMismatchException e) {
-                System.out.println("A non-numeric input has been entered. Please enter a valid input again");
-                scanner.nextLine();
-                break;
+                System.out.print("A non-numeric input has been detected.\nPlease enter a valid input: ");
+                scanner.nextLine(); // here to eat the feed line that scanner.nextInt() misses
             }
         }
         return number;
