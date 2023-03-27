@@ -5,19 +5,15 @@ public class Player {
 
     private String name;
     private int level;
-    private int nextLevelExp;
     private int exp;
     private int maxHp;
     private int hp;
-    private int defence;  // Todo remove?
     private int strength;
     private int toughness;
     private int gold;
     private int criticalChance;
 
     Random random;
-    //Save the instance that is sent from the game to create a link between the Healing Potion and the player.
-    // HealingPotion potion; // todo remove?
 
     //ArrayList for saving bought Item
     ArrayList<Item> boughtItemList;
@@ -25,7 +21,7 @@ public class Player {
 
     //a constructor for setting up all the values, calling the random function, and initializing the ArrayList
     public Player(HealingPotion potion) {
-        //this.potion = potion; // todo remove?
+
         random = new Random();
         boughtItemList = new ArrayList<>();
         equippedItemList = new ArrayList<>();
@@ -95,26 +91,24 @@ public class Player {
         }
     }
 
+    public void checkIfLevelUp() { // check if player has reached a new level and adds stats
 
-    //Calculate the leveling up process
-    public void nextLevelExp() { // todo does this really work as intended?
-        nextLevelExp = level * 2;
+        final int  XP_PER_LEVEL = 100;  // condition for leveling up
+
+        if ( level * XP_PER_LEVEL <= exp ) { // 900xp = level 10
+            Text.youHaveLevelup();
+            levelUp();                  // adds stats to player
+            Text.pressToContinue();
+        }
     }
 
-    //Check if the player has leveled up
-    public boolean checkIfLeveledUp() { // todo does this really work as intended?
-        return nextLevelExp <= exp;
-    }
-
-    //increase the players status after leveling up
-    public void levelUp() {
-        level += 1;
-        maxHp += 10;
-        hp = maxHp;
-        criticalChance += 1;
-        strength += 2;
-        toughness += 1;
-        nextLevelExp();
+    public void levelUp() { //increase the players stats when leveling up
+        this.level += 1;
+        this.maxHp += 10;
+        this.hp = maxHp;
+        this.criticalChance += 1;
+        this.strength += 2;
+        this.toughness += 1;
         System.out.println(name + " gains:\n+10 Max HP\n+1 Critical Chance\n+2 Strength\n+1 Toughness");
     }
 
