@@ -58,7 +58,8 @@ public class Game {
                     if (monster.getLvl() == 10) {  // check if monster is final boss
                         Text.getBossFightText();
                         combat(player, monster);
-                        Text.ThanksForPlaying();//TODO change message to after killed boss message
+                        Text.getBossFightOverText();
+                        Text.pressToContinue();
                         resetToDefault();
                         break;
                     }
@@ -110,6 +111,7 @@ public class Game {
                 }
                 case 2 -> {  // Use potion
                     player.usePotion(); // player uses healing potion
+                    Text.pressToContinue();
                 }
                 default -> Text.getInvalidChoice();
             }
@@ -133,6 +135,7 @@ public class Game {
 
     public void resetToDefault(){
         player.resetPlayer();
+        makeMonsters();
         shop.resetShop();
         startGame();
     }
@@ -200,9 +203,6 @@ public class Game {
     // method to initiate all monsters
     private void makeMonsters() {
 
-        //TODO do we really want all monsters?
-
-        //initiate all monsters
         //level 1
         Goblin goblin1 = new Goblin("Goblin", 1, 40, 10, 0, 10, 100);
         Orc orc1 = new Orc("Orc", 1, 40, 10, 0, 10, 100);

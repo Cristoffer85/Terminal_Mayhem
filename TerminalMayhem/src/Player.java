@@ -123,6 +123,7 @@ public class Player {
     public void resetPlayer() {
         makePlayer();
         boughtItemList.clear();
+        equippedItemList.clear();
     }
 
     //Check if the user has reached level 9 and is ready to face the final boss
@@ -137,16 +138,6 @@ public class Player {
     //calculation for gold dropped by a monster
     public void setGold(int gold) {
         this.gold += gold;
-    }
-
-
-    public void removeFromInventory(Item item) {
-        boughtItemList.remove(item);
-    } //TODO remove?
-
-    // Add HP after fighting Monster //TODO remove?
-    public void addHP() { // todo? remove unused  method
-        hp = maxHp - hp / 2;
     }
 
     public int getAddHp(){
@@ -201,7 +192,9 @@ public class Player {
     //Add the item to the inventory and equips the item
     public void addToInventory(Item item) {
         boughtItemList.add(item);
-        equipHero(item);
+        if(item instanceof Equipment){
+            equipHero(item);
+        }
     }
 
     //adds the item to the list equippeditems  and add the stats to the player, then removes the item from the list

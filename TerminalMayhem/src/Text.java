@@ -183,6 +183,12 @@ public class Text {
         System.out.println(".... You hear a lurge thud, the kind that only the largest form of set of multiple encyclopedias mounted together could ever perform, \nand there he was, standing right in front of you, Backgammon...");
     }
 
+    public static void getBossFightOverText() {
+        System.out.println("You wipe off your sharpened propeller-wing, and look down on the chopped up pieces of Backgammon.\n" +
+                "Sitting in a corner of terminal 58, you notice Welda looking at you.\n" +
+                "he says, and where the hell have you been! ");
+    }
+
     static void youHaveLevelup() {  //
         System.out.println("Congrats! You have leveled up!");
         System.out.println("");
@@ -199,8 +205,6 @@ public class Text {
         System.out.println("You look in your bag for a healing potion but find none! Turn successfully wasted.");
     }
 
-
-    // todo add attack damage output for player.defence() and monster.defence() to call
     static void playerDamageDone(Player player, Monster monster, int damage) {
         System.out.println("Bang! You slash the " + monster.getName() + " for " + damage + " damage-points." +
                 "\nThe " + monster.getName() + " blocks " + monster.getToughness() + " damage-points." +
