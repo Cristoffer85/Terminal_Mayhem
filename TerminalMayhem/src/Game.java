@@ -200,9 +200,6 @@ public class Game {
     // method to initiate all monsters
     private void makeMonsters() {
 
-        //TODO do we really want all monsters?
-
-        //initiate all monsters
         //level 1
         Goblin goblin1 = new Goblin("Goblin", 1, 40, 10, 0, 10, 100);
         Orc orc1 = new Orc("Orc", 1, 40, 10, 0, 10, 100);

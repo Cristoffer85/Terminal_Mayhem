@@ -199,8 +199,6 @@ public class Text {
         System.out.println("You look in your bag for a healing potion but find none! Turn successfully wasted.");
     }
 
-
-    // todo add attack damage output for player.defence() and monster.defence() to call
     static void playerDamageDone(Player player, Monster monster, int damage) {
         System.out.println("Bang! You slash the " + monster.getName() + " for " + damage + " damage-points." +
                 "\nThe " + monster.getName() + " blocks " + monster.getToughness() + " damage-points." +

@@ -139,16 +139,6 @@ public class Player {
         this.gold += gold;
     }
 
-
-    public void removeFromInventory(Item item) {
-        boughtItemList.remove(item);
-    } //TODO remove?
-
-    // Add HP after fighting Monster //TODO remove?
-    public void addHP() { // todo? remove unused  method
-        hp = maxHp - hp / 2;
-    }
-
     public int getAddHp(){
         return (this.maxHp - this.hp) / 2;
     }  // player regains halv of the missing hp after combat
@@ -201,7 +191,9 @@ public class Player {
     //Add the item to the inventory and equips the item
     public void addToInventory(Item item) {
         boughtItemList.add(item);
-        equipHero(item);
+        if(item instanceof Equipment){
+            equipHero(item);
+        }
     }
 
     //adds the item to the list equippeditems  and add the stats to the player, then removes the item from the list
