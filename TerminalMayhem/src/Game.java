@@ -59,8 +59,7 @@ public class Game {
                         Text.getBossFightText();
                         combat(player, monster);
                         Text.getBossFightOverText();
-                        Text.pressToContinue();
-                        resetToDefault();
+                        System.exit(0);
                         break;
                     }
                 }
@@ -127,17 +126,10 @@ public class Game {
             // If the player dies, breaks loop
             if (player.checkIfDead()) {
                 Text.getPlayerDead();
-                resetToDefault();
+                System.exit(0);
                 break;
             }
         }
-    }
-
-    public void resetToDefault(){
-        player.resetPlayer();
-        makeMonsters();
-        shop.resetShop();
-        startGame();
     }
 
     // in this method the transactions between shop and player are concluded

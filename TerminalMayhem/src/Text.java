@@ -250,12 +250,12 @@ public class Text {
 
     //------------------------END----------------------------------
     static void getPlayerDead() {     //Game over
-        System.out.println(ANSI_GREEN + "Sorry, you´re dead! You were overwhelmed by the dishes.." + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "Sorry, you´re dead! Airtraffic seems like maybe not your main. Maybe try taxiindustry instead?" + ANSI_RESET);
         System.out.println(" ");
     }
 
     static void ThanksForPlaying() {   //Sluttext
-        System.out.println(ANSI_GREEN + "Thank you for playing! You solved all the evil problems related to angry superstressed travellers...!" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "Thank you for playing!" + ANSI_RESET);
         System.out.println(" " );
     }
 
