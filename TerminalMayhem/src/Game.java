@@ -182,7 +182,7 @@ public class Game {
     }
 
     //Control if user input is an integer
-    public int userInputInt() { // makes sure that the userInput is a int
+    public int userInputInt() { // makes sure that the userInput is int
 
         int number = 0;
 
