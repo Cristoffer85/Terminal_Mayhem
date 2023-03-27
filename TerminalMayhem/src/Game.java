@@ -46,6 +46,7 @@ public class Game {
                 default -> Text.getInvalidChoice();
             }
         }
+        System.exit(0);
     }
 
     //method to go look for monsters
