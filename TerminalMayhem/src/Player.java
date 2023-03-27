@@ -123,6 +123,7 @@ public class Player {
     public void resetPlayer() {
         makePlayer();
         boughtItemList.clear();
+        equippedItemList.clear();
     }
 
     //Check if the user has reached level 9 and is ready to face the final boss

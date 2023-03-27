@@ -59,6 +59,7 @@ public class Game {
                         Text.getBossFightText();
                         combat(player, monster);
                         Text.getBossFightOverText();
+                        Text.pressToContinue();
                         resetToDefault();
                         break;
                     }
@@ -110,6 +111,7 @@ public class Game {
                 }
                 case 2 -> {  // Use potion
                     player.usePotion(); // player uses healing potion
+                    Text.pressToContinue();
                 }
                 default -> Text.getInvalidChoice();
             }
@@ -133,6 +135,7 @@ public class Game {
 
     public void resetToDefault(){
         player.resetPlayer();
+        makeMonsters();
         shop.resetShop();
         startGame();
     }
