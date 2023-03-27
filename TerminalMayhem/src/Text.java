@@ -85,11 +85,12 @@ public class Text {
 
     static void getMainMenu() {               //Färg Vit
         System.out.println(
-                "1.Start game.\n" +
-                        "2.See your current stats.\n" +
-                        "3.Shop\n" +
-                        "4.End game." +
-                        "\n"
+                """
+                        1.Start game.
+                        2.See your current stats.
+                        3.Shop
+                        4.End game.
+                        """
         );
         System.out.print("What is your number of choice: ");
     }
@@ -135,9 +136,10 @@ public class Text {
     //-----------------------FIGHT--------------------------------------
     static void getFightMenu() {  //Fightmenu
         System.out.println(
-                        "1.Fight!\n" +
-                        "2.Drink healing potion.\n" +
-                        ""
+                """
+                        1.Fight!
+                        2.Drink healing potion.
+                        """
         );
         System.out.print("What is your number of choice?: ");
     }

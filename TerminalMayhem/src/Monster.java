@@ -6,13 +6,13 @@ public abstract class Monster {
     Random random = new Random();
 
     //initiate variables
-    private String name;
-    private int lvl;
+    private final String name;
+    private final int lvl;
     private int HP;
-    private int strength;
-    private int toughness;
+    private final int strength;
+    private final int toughness;
     private int gold;
-    private int exp;
+    private final int exp;
 
     //constructor for monster class
     public Monster(String name, int lvl, int HP, int strength, int toughness, int gold, int exp) {
