@@ -59,8 +59,7 @@ public class Game {
                         Text.getBossFightText();
                         combat(player, monster);
                         Text.getBossFightOverText();
-                        Text.pressToContinue();
-                        resetToDefault();
+                        System.exit(0);
                         break;
                     }
                 }
@@ -124,17 +123,10 @@ public class Game {
             // If the player dies, breaks loop
             if (player.checkIfDead()) {
                 Text.getPlayerDead();
-                resetToDefault();
+                System.exit(0);
                 break;
             }
         }
-    }
-
-    public void resetToDefault() {
-        player.resetPlayer();
-        makeMonsters();
-        shop.resetShop();
-        startGame();
     }
 
     // in this method the transactions between shop and player are concluded
@@ -269,7 +261,7 @@ public class Game {
         Knight knight9 = new Knight("Knight called Marcus Medina", 9, 64, 26, 16, 90, 450);
 
         //Bossmonster
-        BossMonster bossMonster = new BossMonster("Slime", 10, 200, 28, 20, 1000, 1000);
+        BossMonster bossMonster = new BossMonster("Backgammon", 10, 200, 28, 20, 1000, 1000);
 
         //Add all monsters to list
         monsters.add(goblin1);
