@@ -67,7 +67,7 @@ public class Game {
             } else {
                 for (Monster monster : monsters) {
                     if (monster.getLvl() == player.getLevel()) {
-                        combat(player, monster, game);
+                        game = combat(player, monster, game);
                         monsters.remove(monster); // remove monster from list once defeated
                         break;
                     }
