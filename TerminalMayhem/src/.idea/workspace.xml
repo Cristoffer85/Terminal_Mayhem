@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71e3d992-9c70-407e-89ed-59aa2eb95d1b" name="Changes" comment="Quick fix. Ändrade så att items i shopen börjar på 1 istället för 0." />
+    <list default="true" id="71e3d992-9c70-407e-89ed-59aa2eb95d1b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Game.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,10 +22,18 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="BossFightText" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2NKDXHMFy7yiHVxBTM36qo1Xx4l" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -33,7 +45,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/SchoolProjekt/GropProjekt1/GroupProjekt1/terminal-mayhem/TerminalMayhem/src",
+    "last_opened_file_path": "C:/Users/Crist/OneDrive/Skrivbord/Ny skola - Systemutvecklare Campus Mölndal/IntelliJProjects/GRUPPÖVNINGAR/terminal-mayhem/TerminalMayhem/src",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0"
@@ -54,7 +66,19 @@
       <option name="presentableId" value="LOCAL−00001" />
       <updated>1679579766823</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL−00002" summary="Changed name of endboss">
+      <created>1679917778155</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1679917778155</updated>
+    </task>
+    <task id="LOCAL−00003" summary="Niced up some text in getEndboss description.&#10;&#10;Niced up/added some text in getBossFightOvertext">
+      <created>1679918293559</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1679918293559</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -70,6 +94,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Quick fix. Ändrade så att items i shopen börjar på 1 istället för 0." />
-    <option name="LAST_COMMIT_MESSAGE" value="Quick fix. Ändrade så att items i shopen börjar på 1 istället för 0." />
+    <MESSAGE value="Changed name of endboss" />
+    <MESSAGE value="Niced up some text in getEndboss description.&#10;&#10;Niced up/added some text in getBossFightOvertext" />
+    <option name="LAST_COMMIT_MESSAGE" value="Niced up some text in getEndboss description.&#10;&#10;Niced up/added some text in getBossFightOvertext" />
   </component>
 </project>

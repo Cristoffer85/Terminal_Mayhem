@@ -52,7 +52,7 @@ public class Game {
     private boolean goAdventuring(Player player, boolean game) {
 
         int isItAFight = random.nextInt(100);
-        
+
         if (isItAFight <= 10) { // 90% chance of a fight
 
             Text.nothingHappened(); // 10% chance of nothing happening, prints message about it
@@ -120,7 +120,7 @@ public class Game {
                     player.usePotion(); // player uses healing potion
                     Text.pressToContinue();
                 }
-                default -> Text.getInvalidChoice();
+                default -> Text.getWastedTurnText();
             }
 
             if (monster.checkIfDead()) { //exit the loop if the monster is dead
@@ -141,45 +141,44 @@ public class Game {
         return game;
     }
 
-    public void resetToDefault(){
-        player.resetPlayer();
-        makeMonsters();
-        shop.resetShop();
-        startGame();
-    }
-
     // in this method the transactions between shop and player are concluded
     private void goShopping() {
         player.setGold(400); //TODO remove this when done testing
-        boolean runGoShopping=true;
-        while (shop.inventorySize() > 0 && runGoShopping ) { // loop runs until the shop is out of items
+        boolean runGoShopping = true;
+        while (shop.inventorySize() > 0 && runGoShopping) { // loop runs until the shop is out of items
             Text.getShopMenu(player);
             shop.showItems();
 
-            try{ // try catch to catch invalid input
-                int itemToBuy = userInputInt() -1;
+            try { // try catch to catch invalid input
+                int itemToBuy = userInputInt() - 1;
 
+                if (itemToBuy + 1 == 0) {
+                    Text.thanksForShopping();
+                    Text.pressToContinue();
+                    runGoShopping = false;
+                    break;
+                }
                 if (shop.getPrice(itemToBuy) <= player.getGold()) { //check if player has enough money
                     Text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
                     player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
                     player.addToInventory(shop.buyItem(itemToBuy)); // Add item to player inventory and equips it
 
-                    if (shop.inventorySize() <= 0){ // if the shop is out of items it prints a message and exits the loop
+                    if (shop.inventorySize() <= 0) { // if the shop is out of items it prints a message and exits the loop
                         Text.getnoMoreWares();
                         mainSwitch();
                     } else {
-                         boolean run=true;
-                         while(run) {
-                             // if the player wants to buy more stuff
-                              Text.doYouWantToBuyMore();
+                        boolean run = true;
+                        while (run) {
+                            // if the player wants to buy more stuff
+                            Text.doYouWantToBuyMore();
                             int buyMore = userInputInt();
                             if (buyMore == 1) {
-                                runGoShopping=true;
-                                run=false;
+                                runGoShopping = true;
+                                run = false;
                             } else if (buyMore == 2) {
                                 Text.thanksForShopping();
-                                runGoShopping=false;
-                                run=false;
+                                runGoShopping = false;
+                                run = false;
                             } else {
                                 Text.getInvalidChoice();
                             }
@@ -275,7 +274,7 @@ public class Game {
         Knight knight9 = new Knight("Knight called Marcus Medina", 9, 64, 26, 16, 90, 450);
 
         //Bossmonster
-        BossMonster bossMonster = new BossMonster("Slime", 10, 200, 28, 20, 1000, 1000);
+        BossMonster bossMonster = new BossMonster("Backgammon", 10, 200, 28, 20, 1000, 1000);
 
         //Add all monsters to list
         monsters.add(goblin1);
