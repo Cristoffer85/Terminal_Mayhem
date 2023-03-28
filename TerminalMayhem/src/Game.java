@@ -6,8 +6,7 @@ import java.util.Scanner;
 public class Game {
 
     //initiate objects
-    private boolean game = true; // used by mainSwitch() for keeping loop running
-    HealingPotion healingPotion = new HealingPotion(); // todo remove
+    private boolean game = true; // used by mainSwitch() to keeping game running. Set to false when player dies or final boss defeated
     Player player = new Player();
     ArrayList<Monster> monsters = new ArrayList<>();
     Shop shop = new Shop();
@@ -31,31 +30,42 @@ public class Game {
 
     // main game loop method
     private void mainSwitch() {
+        /*
+          Main loop that keeps the game running.
+          Uses a class boolean to keep track of player death and Final boss defeated witch breaks the loop
+         */
 
-        while (game) {
+        while (this.game) {
             Text.getMainMenu();
             int mainMenuChoice = userInputInt();
 
             switch (mainMenuChoice) {
-                case 1 -> goAdventuring(player);
+                case 1 -> goAdventuring(player); // looking for trouble eh?
                 case 2 -> {
-                    Text.getPlayerStatText();
+                    Text.getPlayerStatText();    // shows player stats
                     player.showHero();
                     Text.pressToContinue();
                 }
-                case 3 -> goShopping();
-                case 4 -> {
+                case 3 -> goShopping();          // opens the shop
+                case 4 -> {                      // exit the game
                     Text.ThanksForPlaying();
                     System.exit(0);
                 }
                 default -> Text.getInvalidChoice();
             }
         }
-        System.exit(0); // todo remove?
+        System.exit(0); // If we want a message independent of game outcome it should go here
     }
 
     //method to go look for monsters
     private void goAdventuring(Player player) {
+        /*
+          When player selects start game from mainSwitch this method decides what will happen
+          10% a text message
+          90% fight a monster
+          player level 9 or above will encounter final boss and then the game ends.
+          Before leaving method checks if the player leveled up.
+          */
 
         int isItAFight = random.nextInt(100);
 
@@ -82,14 +92,16 @@ public class Game {
         player.checkIfLevelUp();  // check if player has reached a new level and adds stats. Can trigger multiple level++
     }
 
-    private void finalEncounter(Player player) {  // for final boss text and select final boss as monster
+    private void finalEncounter(Player player) {
+
+        // Final boss. Boss text and select final boss as monster
         for (Monster monster : monsters) {
-            if (monster.getLvl() == 10) {  // check if monster is final boss
+            if (monster.getLvl() == 10) {  // the only level 10 monster is final boss
                 Text.getBossFightText();
                 combat(player, monster);  //  combat()
                 Text.getBossFightOverText(); //
                 Text.pressToContinue();
-                this.game = false; // False breaks the mainSwitch loop. Hard typed to false for prevent bug with player dying.
+                this.game = false; // False breaks the mainSwitch loop. Hard typed to false for prevent bug with player dying in encounter.
             }
         }
     }
@@ -100,49 +112,48 @@ public class Game {
         Text.getRewardtext(player, monster);
         player.setGold(monster.dropGold());
         player.setExp(monster.dropExp());
-        player.getAddHp();
-
+        player.getAddHp(); // after combat player regains half of their missing health
     }
 
     //Initiate battle between player and selected monster.
     private void combat(Player player, Monster monster) {  // "Without Pain, Without Sacrifice, We Would Have Nothing."
 
         Text.aMonsterAppears(monster, monster.getName());
-
+        /* Loops until the player or monster dies
+        */
         while (true) {
             //User choice to attack or use a potion
             Text.getFightMenu();
             int fightChoice = userInputInt();
 
             switch (fightChoice) {
-                case 1 -> {
-                    monster.defence(player); //Player attack, changes monster HP and displays message of damage
+                case 1 -> { // Player attack
+                    monster.defence(player); // calculates damage to monster setHP and prints message
                     Text.pressToContinue();
                 }
-                case 2 -> {  // Use potion
-                    player.usePotion(); // player uses healing potion
+                case 2 -> {  // player uses healing potion
+                    player.usePotion(); // adds health to player if Healing Potion in inventory.
                     Text.pressToContinue();
                 }
                 default -> Text.getWastedTurnText();
             }
 
-            if (monster.checkIfDead()) { //exit the loop if the monster is dead
+            if (monster.checkIfDead()) { //breaks the combat loop if the monster is dead
                 givePlayerReward(player, monster); // gives the player loot
                 break;
             }
             //If Monster is alive it attacks player
-            player.defence(monster); // changes the player health and displays damage message
+            player.defence(monster); // calculates damage to player setHP and prints message
             Text.pressToContinue();
 
-            // If the player dies, breaks loop
+            // If the player dies, breaks loop in mainSwitch and the game quits
             if (player.checkIfDead()) {
                 Text.getPlayerDead();
-                this.game = false; // player died break mainSwitch
+                this.game = false; // breaks mainSwitch
+                break;
             }
         }
-
     }
-
     // in this method the transactions between shop and player are concluded
     private void goShopping() { // "The Things You Own End Up Owning You."
         player.setGold(400); //TODO remove this when done testing
@@ -197,12 +208,9 @@ public class Game {
             }
         }
     }
-
-
-
     //Control if user input is an integer
     public int userInputInt() { // makes sure that the userInput is int
-
+        
         int number = 0;
 
         while (true) {
@@ -218,7 +226,6 @@ public class Game {
         }
         return number;
     }
-
     // method to initiate all monsters
     private void makeMonsters() {
 
