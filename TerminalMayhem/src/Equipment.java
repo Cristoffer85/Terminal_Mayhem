@@ -2,8 +2,9 @@
  * @author Kristian Karlson
  *
  * Make equipment the player can buy in shop and equip
- * Empty constructor to catch null parameter constructor calls will create "Random crap" with no stats
  *
+ * Equipment() zero parameter constructor create "Random crap" with no stats
+ * Equipment() calls Super constructor in Item
  */
 public class Equipment extends Item {
 
