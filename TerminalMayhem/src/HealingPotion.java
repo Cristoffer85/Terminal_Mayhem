@@ -1,6 +1,5 @@
 /**
  * @author Kristian Karlson
- *
  * creates healingPotions "Potion of life" that are sold in the shop
  * Player can buy and keep in inventory
  *

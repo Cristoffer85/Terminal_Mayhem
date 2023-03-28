@@ -1,8 +1,6 @@
 /**
  * @author Kristian Karlson
- *
  * Make equipment the player can buy in shop and equip
- *
  * Equipment() zero parameter constructor create "Random crap" with no stats
  * Equipment() calls Super constructor in Item
  */

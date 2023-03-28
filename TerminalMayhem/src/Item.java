@@ -1,9 +1,7 @@
 /**
  * @author Kristian Karlson
- *
  * Abstract class to prevent construction of items.
  * Subclasses are Equipment and HealingPotion.
- *
  * Item() : item zero parameter constructor not currently i use
  * Item() : item creates items of type Equipment and Healingpotion
  * getName() : String return item name
