@@ -2,10 +2,14 @@ import java.util.ArrayList;
 
 /**
  * @author Kristian Karlson
- * Used by Game for the goShopping()
+ * Used by Game and acessed by Game.goShopping()
  * Created at start of Game. Shop fills in self with items
- * Displays items
- * Sells items as Object
+ *
+ * inventorySize() : int size of ArrayList items
+ * showItems() Displays items list to console
+ * getPrice() : int price of specific entry in items
+ * buyItem() : Item "sells" the contetent of items as Object
+ * getName() : String used to dislplay name of purchased item
  *
  */
 public class Shop {

@@ -1,7 +1,7 @@
 /**
  * @author Kristian Karlson
  *
- * Creates healing potions "Potion of life" that are sold in the shop
+ * HealingPotion() Creates healingPotions "Potion of life" that are sold in the shop
  * Player can buy and keep in inventory
  *
  */
