@@ -13,7 +13,7 @@ public class Player {
     private int gold;       //save Players gold
     private int criticalChance; // save Players ciritical Chance
 
-    Random random;
+    Random random; //save random instans
 
     //ArrayList for saving bought Item
     ArrayList<Item> boughtItemList;
@@ -25,11 +25,11 @@ public class Player {
         random = new Random();
         boughtItemList = new ArrayList<>();
         equippedItemList = new ArrayList<>();
-        makePlayer();
+        makePlayer();//
     }
 
     //The initial status of the player
-    public void makePlayer() { // todo suggestion to reset the game delete the player object and create an new one
+    public void makePlayer() {
         level = 1;
         maxHp = 100;
         hp = maxHp;
@@ -112,12 +112,6 @@ public class Player {
         System.out.println(name + " gains:\n+10 Max HP\n+1 Critical Chance\n+2 Strength\n+1 Toughness");
     }
 
-    //reset all the values
-    public void resetPlayer() {
-        makePlayer();
-        boughtItemList.clear();
-        equippedItemList.clear();
-    }
 
     //Check if the player has reached level 9 and is ready to face the final boss
     public boolean readyForFinalBoss() {

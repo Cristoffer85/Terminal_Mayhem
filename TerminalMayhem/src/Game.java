@@ -87,7 +87,7 @@ public class Game {
             if (monster.getLvl() == 10) {  // check if monster is final boss
                 Text.getBossFightText();
                 combat(player, monster);  //  combat()
-                Text.getBossFightOverText();
+                Text.getBossFightOverText(); //
                 Text.pressToContinue();
                 this.game = false; // False breaks the mainSwitch loop. Hard typed to false for prevent bug with player dying.
             }
@@ -174,15 +174,15 @@ public class Game {
                             // if the player wants to buy more stuff
                             Text.doYouWantToBuyMore();
                             int buyMore = userInputInt(); //save userInput
-                            if (buyMore == 1) {           // Go back to main shopping menu
-                                runGoShopping = true;
-                                run = false;
-                            } else if (buyMore == 2) { //end shopping menu
-                                Text.thanksForShopping();
-                                runGoShopping = false;
-                                run = false;
+                            if (buyMore == 1) {           //1 is go back to main shopping menu
+                                runGoShopping = true;     // Continue loop for main shopping menu
+                                run = false;               //Exit doYouWantToBuyMore loop
+                            } else if (buyMore == 2) { //2 is finish shopping
+                                Text.thanksForShopping();// show thanks message
+                                runGoShopping = false; // Exit loop for main shopping menu
+                                run = false;           // Exit doYouWantToBuyMore loop
                             } else {
-                                Text.getInvalidChoice();  //showing error message
+                                Text.getInvalidChoice();  //If player input something other than 1,2 display an error message
                             }
                         }
 
