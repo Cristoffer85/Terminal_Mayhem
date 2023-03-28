@@ -123,7 +123,7 @@ public class Game {
         while (true) {
             //User choice to attack or use a potion
             Text.getFightMenu(); // prints fight menu
-            int fightChoice = userInputInt(); // takes user input and checks if its an integer
+            int fightChoice = userInputInt(); // takes user input and checks if it's an integer
 
             switch (fightChoice) {
                 case 1 -> { // Player attack
@@ -207,8 +207,9 @@ public class Game {
         }
     }
     //Control if user input is an integer
-    public int userInputInt() { // makes sure that the userInput is int
-        
+    public int userInputInt() { 
+        /* Used to prevent input other than int. loops until user input is valid
+        */
         int number = 0; // initialize number
 
         while (true) {  // loop until user inputs an integer
@@ -219,7 +220,6 @@ public class Game {
 
                 System.out.print("A non-numeric input has been detected.\nPlease enter a valid input: ");
                 scanner.nextLine(); // here to eat the feed line that scanner.nextInt() misses
-
             }
         }
         return number; // returns the user input
