@@ -2,24 +2,17 @@ import java.util.ArrayList;
 
 /**
  * @author Kristian Karlson
+ * Used by game for the goShopping
+ * Created at start of Game. Shop fills in self with items
+ *
  */
 public class Shop {
-
     private ArrayList<Item> items;
-    Equipment equipment; // todo remove
-    HealingPotion healingPotion; // todo remove
 
     public Shop() {
-        // Fills the shop with items
-        // equipment = new Equipment("The Cat's Eye Amulet"); //todo remove
-        // healingPotion = new HealingPotion(); // todo remove
         items = new ArrayList<>();
-
-        addDefaultItems();  // todo instead of reset shop delete the shop object and create an new one?
-    }
-
-    public void addDefaultItems() {
-        // new Equipment (String name, int maxHpBoost, int strengthBoost, int toughnessBoost, int criticalChanceBoost, int potionValue, int price)
+        /* Item properties = itemName +maxHP +strength + toughness +criticalChance + healingPotionValue Price
+           Ok to create  +/-/0 values. But player stats will display bugged if player stats go below zero. */
         this.items.add(new Equipment("The Cat's Eye Amulet", 5, 5, 2, 1, 0, 69));
         this.items.add(new Equipment("The Ring of the Unlucky", 0, 0, 0, -10, 0, 10));  // idé? ge varan negativt pris och ge spelaren möjlighet att inte equipa den
         this.items.add(new Equipment("The Ruby axe of Joy", 0, 8, 0, 4, 0, 200));
@@ -28,23 +21,23 @@ public class Shop {
         this.items.add(new HealingPotion());
     }
 
-    public void resetShop() {  // todo instead of reset shop delete the shop object and create an new one?
-        items.clear();
-        addDefaultItems();
+    public int inventorySize() {
+        // Checks if the shop contains items. To prevent game crash from opening empty arrayList.
+        return items.size();
     }
 
-    public int inventorySize() {
-        return items.size();
-    } // used by game to not open the shop if its empty
+    public void showItems() {
+        /* display all available items in the shop.
+           Used for each loop to make the code more readable
+           index to select items from when buying. Game reduces user input with -1 to point at the correct item
 
-    public void showItems() { // loop to meet requirements for the assignment
-        // display all available items in the shop
-        int index = 1;  // number to select items from when buying
-        for (Item item : items) {  // used for each loop to make the code more readable
-            if (item instanceof HealingPotion) {   // Done to show of usage of instanceof
-                System.out.println(index + " " + item.getName() + ", gives " + item.getPotionValue() + " Health points, costs: " + item.getPrice() + " gold");
-            } else {
-                System.out.println(index + " " + item.toString()); // prints item stats that are greater then 0
+        */
+        int index = 1;  //
+        for (Item item : items) {  //
+            if (item instanceof HealingPotion) {   // different println for Healing potions
+                System.out.println(index + " " + item.getName() + ", adds " + item.getPotionValue() + " Health points, price: " + item.getPrice() + " gold");
+            } else { // print all other items with @Override toString. when this comment were written only other typ was Equipment
+                System.out.println(index + " " + item.toString()); // prints index number for user and item stats that are !0
             }
             index++;
         }
