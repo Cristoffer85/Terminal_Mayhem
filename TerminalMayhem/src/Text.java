@@ -33,23 +33,28 @@ Metod getBossFightText()
 import java.util.Scanner;
 
 public class Text {
+    static Scanner scanner = new Scanner(System.in).useDelimiter("\n"); //Scanner+delimiter to only accept specific "Enter" as a valid choice, method "pressToContinue"further down
 
-    static final String ANSI_RESET = "\u001B[0m";
-    static final String ANSI_RED = "\u001B[31m";
-    static final String ANSI_GREEN = "\u001B[32m";
-    static final String ANSI_YELLOW = "\u001B[33m";
+    //------------------------------FONT-------------------------------------------
+    static final String RESET = "\u001B[0m";
+    static final String RED_REG = "\u001B[31m";
+    static final String GREEN_REG = "\u001B[32m";
+    static final String YELLOW_REG = "\u001B[33m";
     //Some color to make the output nicer. Restricted down to only 3 Colors + 1 reset, to make the code cleaner.
-    //Colors are static and final, since they don't change.
-    static final String TEXTBOLD = "\033[0;1m"; //Bold font for some special text-choices
-    static Scanner scanner = new Scanner(System.in).useDelimiter("\n"); //Scanner+delimiter to only accept specific "Enter" as a valid choice
+    //Colors are static and final, since they don't change. Every text-String in Capital to easier see, and find.
+    public static final String RED_BOLD = "\033[1;31m";
+    public static final String YELLOW_BOLD = "\033[1;33m";
+    public static final String WHITE_BOLD = "\033[1;37m";
+    //Bold font for some special text-choices.
+    //-----------------------------------------------------------------------------
 
     //----------------------INITIAL MENUS + STORY----------------------------------
     static void getWelcomeText() {     //Initial startmenu, user create hero
         System.out.print(
-           ANSI_GREEN + "##############################################################\n" +
+           GREEN_REG + "##############################################################\n" +
                         "   Welcome to the fantastic adventures of Terminal Mayhem     \n" +
-                        "##############################################################\n" + ANSI_RESET +
-          ANSI_YELLOW + "                                                              \n" +
+                        "##############################################################\n" + RESET +
+          YELLOW_REG + "                                                              \n" +
                         "                        %%%%%%%%%%%%%@@                       \n" +
                         "                   %%%%%@      |      /@%%%@                  \n" +
                         "                @%%&/|         |        | @%%&                \n" +
@@ -64,24 +69,24 @@ public class Text {
                         "                    /@%%%      |      %%%%@                   \n" +
                         "                        %%%%%%%%%%%%%@@                       \n" +
                         "                                                              \n" +
-           ANSI_GREEN + "##############################################################\n" + ANSI_RESET +
+                   GREEN_REG + "##############################################################\n" + RESET +
                         "                                                              \n" +
-             TEXTBOLD + "Please enter your hero:s name: " + ANSI_RESET
+             YELLOW_BOLD + "Please enter your hero:s name: " + RESET
         );
     }
 
     static void getIntrotext(String playerName) {        //Textstory
-        System.out.println(ANSI_GREEN +
+        System.out.println(GREEN_REG +
                 "\n" +
                 " ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤\n" +
-                "|This is the story of " + TEXTBOLD + playerName + ANSI_RESET + ANSI_GREEN + ", sibling of " + ANSI_YELLOW + "KLink" + ANSI_RESET + ANSI_GREEN + " (who is now on a well-earned vacation somewhere in the midwest Maldives..)                                                      \n" +
+                "|This is the story of " + WHITE_BOLD + playerName + RESET + GREEN_REG + ", sibling of " + YELLOW_REG + "KLink" + RESET + GREEN_REG + " (who is now on a well-earned vacation somewhere in the midwest Maldives..)                                                      \n" +
                 "|In the land of Tyrule, you´re a tyre-changing pro and this story is about your perilous journey set right in that kingdom.                                                                                    \n" +
                 "|                                                                                                                                                                                                              \n" +
                 "|The Tyrule Kingdom is a mysterious and wonderous gigantic airport terminal in the shape of a Tyre, where you daily scour the lands fighting various evil monsters and charter troubles..                      \n" +
                 "|Your ultimate goal here is to surpass all the obstacles, encounter both funnier and unfunnier stuffs and lastly but not least..                                                     \n" +
                 "|Defeat the evil tyrant Backgammon, which holds your dear Welding-expert partner Welda captured in terminal 5B.                                                                                                \n" +
                 " ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤  " +
-                "\n" + ANSI_RESET
+                "\n" + RESET
         );
     }
 
@@ -94,20 +99,20 @@ public class Text {
                         4.End game.
                         """
         );
-        System.out.print(TEXTBOLD + "What is your number of choice: " + ANSI_RESET);
+        System.out.print(YELLOW_BOLD + "What is your number of choice: " + RESET);
     }
     //-------------------------------------------------------------
 
 
     //--------------------SHOP-------------------------------------       //"Clustered" everything related to shop etc into one separate place, using "-----" as spacers, to make the code more readable.
     static void getShopMenu(Player player) { //Shopmenu div.
-        System.out.println(ANSI_GREEN +
-                "------------Welcome to the shop!------------\nThis are the wares available right now." + ANSI_RESET
+        System.out.println(GREEN_REG +
+                "------------Welcome to the shop!------------\nThis are the wares available right now." + RESET
         );
         System.out.println("You have :" + player.getGold() + " Gold");
         System.out.println();
-        System.out.println(ANSI_GREEN + "If you dont want to buy anything right now press 0" + ANSI_RESET);
-        System.out.println(ANSI_GREEN + TEXTBOLD + "What is your number of choice?: " + ANSI_RESET);
+        System.out.println(GREEN_REG + "If you dont want to buy anything right now press 0" + RESET);
+        System.out.println(GREEN_REG + YELLOW_BOLD + "What is your number of choice?: " + RESET);
         System.out.println();
 
     }
@@ -117,7 +122,7 @@ public class Text {
     }
 
     static void doYouWantToBuyMore() {  //Köpa mer?
-        System.out.println(ANSI_YELLOW + TEXTBOLD + "Do you want to purchase something more? \n" + ANSI_RESET);
+        System.out.println(YELLOW_REG + YELLOW_BOLD + "Do you want to purchase something more? \n" + RESET);
         System.out.println("1.Yes or 2.No");
         System.out.println();
     }
@@ -128,11 +133,11 @@ public class Text {
     }
 
     static void inSufficient() {  //Insufficient gold
-        System.out.println(ANSI_RED + "Insufficient Gold!" + ANSI_RESET);
+        System.out.println(RED_REG + "Insufficient Gold!" + RESET);
     }
 
     static void thanksForShopping() {  //Shoptext thank you for shopping
-        System.out.println(ANSI_YELLOW + "Thank you for shopping!" + ANSI_RESET);
+        System.out.println(YELLOW_REG + "Thank you for shopping!" + RESET);
     }
     //------------------------------------------------------------------
 
@@ -145,66 +150,66 @@ public class Text {
                         2.Drink healing potion.
                         """
         );
-        System.out.print(TEXTBOLD + "What is your number of choice?: " + ANSI_RESET);
+        System.out.print(YELLOW_BOLD + "What is your number of choice?: " + RESET);
     }
 
     //---------------------Fight monsters-----------        // Monster-section
     static void aMonsterAppears(Monster monster,String monsterName) {
         if (monster instanceof Goblin){
-            System.out.println(ANSI_GREEN + "From a terminal entrance you hear someone scream! \n" + monster.monsterScream() + ANSI_RESET);
-            System.out.println(ANSI_GREEN + "\n*** A wild " + monsterName + " appears! ***\n" + ANSI_RESET);
+            System.out.println(GREEN_REG + "From a terminal entrance you hear someone scream! \n" + monster.monsterScream() + RESET);
+            System.out.println(GREEN_REG + "\n*** A wild " + monsterName + " appears! ***\n" + RESET);
         }
         if (monster instanceof Demon){
-            System.out.println(ANSI_GREEN + "From a far distant dimension (that could also be an airplanemotor) a piercing scream says \n" + monster.monsterScream() + ANSI_RESET);
-            System.out.println(ANSI_GREEN + "\n*** A wild " + monsterName + " appears! ***\n" + ANSI_RESET);
+            System.out.println(GREEN_REG + "From a far distant dimension (that could also be an airplanemotor) a piercing scream says \n" + monster.monsterScream() + RESET);
+            System.out.println(GREEN_REG + "\n*** A wild " + monsterName + " appears! ***\n" + RESET);
         }
         if (monster instanceof Dragon){
-            System.out.println(ANSI_GREEN + "When you pass between buildings a a piercing scream from the skies says \n" + monster.monsterScream() + ANSI_RESET);
-            System.out.println(ANSI_GREEN + "\n*** A wild " + monsterName + " appears! ***\n" + ANSI_RESET);
+            System.out.println(GREEN_REG + "When you pass between buildings a a piercing scream from the skies says \n" + monster.monsterScream() + RESET);
+            System.out.println(GREEN_REG + "\n*** A wild " + monsterName + " appears! ***\n" + RESET);
         }
         if (monster instanceof Knight){
-            System.out.println(ANSI_GREEN + "When you casually walk from the torched barista place for your daily java, \nyou turn around to see a man scream \n" + monster.monsterScream() + ANSI_RESET);
-            System.out.println(ANSI_GREEN + "\n*** A wild " + monsterName + " appears! ***\n" + ANSI_RESET);
+            System.out.println(GREEN_REG + "When you casually walk from the torched barista place for your daily java, \nyou turn around to see a man scream \n" + monster.monsterScream() + RESET);
+            System.out.println(GREEN_REG + "\n*** A wild " + monsterName + " appears! ***\n" + RESET);
         }
         if (monster instanceof Mercenary){
-            System.out.println(ANSI_GREEN + "Some ragged looking fella jumps out of the roof-panels, sticks a knife in your face and whispers \n" + monster.monsterScream() + ANSI_RESET);
-            System.out.println(ANSI_GREEN + "\n*** A wild " + monsterName + " appears! ***\n" + ANSI_RESET);
+            System.out.println(GREEN_REG + "Some ragged looking fella jumps out of the roof-panels, sticks a knife in your face and whispers \n" + monster.monsterScream() + RESET);
+            System.out.println(GREEN_REG + "\n*** A wild " + monsterName + " appears! ***\n" + RESET);
         }
         if (monster instanceof Skeleton){
-            System.out.println(ANSI_GREEN + "Something is moving in the darkness of the old toilets on terminal 12, you hear \n" + monster.monsterScream() + ANSI_RESET);
-            System.out.println(ANSI_GREEN + "\n*** A wild " + monsterName + " appears! ***\n" + ANSI_RESET);
+            System.out.println(GREEN_REG + "Something is moving in the darkness of the old toilets on terminal 12, you hear \n" + monster.monsterScream() + RESET);
+            System.out.println(GREEN_REG + "\n*** A wild " + monsterName + " appears! ***\n" + RESET);
         }
         if (monster instanceof Minotauros){
-            System.out.println(ANSI_GREEN + "When meeting a man who says his hat of foil might be the next big thing,\n the ground suddenly shakes and you hear a roaring \n" + monster.monsterScream() + ANSI_RESET);
-            System.out.println(ANSI_GREEN + "\n*** A wild " + monsterName + " appears! ***\n" + ANSI_RESET);
+            System.out.println(GREEN_REG + "When meeting a man who says his hat of foil might be the next big thing,\n the ground suddenly shakes and you hear a roaring \n" + monster.monsterScream() + RESET);
+            System.out.println(GREEN_REG + "\n*** A wild " + monsterName + " appears! ***\n" + RESET);
         }
         if (monster instanceof Orc){
-            System.out.println("As you enter a half wrecked bagage-trolly, you hear someone outside say  \n" + monster.monsterScream() + ANSI_RESET);
-            System.out.println(ANSI_GREEN + "\n*** A wild " + monsterName + " appears! ***\n" + ANSI_RESET);
+            System.out.println("As you enter a half wrecked bagage-trolly, you hear someone outside say  \n" + monster.monsterScream() + RESET);
+            System.out.println(GREEN_REG + "\n*** A wild " + monsterName + " appears! ***\n" + RESET);
         }
         if (monster instanceof Zombie){
-            System.out.println(ANSI_GREEN + "You try to catch some Z´s in a watchstore in terminal 3, but the ticktock of a clock keeps you awake\n, luckily for you cuz the air suddenly smells foul and you hear \n" + monster.monsterScream() + ANSI_RESET);
-            System.out.println(ANSI_GREEN + "\n*** A wild " + monsterName + " appears! ***\n" + ANSI_RESET);
+            System.out.println(GREEN_REG + "You try to catch some Z´s in a watchstore in terminal 3, but the ticktock of a clock keeps you awake\n, luckily for you cuz the air suddenly smells foul and you hear \n" + monster.monsterScream() + RESET);
+            System.out.println(GREEN_REG + "\n*** A wild " + monsterName + " appears! ***\n" + RESET);
         }
     }
     //-----------------Fight various outputs---------------------------       //more general fight outputs
     static void youHaveLevelup() {  //
-        System.out.println(ANSI_YELLOW + "Congrats! You have leveled up!" + ANSI_RESET);
+        System.out.println(YELLOW_REG + "Congrats! You have leveled up!" + RESET);
     }
 
     static void nothingHappened() {  //
-        System.out.println(ANSI_GREEN + "An extremely weird day in the kingdom, where you just encounter random empty baggage carts and lost tourists from Malta.. " + ANSI_RESET);
+        System.out.println(GREEN_REG + "An extremely weird day in the kingdom, where you just encounter random empty baggage carts and lost tourists from Malta.. " + RESET);
     }
 
     static void playerUsedPotion(String playerName, int healingPoints) {
-        System.out.println(ANSI_YELLOW + playerName + " has used a potion and added " + healingPoints + " health-points." + ANSI_RESET);
+        System.out.println(YELLOW_REG + playerName + " has used a potion and added " + healingPoints + " health-points." + RESET);
     }
     static void playerDontHavePotion(){
-        System.out.println(ANSI_YELLOW + "You look in your bag for a healing potion but find none! Turn successfully wasted." + ANSI_RESET);
+        System.out.println(YELLOW_REG + "You look in your bag for a healing potion but find none! Turn successfully wasted." + RESET);
     }
 
     static void playerDamageDone(Monster monster, int damage) {       //Player damage to monster
-        System.out.println(ANSI_RED + TEXTBOLD + "BANG!\n" + ANSI_RESET +
+        System.out.println(RED_BOLD + "BANG!\n" + RESET +
                 "You slash the " + monster.getName() + " for " + damage + " damage-points." +
                 "\nThe " + monster.getName() + " blocks " + monster.getToughness() + " damage-points.");
                 if (monster.getHP() <= 0){ // if monster health is less than or equal to 0, print only 0, to avoid negative numbers
@@ -215,7 +220,7 @@ public class Text {
     }
 
     static void monsterDamageDone(Player player, Monster monster, int damage) {    //Monster damage to player
-        System.out.println(ANSI_RED + TEXTBOLD + "Uuuuraahhhhh!\n" + ANSI_RESET +
+        System.out.println(RED_BOLD + "Uuuuraahhhhh!\n" + RESET +
                 "the " + monster.getName() + " hits you hard!\n");
                 if (damage <= 0) {  // if damage is less than or equal to 0, alter print to avoid negative numbers
                     System.out.println("You successfully block the " + monster.getName() + "s attack\n"
@@ -235,43 +240,43 @@ public class Text {
     }
     //------------------------EndBoss-fight text---------------------
     static void getBossFightText() {   //Describes endboss, initial turn to give more feeling in the game
-        System.out.println(ANSI_GREEN + ".... You hear a lurge thud, the kind that only the largest set of multiple encyclopedias mounted together could ever perform, \n" +
-                "and there he was, standing right in front of you, " + TEXTBOLD + "BACKGAMMON" + ANSI_RESET +"...");
+        System.out.println(GREEN_REG + ".... You hear a lurge thud, the kind that only the largest set of multiple encyclopedias mounted together could ever perform, \n" +
+                "and there he was, standing right in front of you, " + RED_BOLD + "BACKGAMMON" + RESET +"...");
     }
 
     public static void getBossFightOverText() {   //Endboss text after endboss defeated.
-        System.out.println(ANSI_GREEN +
+        System.out.println(GREEN_REG +
                 "You wipe off your sharpened propeller-wing, and look down on the chopped up pieces of Backgammon..\n" +
                 "Then in a corner of your eye, you notice something, sitting down in a damp and dark end of terminal 5B - Welda, sitting down looking at you indifferently.. \n" +
-                "And finally says - And where the "+ TEXTBOLD + "Hell" + ANSI_RESET + ANSI_GREEN + "have you been!?" +
+                "And finally says - And where the "+ WHITE_BOLD + "Hell" + RESET + GREEN_REG + "have you been!?" +
                 "And then steals the only ticket left in the terminal and flies home while listening to Motley Crue on loudest volume in its headphones," +
-                "leaving you entirely alone in the kingdom." + ANSI_RESET);
+                "leaving you entirely alone in the kingdom." + RESET);
     }
     //-------------------------------------------------------------
 
     //---------------------RANDOM----------------------------------
     static void getPlayerStatText() {  //Stats for hero        //
-        System.out.println(ANSI_GREEN + "Here are the current statistics of your Hero: " + ANSI_RESET);
+        System.out.println(GREEN_REG + "Here are the current statistics of your Hero: " + RESET);
     }
 
     static void getInvalidChoice() {    //Invalid choice
-        System.out.println(ANSI_RED + "Im sorry, but you´ve made an incorrect choice." + ANSI_RESET);
+        System.out.println(RED_REG + "Im sorry, but you´ve made an incorrect choice." + RESET);
     }
 
     static void getWastedTurnText() {    //Get text for the wasted turn
-        System.out.println(ANSI_RED + "Im sorry, but you´ve made an incorrect choice..\n" +
-                "...no im not , you´ve just wasted your turn!" + ANSI_RESET);
+        System.out.println(RED_REG + "Im sorry, but you´ve made an incorrect choice..\n" +
+                "...no im not , you´ve just wasted your turn!" + RESET);
     }
 
     static void pressToContinue() {      //Press to continue while-loop, to make sure the input is only valid as enter, and nothing else.
         boolean run=true;
         while(run) {
-            System.out.println(ANSI_YELLOW + TEXTBOLD + "Press enter to continue.." + ANSI_RESET);
+            System.out.println(YELLOW_BOLD + "Press enter to continue.." + RESET);
             String input = scanner.nextLine();
             if (input.equals("")) {
                 run = false;
             } else {
-                System.out.println(ANSI_RED+"Invalid input."+ANSI_RESET);
+                System.out.println(RED_REG+"Invalid input."+RESET);
             }
         }
     }
@@ -280,13 +285,13 @@ public class Text {
 
     //------------------------END----------------------------------
     static void getPlayerDead() {     //Game over
-        System.out.println(ANSI_GREEN + "Sorry, you´re dead! Airtraffic seems like maybe not your mainline of business.. " +
-                "Maybe try the taxiindustry instead?" + ANSI_RESET);
+        System.out.println(GREEN_REG + "Sorry, you´re dead! Airtraffic seems like maybe not your mainline of business.. " +
+                "Maybe try the taxiindustry instead?" + RESET);
         System.out.println("");
     }
 
     static void ThanksForPlaying() {   //Endtext after either quitting game on own choice.
-        System.out.println(ANSI_GREEN + "Thank you for playing!" + ANSI_RESET);
+        System.out.println(GREEN_REG + "Thank you for playing!" + RESET);
         System.out.println("");
     }
 }
