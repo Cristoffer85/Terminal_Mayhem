@@ -64,9 +64,9 @@ public class Text {
                         "                    /@%%%      |      %%%%@                   \n" +
                         "                        %%%%%%%%%%%%%@@                       \n" +
                         "                                                              \n" +
-                        "############################################################# \n" + ANSI_RESET +
+           ANSI_GREEN + "############################################################# \n" + ANSI_RESET +
                         "                                                              \n" +
-           ANSI_GREEN + TEXTBOLD + "Please enter your hero:s name: " + ANSI_RESET
+             TEXTBOLD + "Please enter your hero:s name: " + ANSI_RESET
         );
     }
 
