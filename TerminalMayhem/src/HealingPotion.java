@@ -1,8 +1,9 @@
 /**
  * @author Kristian Karlson
- *
- * HealingPotion() Creates healingPotions "Potion of life" that are sold in the shop
+ * creates healingPotions "Potion of life" that are sold in the shop
  * Player can buy and keep in inventory
+ *
+ * HealingPotion() Calls Super constructor in Item
  *
  */
 public class HealingPotion extends Item {

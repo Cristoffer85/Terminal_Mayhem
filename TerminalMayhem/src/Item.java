@@ -1,10 +1,17 @@
 /**
  * @author Kristian Karlson
- *
  * Abstract class to prevent construction of items.
  * Subclasses are Equipment and HealingPotion.
- * Only getters for properties
- * Overide for toString to only print values that are != 0
+ * Item() : item zero parameter constructor not currently i use
+ * Item() : item creates items of type Equipment and Healingpotion
+ * getName() : String return item name
+ * getPrice() : int return item price
+ * getPotionValue() : int item healing value
+ * getMaxHpBoost() : int item +maxHp stat
+ * getStrengthBoost() : int item +strength
+ * getToughnessBoost() : int item +toughness
+ * getCriticalChanceBoost() : int item +CriticalChance
+ * toString() : String @Override displays item properties that are != 0
  */
 public abstract class Item {
 

@@ -2,14 +2,14 @@ import java.util.ArrayList;
 
 /**
  * @author Kristian Karlson
- * Used by Game and acessed by Game.goShopping()
- * Created at start of Game. Shop fills in self with items
- *
+ * Used by Game and accessed by Game.goShopping()
+ * Created at start of Game.
+ * Shop() Shop fills self with items. Calls constructor in Healingpotion and Equipment that use Super constructor in Item
  * inventorySize() : int size of ArrayList items
- * showItems() Displays items list to console
+ * showItems() loops all items and writes content to console
  * getPrice() : int price of specific entry in items
- * buyItem() : Item "sells" the contetent of items as Object
- * getName() : String used to dislplay name of purchased item
+ * buyItem() : Item "sells" the content of items as Object
+ * getName() : String used to display name of purchased item
  *
  */
 public class Shop {
