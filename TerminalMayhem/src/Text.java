@@ -46,9 +46,9 @@ public class Text {
     //----------------------INITIAL MENUS + STORY----------------------------------
     static void getWelcomeText() {     //Initial startmenu, user create hero
         System.out.print(
-           ANSI_GREEN + "############################################################# \n" +
+           ANSI_GREEN + "##############################################################\n" +
                         "   Welcome to the fantastic adventures of Terminal Mayhem     \n" +
-                        "############################################################# \n" + ANSI_RESET +
+                        "##############################################################\n" + ANSI_RESET +
           ANSI_YELLOW + "                                                              \n" +
                         "                        %%%%%%%%%%%%%@@                       \n" +
                         "                   %%%%%@      |      /@%%%@                  \n" +
@@ -64,7 +64,7 @@ public class Text {
                         "                    /@%%%      |      %%%%@                   \n" +
                         "                        %%%%%%%%%%%%%@@                       \n" +
                         "                                                              \n" +
-           ANSI_GREEN + "############################################################# \n" + ANSI_RESET +
+           ANSI_GREEN + "##############################################################\n" + ANSI_RESET +
                         "                                                              \n" +
              TEXTBOLD + "Please enter your hero:s name: " + ANSI_RESET
         );
