@@ -1,6 +1,6 @@
 ```mermaid
 classDiagram
-direction TD
+direction LR
 class BossMonster {
   ~ monsterScream() String
 }
@@ -8,57 +8,6 @@ class Demon {
   ~ monsterScream() String
 }
 class Dragon {
-  ~ monsterScream() String
-}
-class Equipment
-class Game {
-  - boolean game
-  ~ Player player
-  ~ Random random
-  ~ ArrayList~Monster~ monsters
-  ~ Scanner scanner
-  ~ Shop shop
-  - givePlayerReward(Player, Monster) void
-  - goShopping() void
-  ~ startGame() void
-  + userInputInt() int
-  - combat(Player, Monster) void
-  - mainSwitch() void
-  - finalEncounter(Player) void
-  - goAdventuring(Player) void
-  - makeMonsters() void
-}
-class Goblin {
-  ~ monsterScream() String
-}
-class HealingPotion
-class Item {
-  - int criticalChanceBoost
-  - int maxHpBoost
-  - int strengthBoost
-  - int toughnessBoost
-  - int price
-  - String name
-  - int potionValue
-  + getToughnessBoost() int
-  + getPrice() int
-  + getPotionValue() int
-  + toString() String
-  + getName() String
-  + getCriticalChanceBoost() int
-  + getStrengthBoost() int
-  + getMaxHpBoost() int
-}
-class Knight {
-  ~ monsterScream() String
-}
-class Main {
-  + main(String[]) void
-}
-class Mercenary {
-  ~ monsterScream() String
-}
-class Minotauros {
   ~ monsterScream() String
 }
 class Monster {
@@ -88,6 +37,86 @@ class Monster {
 }
 class Orc {
   ~ monsterScream() String
+}
+class Goblin {
+  ~ monsterScream() String
+}
+class Mercenary {
+  ~ monsterScream() String
+}
+class Minotauros {
+  ~ monsterScream() String
+}
+class Knight {
+  ~ monsterScream() String
+}
+class Zombie {
+  ~ monsterScream() String
+}
+class Skeleton {
+  ~ monsterScream() String
+}
+BossMonster  -->  Monster 
+Demon  -->  Monster 
+Dragon  -->  Monster 
+Knight  -->  Monster 
+Mercenary  -->  Monster 
+Minotauros  -->  Monster  
+Goblin  -->  Monster
+Orc  -->  Monster 
+Skeleton  -->  Monster 
+Zombie  -->  Monster
+```
+```mermaid
+classDiagram
+direction LR
+
+class Main {
+  + main(String[]) void
+}
+class Game {
+  - boolean game
+  ~ Player player
+  ~ Random random
+  ~ ArrayList~Monster~ monsters
+  ~ Scanner scanner
+  ~ Shop shop
+  - givePlayerReward(Player, Monster) void
+  - goShopping() void
+  ~ startGame() void
+  + userInputInt() int
+  - combat(Player, Monster) void
+  - mainSwitch() void
+  - finalEncounter(Player) void
+  - goAdventuring(Player) void
+  - makeMonsters() void
+}
+class HealingPotion
+class Equipment
+class Item {
+  - int criticalChanceBoost
+  - int maxHpBoost
+  - int strengthBoost
+  - int toughnessBoost
+  - int price
+  - String name
+  - int potionValue
+  + getToughnessBoost() int
+  + getPrice() int
+  + getPotionValue() int
+  + toString() String
+  + getName() String
+  + getCriticalChanceBoost() int
+  + getStrengthBoost() int
+  + getMaxHpBoost() int
+}
+class Shop {
+  - ArrayList~Item~ items
+  + getPrice(int) int
+  + inventorySize() int
+  + showItems() void
+  + buyItem(int) Item
+  + getName(int) String
 }
 class Player {
   - int hp
@@ -128,17 +157,7 @@ class Player {
   + randomNumber(int, int) int
   + checkIfLevelUp() void
 }
-class Shop {
-  - ArrayList~Item~ items
-  + getPrice(int) int
-  + inventorySize() int
-  + showItems() void
-  + buyItem(int) Item
-  + getName(int) String
-}
-class Skeleton {
-  ~ monsterScream() String
-}
+
 class Text {
   ~ String ANSI_RESET
   ~ String ANSI_YELLOW
@@ -173,20 +192,6 @@ class Text {
   ~ inSufficient() void
   ~ getPlayerStatText() void
 }
-class Zombie {
-  ~ monsterScream() String
-}
-
-BossMonster  -->  Monster 
-Demon  -->  Monster 
-Dragon  -->  Monster 
+HealingPotion  -->  Item
 Equipment  -->  Item 
-Goblin  -->  Monster 
-HealingPotion  -->  Item 
-Knight  -->  Monster 
-Mercenary  -->  Monster 
-Minotauros  -->  Monster 
-Orc  -->  Monster 
-Skeleton  -->  Monster 
-Zombie  -->  Monster 
 ```
