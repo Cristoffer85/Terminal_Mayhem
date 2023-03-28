@@ -1,5 +1,17 @@
 /**
  * @author Kristian Karlson
+ * Abstract class to prevent construction of items.
+ * Subclasses are Equipment and HealingPotion.
+ * Item() : item zero parameter constructor not currently i use
+ * Item() : item creates items of type Equipment and Healingpotion
+ * getName() : String return item name
+ * getPrice() : int return item price
+ * getPotionValue() : int item healing value
+ * getMaxHpBoost() : int item +maxHp stat
+ * getStrengthBoost() : int item +strength
+ * getToughnessBoost() : int item +toughness
+ * getCriticalChanceBoost() : int item +CriticalChance
+ * toString() : String @Override displays item properties that are != 0
  */
 public abstract class Item {
 
@@ -11,10 +23,12 @@ public abstract class Item {
     private int potionValue;
     private int price;
 
-    public Item(String name) {
+    protected Item(String name) {
+        // to handle the zero parameter items, they will all be "Random crap" as set by Equipment constructor
         this.name = name;
     }
-    public Item(String name, int maxHpBoost, int strengthBoost, int toughnessBoost, int criticalChanceBoost, int potionValue, int price) {
+
+    protected Item(String name, int maxHpBoost, int strengthBoost, int toughnessBoost, int criticalChanceBoost, int potionValue, int price) {
         this.name = name;
         this.maxHpBoost = maxHpBoost;
         this.strengthBoost = strengthBoost;
@@ -22,19 +36,19 @@ public abstract class Item {
         this.criticalChanceBoost = criticalChanceBoost;
         this.potionValue = potionValue;
         this.price = price;
-
     }
 
     public String getName() {
         return this.name;
     }
+
     public int getPrice() {
         return this.price;
     }
+
     public int getPotionValue() {
         return this.potionValue;
     }
-
 
     public int getMaxHpBoost() {
         return maxHpBoost;
@@ -53,16 +67,16 @@ public abstract class Item {
     }
 
     @Override
-    public String toString() { // lines for printing + and - stats separated to avoid nested ternary ifs
-       return this.name + ", " +
-                ( maxHpBoost > 0 ? "increases max Hp +" + maxHpBoost + ", " : "") +
-                ( maxHpBoost < 0 ? "increases max Hp " + maxHpBoost + ", " : "") +
-                ( strengthBoost > 0 ? "increases strength +" + strengthBoost + ", " : "") +
-                ( strengthBoost < 0 ? "increases strength " + strengthBoost + ", " : "") +
-                ( toughnessBoost > 0 ? " increases toughness +" + toughnessBoost + ", " : "") +
-                ( toughnessBoost < 0 ? " increases toughness " + toughnessBoost + ", " : "") +
-                ( criticalChanceBoost > 0 ? " increases critical chance +" + criticalChanceBoost + ", " : "") +
-                ( criticalChanceBoost < 0 ? " increases critical chance " + criticalChanceBoost + ", " : "") +
+    public String toString() { // Separate lines for printing (+) && (-) stats to avoid nested ternary ifs.
+        return this.name + ", " +
+                (maxHpBoost > 0 ? "increases max Hp +" + maxHpBoost + ", " : "") +
+                (maxHpBoost < 0 ? "increases max Hp " + maxHpBoost + ", " : "") +
+                (strengthBoost > 0 ? "increases strength +" + strengthBoost + ", " : "") +
+                (strengthBoost < 0 ? "increases strength " + strengthBoost + ", " : "") +
+                (toughnessBoost > 0 ? " increases toughness +" + toughnessBoost + ", " : "") +
+                (toughnessBoost < 0 ? " increases toughness " + toughnessBoost + ", " : "") +
+                (criticalChanceBoost > 0 ? " increases critical chance +" + criticalChanceBoost + ", " : "") +
+                (criticalChanceBoost < 0 ? " increases critical chance " + criticalChanceBoost + ", " : "") +
                 "price " + this.price + " gold";
     }
 }
