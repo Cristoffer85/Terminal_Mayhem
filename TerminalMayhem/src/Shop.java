@@ -10,7 +10,6 @@ import java.util.ArrayList;
  * getPrice() : int price of specific entry in items
  * buyItem() : Item "sells" the content of items as Object
  * getName() : String used to display name of purchased item
- *
  */
 public class Shop {
     private ArrayList<Item> items;

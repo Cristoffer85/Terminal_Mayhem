@@ -111,9 +111,8 @@ public class Text {
         );
         System.out.println("You have :" + player.getGold() + " Gold");
         System.out.println();
-        System.out.println(GREEN_REG + "If you dont want to buy anything right now press 0" + RESET);
         System.out.println(GREEN_REG + YELLOW_BOLD + "What is your number of choice?: " + RESET);
-        System.out.println();
+        System.out.println(GREEN_REG + "0 Exit shop" + RESET);
 
     }
 

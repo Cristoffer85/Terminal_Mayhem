@@ -119,7 +119,7 @@ public class Game {
 
         Text.aMonsterAppears(monster, monster.getName()); // prints monster appears, different text for different monsters
         /* Loops until the player or monster dies
-        */
+         */
         while (true) {
             //User choice to attack or use a potion
             Text.getFightMenu(); // prints fight menu
@@ -134,7 +134,8 @@ public class Game {
                     player.usePotion(); // adds health to player if Healing Potion in inventory.
                     Text.pressToContinue(); // waits for user input to continue
                 }
-                default -> Text.getWastedTurnText(); // if user input is not 1-2, prints error message about wasting a turn
+                default ->
+                        Text.getWastedTurnText(); // if user input is not 1-2, prints error message about wasting a turn
             }
 
             if (monster.checkIfDead()) { //returns true if the monster is dead
@@ -153,63 +154,79 @@ public class Game {
             }
         }
     }
+
     // in this method the transactions between shop and player are concluded
     private void goShopping() {
-        boolean runGoShopping = true; // boolean to run the loop
-        while (shop.inventorySize() > 0 && runGoShopping) { // loop runs until the shop is out of items or player exits
+        /* shop for items
+         player press 0 to exit
+         otherwise only able to select items in the shop inventory out of bound will crash the game
+         check and deduct gold before giving out item
+         */
+        // boolean runShop = true; // boolean to run the loop
+        while (true) { // loop runs until the shop is out of items or player exits
+            if (shop.inventorySize() <= 0) {
+                Text.getnoMoreWares(); // prints no more wares message
+                break; // runShop = !runShop;
+            }
             Text.getShopMenu(player); // prints shop menu with player gold amount
             shop.showItems(); // prints shop inventory
 
-            try { // try catch to catch array out of bounds exception
-                int itemToBuy = userInputInt() - 1; // takes user input and checks if its an integer and subtracts 1 make a better printout.
+            int itemToBuy = userInputInt() - 1; // takes user input and checks if its an integer and subtracts 1 make a better printout.
 
-                // if the player wants to exit the shop
-                if (itemToBuy + 1 == 0) { // if the player enters 0, plus 1 to correct input.
-                    Text.thanksForShopping(); // prints thanks for shopping
-                    Text.pressToContinue(); // waits for user input to continue
-                    runGoShopping = false; // breaks the shopping loop
-                    break;
-                }
-                if (shop.getPrice(itemToBuy) <= player.getGold()) { //check if player has enough money
-                    Text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
-                    player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
-                    player.addToInventory(shop.buyItem(itemToBuy)); // Add item to player inventory and equips it
-
-                    if (shop.inventorySize() <= 0) { // if the shop is out of items it prints a message and exits the loop
-                        Text.getnoMoreWares(); // prints no more wares message
-                        mainSwitch();       // returns to main menu
-                    } else {
-                        boolean run = true; // boolean to run the loop about buying more stuff
-                        while (run) {
-                            Text.doYouWantToBuyMore(); // prints do you want to buy more message
-                            int buyMore = userInputInt(); //save userInput
-                            if (buyMore == 1) {           //1 is go back to main shopping menu
-                                runGoShopping = true;     // Continue loop for main shopping menu
-                                run = false;               //Exit doYouWantToBuyMore loop
-                            } else if (buyMore == 2) { //2 is finish shopping
-                                Text.thanksForShopping();// show thanks message
-                                runGoShopping = false; // Exit loop for main shopping menu
-                                run = false;           // Exit doYouWantToBuyMore loop
-                            } else {
-                                Text.getInvalidChoice();  //If player input something other than 1,2 display an error message
-                            }
-                        }
-
-                    }
-                } else {
-                    Text.inSufficient(); // if the player does not have enough gold
-                    break;
-                }
-
-            } catch (IndexOutOfBoundsException e) { // catch invalid input
-                Text.getInvalidChoice();
+            if (itemToBuy + 1 == 0) { // if the player enters 0, plus 1 to correct input.
+                Text.thanksForShopping(); // prints thanks for shopping
+                Text.pressToContinue(); // waits for user input to continue
+                break;
             }
+            if (itemToBuy < 0 || itemToBuy > shop.inventorySize()) { // check that input is inside ArrayList
+                Text.getInvalidChoice();
+                Text.pressToContinue();
+                continue;
+            } else if (shop.getPrice(itemToBuy) <= player.getGold()) {
+                Text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
+                player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
+                player.addToInventory(shop.buyItem(itemToBuy)); // Add item to player inventory and equips it
+            } else {
+                Text.inSufficient(); // if the player does not have enough gold
+            }
+            /*
+            Text.doYouWantToBuyMore(); // prints do you want to buy more message
+            int buyMore = userInputInt(); //save userInput
+            switch (buyMore){
+                case 1 ->  {} // 1 is continue shopping
+                case 2 -> {
+                    Text.thanksForShopping();
+                    break;
+                } //2 is finish shopping
+                default -> {
+                    ;
+                }
+            }
+            if (buyMore == 2) {           //2 is finish shopping
+
+                break;    // Continue loop for main shopping menu
+                               //Exit doYouWantToBuyMore loop
+            } else if (buyMore == 2) {
+                // show thanks message
+                runShop = false; // Exit loop for main shopping menu
+                run = false;           // Exit doYouWantToBuyMore loop
+            } else {
+            */
         }
     }
+
+
+
+
+
+
+
+
+
     //Control if user input is an integer
-    public int userInputInt() { 
+    public int userInputInt() {
         /* Used to prevent input other than int. loops until user input is valid
-        */
+         */
         int number = 0; // initialize number
 
         while (true) {  // loop until user inputs an integer
@@ -224,6 +241,7 @@ public class Game {
         }
         return number; // returns the user input
     }
+
     // method to initiate all monsters
     private void makeMonsters() {
 
