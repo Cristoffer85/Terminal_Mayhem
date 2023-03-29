@@ -3,9 +3,13 @@
 I spelet används olika datatyper för att representera olika aspekter av spelets funktioner och data.
 
 Integer används för numeriska värden som hälsa, attackstyrka och föremåls värde.
+
 Boolean används för sant/falskt-värden, till exempel om spelaren eller monstret är vid liv eller döda.
+
 String används för textdata som namn på karaktärer och föremål eller meddelanden och färgkoder i ANSI.
+
 Array används för att lagra en samling av värden av samma datatyp, som en lista av föremål.
+
 Object används för att representera en samling av relaterad data och funktioner, som en karaktär eller ett monster.
 
 Utöver de inbyggda datatyperna i programspråket används också egna datatyper i spelet.
