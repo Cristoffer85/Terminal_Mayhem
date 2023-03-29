@@ -14,8 +14,7 @@ public class Game {
     /*The nextLine() method of the Scanner class retrieves the input until it reads the newline character.
         Therefore, there is a possibility that the newline character that was not read by the previous nextLine() call may affect the next nextLine() call.
         You can set the Scanner object to use the newline character as the delimiter by calling Scanner(System.in).useDelimiter("\n").
-        This way, the newline character will be used as the delimiter and the problem will be resolved.*/
-    Random random = new Random();
+        This way, the newline character will be used as the delimiter and the problem will be resolved.*/ Random random = new Random();
 
     //Starts the game
     void startGame() {
@@ -158,30 +157,31 @@ public class Game {
     // in this method the transactions between shop and player are concluded
     private void goShopping() {
         /* shop for items
+         Prevents opening of empty shop
          player press 0 to exit
-         otherwise only able to select items in the shop inventory out of bound will crash the game
-         check and deduct gold before giving out item
+         Otherwise only able to select items in the shop inventory. Prevents buying items out of bounds in arrayList
+         check and deduct gold before giving out item.
+         If insufficient funds no transaction and message.
          */
-        // boolean runShop = true; // boolean to run the loop
-        while (true) { // loop runs until the shop is out of items or player exits
+
+        while (true) {
             if (shop.inventorySize() <= 0) {
                 Text.getnoMoreWares(); // prints no more wares message
-                break; // runShop = !runShop;
+                break;
             }
             Text.getShopMenu(player); // prints shop menu with player gold amount
             shop.showItems(); // prints shop inventory
 
-            int itemToBuy = userInputInt() - 1; // takes user input and checks if its an integer and subtracts 1 make a better printout.
+            int itemToBuy = userInputInt() - 1; // -1 to match shop item with actual position in arrayList
 
-            if (itemToBuy + 1 == 0) { // if the player enters 0, plus 1 to correct input.
-                Text.thanksForShopping(); // prints thanks for shopping
-                Text.pressToContinue(); // waits for user input to continue
+            if (itemToBuy + 1 == 0) { // Check for Exit shop condition
+                Text.thanksForShopping();
+                Text.pressToContinue();
                 break;
             }
-            if (itemToBuy < 0 || itemToBuy > shop.inventorySize()) { // check that input is inside ArrayList
+            if (itemToBuy < 0 || itemToBuy >= shop.inventorySize()) { // check that input is inside ArrayList
                 Text.getInvalidChoice();
                 Text.pressToContinue();
-                continue;
             } else if (shop.getPrice(itemToBuy) <= player.getGold()) {
                 Text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
                 player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
@@ -189,39 +189,8 @@ public class Game {
             } else {
                 Text.inSufficient(); // if the player does not have enough gold
             }
-            /*
-            Text.doYouWantToBuyMore(); // prints do you want to buy more message
-            int buyMore = userInputInt(); //save userInput
-            switch (buyMore){
-                case 1 ->  {} // 1 is continue shopping
-                case 2 -> {
-                    Text.thanksForShopping();
-                    break;
-                } //2 is finish shopping
-                default -> {
-                    ;
-                }
-            }
-            if (buyMore == 2) {           //2 is finish shopping
-
-                break;    // Continue loop for main shopping menu
-                               //Exit doYouWantToBuyMore loop
-            } else if (buyMore == 2) {
-                // show thanks message
-                runShop = false; // Exit loop for main shopping menu
-                run = false;           // Exit doYouWantToBuyMore loop
-            } else {
-            */
         }
     }
-
-
-
-
-
-
-
-
 
     //Control if user input is an integer
     public int userInputInt() {
