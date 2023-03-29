@@ -1,34 +1,31 @@
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Random;
 
 public class Player {
 
-    private String name;
-    private int level;
-    private int nextLevelExp;
-    private int exp;
-    private int maxHp;
-    private int hp;
-    private int defence;  // Todo remove?
-    private int strength;
-    private int toughness;
-    private int gold;
-    private int criticalChance;
+    private String name;     //Save Players Name
+    private int level;      //Save Players Level
+    private int exp;        //Save Players EXP
+    private int maxHp;      //Save Players maxHp
+    private int hp;         //save Players HP
+    private int strength;   //save players Strength
+    private int toughness;  //save Players toughness
+    private int gold;       //save Players gold
+    private int criticalChance; // save Players ciritical Chance
 
-    Random random;
-    //Save the instance that is sent from the game to create a link between the Healing Potion and the player.
-    // HealingPotion potion; // todo remove?
+    Random random; //save random instans
 
     //ArrayList for saving bought Item
-    ArrayList<Item> itemList;
+    ArrayList<Item> boughtItemList;
+    ArrayList<Item> equippedItemList;
 
     //a constructor for setting up all the values, calling the random function, and initializing the ArrayList
-    public Player(HealingPotion potion) {
-        //this.potion = potion; // todo remove?
+    public Player() {
+
         random = new Random();
-        itemList = new ArrayList<>();
-        makePlayer();
+        boughtItemList = new ArrayList<>();
+        equippedItemList = new ArrayList<>();
+        makePlayer();//
     }
 
     //The initial status of the player
@@ -61,67 +58,67 @@ public class Player {
         return damage;
     }
 
-    public void defence(Monster monster) { // The ability to migrate damage with defence before changing health points
-
+    public void defence(Monster monster) { // the ability to take damage and migrate som of it with armor
         int damage = monster.attack(); // the damage is random store the actual damage to make sure the output is right
-        setDamage(damage - getArmorValue()); // migrates defence and half of the player strength
+        setDamage(damage - getArmorValue()); // reduce health point after armor reduction
         Text.monsterDamageDone(this, monster, (damage - getArmorValue()));
     }
 
-    public int getArmorValue() {
+    public int getArmorValue() { // calculates how much damage will be migrated
         return (this.toughness + (this.strength / 2));
     }
 
-    //Use a potion, and also check if the HP has not reached the MaxHP.
-    public void usePotion() {
 
-        for (Item item : itemList) {  // look for healing potion in inventory
+    public void usePotion() { //Use a  healing potion, and also check if the HP has not reached the MaxHP.
+
+        boolean successful = false; // to keep track of outcome and display the correct message to user
+        int hpToRegain = this.maxHp - this.hp; // Player will only regain hp up to maxHp. no over healing
+
+        for (Item item : boughtItemList) {  // look for healing potion in inventory
             if (item instanceof HealingPotion) {
-                int hpToRegain = this.maxHp - this.hp;
-                hpToRegain = (Math.min(hpToRegain, item.getPotionValue())); // to prevent over healing
-                Text.playerUsedPotion(this.getName(), hpToRegain);
+
+                hpToRegain = (Math.min(hpToRegain, item.getPotionValue())); // if missing health smaller than potionValue only regain the smaller value.
                 this.hp += hpToRegain;
-                itemList.remove(item);
+                boughtItemList.remove(item);
+                successful = true;
                 break;
-            } else {
-                Text.playerDontHavePotion();
             }
+        }
+        if (successful) {  // displays appropriate message to user
+            Text.playerUsedPotion(this.getName(), hpToRegain);
+        } else {
+            Text.playerDontHavePotion();
         }
     }
 
+    public void checkIfLevelUp() { // check if player has reached a new level and adds stats
 
-    //Calculate the leveling up process
-    public void nextLevelExp() {
-        nextLevelExp = level * 2;
+        final int XP_PER_LEVEL = 100;  // condition for leveling up
+
+        while (level * XP_PER_LEVEL <= exp) { // lets the player level until level matches experience
+            Text.youHaveLevelup();
+            levelUp();                  // adds stats to player
+            Text.pressToContinue();
+        }
     }
 
-    //Check if the player has leveled up
-    public boolean checkIfLeveledUp() {
-        return nextLevelExp <= exp;
+    public void levelUp() { //increase the players stats when leveling up
+        this.level += 1;
+        this.maxHp += 10;
+        this.hp = maxHp;
+        this.criticalChance += 1;
+        this.strength += 2;
+        this.toughness += 1;
+        System.out.println(name + " gains:\n+10 Max HP\n+1 Critical Chance\n+2 Strength\n+1 Toughness");
     }
 
-    //increase the players status after leveling up
-    public void levelUp() {
-        level += 1;
-        maxHp += 10;
-        hp = maxHp;
-        criticalChance += 1;
-        strength += 2;
-        toughness += 1;
-        nextLevelExp();
-    }
 
-    //reset all the values
-    public void resetPlayer() {
-        makePlayer();
-        itemList.clear();
-    }
-
-    //Check if the user has reached level 9 and is ready to face the final boss
-    public boolean checkIfReadyForFinalBoss() {
+    //Check if the player has reached level 9 and is ready to face the final boss
+    public boolean readyForFinalBoss() {
         return level == 9;
     }
 
+    //Check if the player has not dead.
     public boolean checkIfDead() {
         return hp <= 0;
     }
@@ -131,23 +128,11 @@ public class Player {
         this.gold += gold;
     }
 
-    public void addToInventory(Item item) {
-        itemList.add(item);
-    }
-
-    public void removeFromInventory(Item item) {
-        itemList.remove(item);
-    }
-
-    // Add HP after fighting Monster
-    public void addHP() { // todo? remove unused  method
-        hp = maxHp - hp / 2;
-    }
-
     public int getAddHp(){
         return (this.maxHp - this.hp) / 2;
     }  // player regains halv of the missing hp after combat
 
+    //return players HP
     public int getHp() {
         return hp;
     }
@@ -159,10 +144,11 @@ public class Player {
         }
     }
 
+    //return players strength
     public int getStrength() {
         return strength;
     }
-
+    //return players toughness
     public int getToughness() {
         return toughness;
     }
@@ -171,7 +157,7 @@ public class Player {
     public void setExp(int earnedExp) {
         exp += earnedExp;
     }
-
+   //return players gold
     public int getGold() {
         return gold;
     }
@@ -180,20 +166,39 @@ public class Player {
     public void payGold(int gold) {
         this.gold -= gold;
     }
-
+    //return players level
     public int getLevel() {
         return level;
     }
-
+    //set players name
     public void setName(String name) {
         this.name = name;
     }
-
+    //return players name
     public String getName() {
         return name;
     }
 
+    //Add the item to the inventory and equips the item
+    public void addToInventory(Item item) {
+        boughtItemList.add(item);
+        if(item instanceof Equipment){
+            equipHero(item);
+        }
+    }
 
+    //adds the item to the list equippeditems  and add the stats to the player, then removes the item from the list
+    public void equipHero(Item item) {
+        equippedItemList.add(item);
+        if (item instanceof Equipment) {
+            this.maxHp += item.getMaxHpBoost();
+            this.strength += item.getStrengthBoost();
+            this.toughness += item.getToughnessBoost();
+            this.criticalChance += item.getCriticalChanceBoost();
+        }
+    }
+
+    //Show Players status
     public void showHero() {
         System.out.println("Name: " + name);
         System.out.println("Level: " + level);
@@ -202,12 +207,11 @@ public class Player {
         System.out.println("toughness: " + toughness);
         System.out.println("Critical Chance: " + criticalChance);
         System.out.println("Gold: " + gold);
-        System.out.println(exp); //delete sen
         System.out.println("Inventory : ");
-
-        if(0<itemList.size()) {
-            for(Item item : itemList) {
-                System.out.println(item.getName() + " ");
+        //showing Players inventory
+        if(0< boughtItemList.size()) {
+            for(Item item : boughtItemList) {
+                System.out.println(item.getName());
             }
         }
     }

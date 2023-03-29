@@ -4,193 +4,229 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    HealingPotion healingPotion = new HealingPotion();
-    Player player = new Player(healingPotion);
+
+    //initiate objects used in the game
+    private boolean game = true; // used by mainSwitch() to keeping game running. Set to false when player dies or final boss defeated
+    Player player = new Player();
     ArrayList<Monster> monsters = new ArrayList<>();
     Shop shop = new Shop();
     Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+    /*The nextLine() method of the Scanner class retrieves the input until it reads the newline character.
+        Therefore, there is a possibility that the newline character that was not read by the previous nextLine() call may affect the next nextLine() call.
+        You can set the Scanner object to use the newline character as the delimiter by calling Scanner(System.in).useDelimiter("\n").
+        This way, the newline character will be used as the delimiter and the problem will be resolved.*/
     Random random = new Random();
 
+    //Starts the game
     void startGame() {
         makeMonsters();  //initiate monsters
-        Text.getWelcomeText();
+        Text.getWelcomeText(); //prints welcome text and logo
         player.setName(scanner.nextLine()); // sets player name
-        Text.getIntrotext(player.getName());
-        mainSwitch();
+        Text.getIntrotext(player.getName()); // prints intro text, with player name
+        mainSwitch();  //starts the main game loop
     }
 
+    // main game loop method
     private void mainSwitch() {
-        //Main-game loop
-        boolean game = true;
-        while (game) {
-            Text.getMainMenu();
-            int mainMenuChoice = userInputInt();
+        /*
+          Main loop that keeps the game running.
+          Uses a class boolean to keep track of player death and Final boss defeated witch breaks the loop
+         */
+
+        while (this.game) {
+            Text.getMainMenu(); // prints main menu
+            int mainMenuChoice = userInputInt(); //takes user input and checks if its an integer
 
             switch (mainMenuChoice) {
-                case 1 -> goAdventuring(player);
+                case 1 -> goAdventuring(player); // looks for monsters
                 case 2 -> {
-                    Text.getPlayerStatText();
-                    player.showHero();
-                    Text.pressToContinue();
+                    Text.getPlayerStatText();    // shows player stats
+                    player.showHero();        // prints player stats
+                    Text.pressToContinue();     // waits for user input to continue
                 }
-                case 3 -> goShopping();
-                case 4 -> {
-                    Text.ThanksForPlaying();
-                    System.exit(0);
+                case 3 -> goShopping();          // opens the shop
+                case 4 -> {                      // exit the game
+                    Text.ThanksForPlaying();    // prints exit message
+                    System.exit(0);            // exits the game
                 }
-                default -> Text.getInvalidChoice();
+                default -> Text.getInvalidChoice(); // if user input is not 1-4, prints error message
             }
         }
+        System.exit(0); // exits the game
     }
 
-    // 90 % chance of going to battle, match monster with player level
+    //method to go look for monsters
     private void goAdventuring(Player player) {
-        int isItAFight = random.nextInt(100);
-        if (isItAFight >= 10) {
+        /*
+          When player selects start game from mainSwitch this method decides what will happen
+          10% a text message
+          90% fight a monster
+          player level 9 or above will encounter final boss and then the game ends.
+          Before leaving method checks if the player leveled up.
+          */
 
-            if (player.checkIfReadyForFinalBoss()) {
-                for (Monster monster : monsters) {
-                    if (monster.getLvl() == 10) {
-                        Text.getBossFightText();
-                        combat(player, monster);
-                        Text.ThanksForPlaying();//TODO change message to after killed boss message
-                        resetToDefault();
-                        break;
-                    }
-                }
+        int isItAFight = random.nextInt(100); //
 
-            } else {
-                for (Monster monster : monsters) {
-                    if (monster.getLvl() == player.getLevel()) {
-                        Text.aMonsterAppears(monster.getName());
-                        combat(player, monster);
-                        break;
-                    }
-                }
-                if (player.checkIfLeveledUp()) {  // check if player has reached a new level
-                    Text.youHaveLevelup();
-                    player.levelUp();
+        if (isItAFight <= 10) { // if the random number is 10 or below
+
+            Text.nothingHappened(); // prints text message about nothing happening
+            Text.pressToContinue(); // waits for user input to continue
+
+        } else {
+            // // Final boss
+            if (player.readyForFinalBoss()) { // returns true if player is level 9 or above
+                finalEncounter(player);// last fight in the game
+                return; // return to mainSwitch
+            }
+            // Players below level 9 fight regular monsters
+            for (Monster monster : monsters) { // loops through the monster list
+                if (monster.getLvl() == player.getLevel()) { // if the monster level is the same as the player level
+                    combat(player, monster);       //then player fights the monster
+                    monsters.remove(monster); // remove monster from list once defeated
+                    break;
                 }
             }
-        } else {
-            Text.nothingHappened();
-            //wait for user to press return
-            Text.pressToContinue();
+        }
+        player.checkIfLevelUp();  // check if player has reached a new level and adds stats. Can trigger multiple level++
+    }
+
+    // method for final boss fight
+    private void finalEncounter(Player player) {
+
+        // Final boss. Boss text and select final boss as monster
+        for (Monster monster : monsters) {
+            if (monster.getLvl() == 10) {  // the only level 10 monster is final boss
+                Text.getBossFightText(); // prints boss fight text
+                combat(player, monster);  //  combat()
+                Text.getBossFightOverText(); // prints boss fight over text
+                Text.pressToContinue(); // waits for user input to continue
+                this.game = false; // False breaks the mainSwitch loop. Hard typed to false for prevent bug with player dying in encounter.
+            }
         }
     }
 
     //Give player XP, gold and Hp boost
     private void givePlayerReward(Player player, Monster monster) {
-        monster.calculategold();
-        Text.getRewardtext(player, monster);
-        player.setGold(monster.dropGold());
-        player.setExp(monster.dropExp());
-        player.getAddHp();
+        monster.calculateGold(); // calculates gold drop
+        Text.getRewardtext(player, monster); // prints reward text
+        player.setGold(monster.dropGold()); // adds gold to player
+        player.setExp(monster.dropExp()); // adds exp to player
+        player.getAddHp(); // after combat player regains half of their missing health
     }
 
     //Initiate battle between player and selected monster.
-    private void combat(Player player, Monster monster) {
+    private void combat(Player player, Monster monster) {  // "Without Pain, Without Sacrifice, We Would Have Nothing."
 
+        Text.aMonsterAppears(monster, monster.getName()); // prints monster appears, different text for different monsters
+        /* Loops until the player or monster dies
+        */
         while (true) {
-
             //User choice to attack or use a potion
-            Text.getFightMenu();
-            int fightChoice = userInputInt();
+            Text.getFightMenu(); // prints fight menu
+            int fightChoice = userInputInt(); // takes user input and checks if it's an integer
 
             switch (fightChoice) {
-                case 1 -> {
-                    monster.defence(player); //Player attack, changes monster HP and displays message of damage
-                    Text.pressToContinue();  //todo do we want to wait for user input?
+                case 1 -> { // Player attack
+                    monster.defence(player); // calculates damage to monster setHP and prints message
+                    Text.pressToContinue(); // waits for user input to continue
                 }
-                case 2 -> {  // Use potion
-                    player.usePotion(); // player uses healing potion
+                case 2 -> {  // player uses healing potion
+                    player.usePotion(); // adds health to player if Healing Potion in inventory.
+                    Text.pressToContinue(); // waits for user input to continue
                 }
-                default -> Text.getInvalidChoice();
+                default -> Text.getWastedTurnText(); // if user input is not 1-2, prints error message about wasting a turn
             }
 
-            if (monster.checkIfDead()) { //exit the loop if the monster is dead
+            if (monster.checkIfDead()) { //returns true if the monster is dead
                 givePlayerReward(player, monster); // gives the player loot
-
-                break;
+                break;  // breaks the combat loop
             }
             //If Monster is alive it attacks player
-            player.defence(monster); // changes the player health and displays damage message
+            player.defence(monster); // calculates damage to player setHP and prints message
+            Text.pressToContinue(); // waits for user input to continue
 
-            Text.pressToContinue();
-
-            // If the player dies, breaks loop
-            if (player.checkIfDead()) {
-                Text.getPlayerDead();
-                resetToDefault();
-                break;
+            // If the player dies, breaks loop in mainSwitch and the game quits
+            if (player.checkIfDead()) { // returns true if the player is dead
+                Text.getPlayerDead(); // prints player dead text
+                this.game = false; // breaks mainSwitch
+                break; // breaks combat loop
             }
         }
     }
-
-    public void resetToDefault(){
-        player.resetPlayer();
-        shop.resetShop();
-        startGame();
-    }
-
     // in this method the transactions between shop and player are concluded
     private void goShopping() {
-        player.setGold(400); //TODO remove this when done testing
-        // loop runs while true use break to exit
-        while (shop.inventorySize() > 0) { // check that the shop contains items
-            Text.getShopMenu();
-            shop.showItems();
+        boolean runGoShopping = true; // boolean to run the loop
+        while (shop.inventorySize() > 0 && runGoShopping) { // loop runs until the shop is out of items or player exits
+            Text.getShopMenu(player); // prints shop menu with player gold amount
+            shop.showItems(); // prints shop inventory
 
-            int itemToBuy = userInputInt() -1;
+            try { // try catch to catch array out of bounds exception
+                int itemToBuy = userInputInt() - 1; // takes user input and checks if its an integer and subtracts 1 make a better printout.
 
-            if (shop.getPrice(itemToBuy) <= player.getGold()) { //check if player has enough money
-
-                Text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
-                player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
-                player.addToInventory(shop.buyItem(itemToBuy)); // Add item to player inventory
-                if (shop.inventorySize() <= 0){
-                    Text.getnoMoreWares();
-                    mainSwitch();
-                } else {
-                    Text.doYouWantToBuyMore();              // if the player wants to buy more stuff
-                    int buyMore = userInputInt();
-                    try {
-                        if (buyMore == 1) {
-                            continue;
-                        }
-                        if (buyMore == 2) {
-                            Text.thanksForShopping();
-                            break;
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Invalid input");
-                    }
+                // if the player wants to exit the shop
+                if (itemToBuy + 1 == 0) { // if the player enters 0, plus 1 to correct input.
+                    Text.thanksForShopping(); // prints thanks for shopping
+                    Text.pressToContinue(); // waits for user input to continue
+                    runGoShopping = false; // breaks the shopping loop
+                    break;
                 }
-            } else {
-                Text.inSufficient();
-                break;
+                if (shop.getPrice(itemToBuy) <= player.getGold()) { //check if player has enough money
+                    Text.youHaveBought(shop.getName(itemToBuy));    // Takes a string from the shop and sends to text class
+                    player.payGold(shop.getPrice(itemToBuy));      // Get Player money, for the items price
+                    player.addToInventory(shop.buyItem(itemToBuy)); // Add item to player inventory and equips it
+
+                    if (shop.inventorySize() <= 0) { // if the shop is out of items it prints a message and exits the loop
+                        Text.getnoMoreWares(); // prints no more wares message
+                        mainSwitch();       // returns to main menu
+                    } else {
+                        boolean run = true; // boolean to run the loop about buying more stuff
+                        while (run) {
+                            Text.doYouWantToBuyMore(); // prints do you want to buy more message
+                            int buyMore = userInputInt(); //save userInput
+                            if (buyMore == 1) {           //1 is go back to main shopping menu
+                                runGoShopping = true;     // Continue loop for main shopping menu
+                                run = false;               //Exit doYouWantToBuyMore loop
+                            } else if (buyMore == 2) { //2 is finish shopping
+                                Text.thanksForShopping();// show thanks message
+                                runGoShopping = false; // Exit loop for main shopping menu
+                                run = false;           // Exit doYouWantToBuyMore loop
+                            } else {
+                                Text.getInvalidChoice();  //If player input something other than 1,2 display an error message
+                            }
+                        }
+
+                    }
+                } else {
+                    Text.inSufficient(); // if the player does not have enough gold
+                    break;
+                }
+
+            } catch (IndexOutOfBoundsException e) { // catch invalid input
+                Text.getInvalidChoice();
             }
         }
     }
-
     //Control if user input is an integer
-    public int userInputInt() {
-        int number;
-        while (true) {
+    public int userInputInt() { 
+        /* Used to prevent input other than int. loops until user input is valid
+        */
+        int number = 0; // initialize number
+
+        while (true) {  // loop until user inputs an integer
             try {
-                number = scanner.nextInt();
-                break;
+                number = scanner.nextInt();  // takes user input
+                break; // only break the loop when user inputs integer
             } catch (InputMismatchException e) {
-                System.out.println("A non-numeric input has been entered. Please enter a valid input again");
-                scanner.nextLine();
+
+                System.out.print("A non-numeric input has been detected.\nPlease enter a valid input: ");
+                scanner.nextLine(); // here to eat the feed line that scanner.nextInt() misses
             }
         }
-        return number;
+        return number; // returns the user input
     }
-
+    // method to initiate all monsters
     private void makeMonsters() {
 
-        //initiate all monsters
         //level 1
         Goblin goblin1 = new Goblin("Goblin", 1, 40, 10, 0, 10, 100);
         Orc orc1 = new Orc("Orc", 1, 40, 10, 0, 10, 100);
@@ -199,29 +235,23 @@ public class Game {
         Zombie zombie1 = new Zombie("Zombie", 1, 40, 10, 0, 10, 100);
 
         //level 2
-        Goblin goblin2 = new Goblin("Hairless Goblin", 2, 43, 12, 2, 20, 100);
         Orc orc2 = new Orc("Gruesome Orc", 2, 43, 12, 2, 20, 100);
-        Skeleton skeleton2 = new Skeleton("Skeleton", 2, 43, 12, 2, 20, 100);
+        Skeleton skeleton2 = new Skeleton("Half skeleton", 2, 43, 12, 2, 20, 100);
         Mercenary mercenary2 = new Mercenary("Mercenary", 2, 43, 12, 2, 20, 100);
         Zombie zombie2 = new Zombie("Zombie", 2, 43, 12, 2, 20, 100);
 
         //level 3
-        Goblin goblin3 = new Goblin("Goblin", 3, 46, 14, 4, 30, 150);
-        Orc orc3 = new Orc("Orc", 3, 46, 14, 4, 30, 150);
         Skeleton skeleton3 = new Skeleton("Skeleton", 3, 46, 14, 4, 30, 150);
         Mercenary mercenary3 = new Mercenary("Mercenary", 3, 46, 14, 4, 30, 150);
         Zombie zombie3 = new Zombie("Zombie", 3, 46, 14, 4, 30, 150);
 
         //level 4
-        Goblin goblin4 = new Goblin("Goblin", 4, 49, 16, 6, 40, 200);
         Orc orc4 = new Orc("Orc", 4, 49, 16, 6, 40, 200);
         Skeleton skeleton4 = new Skeleton("Skeleton", 4, 49, 16, 6, 40, 200);
         Mercenary mercenary4 = new Mercenary("Mercenary", 4, 49, 16, 6, 40, 200);
         Zombie zombie4 = new Zombie("Zombie", 4, 49, 16, 6, 40, 200);
 
         //level 5
-        Goblin goblin5 = new Goblin("Goblin", 5, 52, 18, 8, 50, 250);
-        Orc orc5 = new Orc("Bald orc", 5, 52, 18, 8, 50, 250);
         Skeleton skeleton5 = new Skeleton("Skeleton", 5, 52, 18, 8, 50, 250);
         Mercenary mercenary5 = new Mercenary("Mercenary", 5, 52, 18, 8, 50, 250);
         Zombie zombie5 = new Zombie("Not yet dead zombie", 5, 52, 18, 8, 50, 250);
@@ -251,7 +281,7 @@ public class Game {
         Knight knight9 = new Knight("Knight called Marcus Medina", 9, 64, 26, 16, 90, 450);
 
         //Bossmonster
-        BossMonster bossMonster = new BossMonster("Slime", 10, 200, 28, 20, 1000, 1000);
+        BossMonster bossMonster = new BossMonster("Backgammon", 10, 200, 28, 20, 1000, 1000);
 
         //Add all monsters to list
         monsters.add(goblin1);
@@ -259,23 +289,17 @@ public class Game {
         monsters.add(skeleton1);
         monsters.add(mercenary1);
         monsters.add(zombie1);
-        monsters.add(goblin2);
         monsters.add(orc2);
         monsters.add(skeleton2);
         monsters.add(mercenary2);
         monsters.add(zombie2);
-        monsters.add(goblin3);
-        monsters.add(orc3);
         monsters.add(skeleton3);
         monsters.add(mercenary3);
         monsters.add(zombie3);
-        monsters.add(goblin4);
         monsters.add(orc4);
         monsters.add(skeleton4);
         monsters.add(mercenary4);
         monsters.add(zombie4);
-        monsters.add(goblin5);
-        monsters.add(orc5);
         monsters.add(skeleton5);
         monsters.add(mercenary5);
         monsters.add(zombie5);
