@@ -65,7 +65,7 @@ public class Player {
     }
 
     public int getArmorValue() { // calculates how much damage will be migrated
-        return (this.toughness + (this.strength / 2));
+        return (this.toughness + (this.strength / 2)); // Division with integer, the rounding of value is a feature.
     }
 
 
