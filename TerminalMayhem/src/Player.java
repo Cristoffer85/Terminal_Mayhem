@@ -141,6 +141,9 @@ public class Player {
     private void setDamage(int damage) {
         if (0 < damage) {
             this.hp -= damage;
+            if(hp<0){
+                hp=0;
+            }
         }
     }
 
