@@ -96,9 +96,11 @@ public class Game {
         for (Monster monster : monsters) {
             if (monster.getLvl() == 10) {  // the only level 10 monster is final boss
                 Text.getBossFightText(); // prints boss fight text
-                combat(player, monster);  //  combat()
+                combat(player, monster);//  combat()
+                if (!player.checkIfDead()) {// check if payer is not dead
                 Text.getBossFightOverText(); // prints boss fight over text
-                Text.pressToContinue(); // waits for user input to continue
+                Text.pressToContinue();
+                } // waits for user input to continue
                 this.game = false; // False breaks the mainSwitch loop. Hard typed to false for prevent bug with player dying in encounter.
             }
         }
