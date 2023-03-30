@@ -2,9 +2,8 @@
  * @author Kristian Karlson
  * creates healingPotions "Potion of life" that are sold in the shop
  * Player can buy and keep in inventory
- *
+ * <p>
  * HealingPotion() Calls Super constructor in Item
- *
  */
 public class HealingPotion extends Item {
     // text for potion of life is red, resets colour after. Uses the parameterized constructor of Item
